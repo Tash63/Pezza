@@ -1,0 +1,5 @@
+C:\Users\kiran.nariansamy\Desktop\repos\Pezza\Core\obj\Debug\net8.0\Core.csproj.AssemblyReference.cache
+C:\Users\kiran.nariansamy\Desktop\repos\Pezza\Core\obj\Debug\net8.0\Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\kiran.nariansamy\Desktop\repos\Pezza\Core\obj\Debug\net8.0\Core.AssemblyInfoInputs.cache
+C:\Users\kiran.nariansamy\Desktop\repos\Pezza\Core\obj\Debug\net8.0\Core.AssemblyInfo.cs
+C:\Users\kiran.nariansamy\Desktop\repos\Pezza\Core\obj\Debug\net8.0\Core.csproj.CoreCompileInputs.cache
