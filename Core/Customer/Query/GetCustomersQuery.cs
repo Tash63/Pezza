@@ -1,12 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Common.Models.Customer;
+using MediatR;
 
-namespace Core.Customer.Query
+namespace Core.Pizza.Queries;
+
+public class GetCustomersQuery : IRequest<ListResult<CustomerModel>>
 {
-    internal class GetCustomersQuery
+}
+
+public class GetCustomersQueryHandler(DatabaseContext databaseContext) : IRequestHandler<GetCustomersQuery, ListResult<CustomerModel>>
+{
+    public async Task<ListResult<CustomerModel>> Handle(GetCustomersQuery request, CancellationToken cancellationToken)
     {
+        var entities = databaseContext.Customers.Select(x => x).AsNoTracking();
+
+        var count = entities.Count();
+        var paged = await entities.ToListAsync(cancellationToken);
+
+        return ListResult<CustomerModel>.Success(paged.Map(), count);
     }
 }

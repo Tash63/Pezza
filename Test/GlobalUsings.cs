@@ -1,5 +1,5 @@
 global using Bogus;
-global using Common.Models;
+global using Common.Models.Pizza;
 global using Core;
 global using DataAccess;
 global using Microsoft.EntityFrameworkCore;

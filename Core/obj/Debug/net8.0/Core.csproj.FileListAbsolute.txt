@@ -2,9 +2,7 @@ C:\Users\kiran.nariansamy\Desktop\repos\Pezza\Core\bin\Debug\net8.0\Core.deps.js
 C:\Users\kiran.nariansamy\Desktop\repos\Pezza\Core\bin\Debug\net8.0\Core.dll
 C:\Users\kiran.nariansamy\Desktop\repos\Pezza\Core\bin\Debug\net8.0\Core.pdb
 C:\Users\kiran.nariansamy\Desktop\repos\Pezza\Core\bin\Debug\net8.0\Common.dll
-C:\Users\kiran.nariansamy\Desktop\repos\Pezza\Core\bin\Debug\net8.0\Core.Contracts.dll
 C:\Users\kiran.nariansamy\Desktop\repos\Pezza\Core\bin\Debug\net8.0\DataAcess.dll
-C:\Users\kiran.nariansamy\Desktop\repos\Pezza\Core\bin\Debug\net8.0\Core.Contracts.pdb
 C:\Users\kiran.nariansamy\Desktop\repos\Pezza\Core\bin\Debug\net8.0\DataAcess.pdb
 C:\Users\kiran.nariansamy\Desktop\repos\Pezza\Core\bin\Debug\net8.0\Common.pdb
 C:\Users\kiran.nariansamy\Desktop\repos\Pezza\Core\obj\Debug\net8.0\Core.csproj.AssemblyReference.cache

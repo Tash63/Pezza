@@ -8,7 +8,7 @@
     ".NETCoreApp,Version=v8.0": {
       "Core/1.0.0": {
         "dependencies": {
-          "Core.Contracts": "1.0.0",
+          "Common": "1.0.0",
           "DataAcess": "1.0.0",
           "MediatR": "12.4.1",
           "Microsoft.EntityFrameworkCore.Relational": "8.0.8",
@@ -224,20 +224,6 @@
           }
         }
       },
-      "Core.Contracts/1.0.0": {
-        "dependencies": {
-          "Common": "1.0.0",
-          "MediatR": "12.4.1",
-          "Microsoft.EntityFrameworkCore.Relational": "8.0.8",
-          "System.Linq.Dynamic.Core": "1.4.5"
-        },
-        "runtime": {
-          "Core.Contracts.dll": {
-            "assemblyVersion": "1.0.0",
-            "fileVersion": "1.0.0.0"
-          }
-        }
-      },
       "DataAcess/1.0.0": {
         "dependencies": {
           "Bogus": "35.6.1",
@@ -396,11 +382,6 @@
       "hashPath": "system.linq.dynamic.core.1.4.5.nupkg.sha512"
     },
     "Common/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Core.Contracts/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

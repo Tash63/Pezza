@@ -30,7 +30,7 @@ public class UpdateCustomerCommandHandler(DatabaseContext databaseContext) : IRe
         findEntity.Name=string.IsNullOrEmpty(model.Name)?findEntity.Name:model.Name;
         findEntity.Address=string.IsNullOrEmpty(model.Address)?findEntity.Address:model.Address;
         findEntity.Email=string.IsNullOrEmpty(model.Email)?findEntity.Email:model.Email;
-        findEntity.Cellphone=string.IsNullOrEmpty(model.Cellphone)?findEntity.Cellphone:model.ce;
+        findEntity.Cellphone=string.IsNullOrEmpty(model.Cellphone)?findEntity.Cellphone:model.Cellphone;
         findEntity.DateCreated=model.DateCreated;
 
         var outcome = databaseContext.Customers.Update(findEntity);
