@@ -721,7 +721,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
-          "Core.Contracts": "1.0.0",
+          "Common": "1.0.0",
           "DataAcess": "1.0.0",
           "MediatR": "12.4.1",
           "Microsoft.EntityFrameworkCore.Relational": "8.0.8",
@@ -732,22 +732,6 @@
         },
         "runtime": {
           "bin/placeholder/Core.dll": {}
-        }
-      },
-      "Core.Contracts/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v8.0",
-        "dependencies": {
-          "Common": "1.0.0",
-          "MediatR": "12.4.1",
-          "Microsoft.EntityFrameworkCore.Relational": "8.0.8",
-          "System.Linq.Dynamic.Core": "1.4.5"
-        },
-        "compile": {
-          "bin/placeholder/Core.Contracts.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Core.Contracts.dll": {}
         }
       },
       "DataAcess/1.0.0": {
@@ -1915,11 +1899,6 @@
       "type": "project",
       "path": "../Core/Core.csproj",
       "msbuildProject": "../Core/Core.csproj"
-    },
-    "Core.Contracts/1.0.0": {
-      "type": "project",
-      "path": "../Core.Contracts/Core.Contracts.csproj",
-      "msbuildProject": "../Core.Contracts/Core.Contracts.csproj"
     },
     "DataAcess/1.0.0": {
       "type": "project",
