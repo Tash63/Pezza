@@ -27,7 +27,8 @@ public class TestPizzaCore : QueryTestBase
                 {
                     Name = this.model.Name,
                     Description = this.model.Description,
-                    DateCreated = this.model.DateCreated
+                    DateCreated = this.model.DateCreated,
+                    Price= this.model.Price??0
                 }
             }, CancellationToken.None);
 

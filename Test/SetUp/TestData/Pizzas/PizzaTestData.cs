@@ -1,12 +1,19 @@
-﻿using Common.Entities;
-
+﻿using Common.Models.Pizza;
 namespace Test.Setup.TestData.Pizzas;
 
 public static class PizzaTestData
 {
     public static Faker faker = new();
-
-    public static Pizza pizza = new()
+    private static readonly List<string> pizzas = new()
+    {
+        "Veggie Pizza",
+        "Pepperoni Pizza",
+        "Meat Pizza",
+        "Margherita Pizza",
+        "BBQ Chicken Pizza",
+        "Hawaiian Pizza"
+    };
+    public static Common.Entities.Pizza pizza = new()
     {
         Id = 1,
         Name = faker.PickRandom(pizzas),
@@ -25,13 +32,4 @@ public static class PizzaTestData
 
     };
 
-    private static readonly List<string> pizzas = new()
-    {
-        "Veggie Pizza",
-        "Pepperoni Pizza",
-        "Meat Pizza",
-        "Margherita Pizza",
-        "BBQ Chicken Pizza",
-        "Hawaiian Pizza"
-    };
 }
