@@ -1,10 +1,12 @@
-﻿namespace Test.Setup.TestData.Pizza;
+﻿using Common.Entities;
+
+namespace Test.Setup.TestData.Pizzas;
 
 public static class PizzaTestData
 {
-    public static Faker faker = new Faker();
+    public static Faker faker = new();
 
-    public static Pizza Pizza = new Pizza()
+    public static Pizza pizza = new()
     {
         Id = 1,
         Name = faker.PickRandom(pizzas),
@@ -13,7 +15,7 @@ public static class PizzaTestData
         DateCreated = DateTime.Now,
     };
 
-    public static PizzaModel PizzaModel = new PizzaModel()
+    public static PizzaModel PizzaModel = new()
     {
         Id = 1,
         Name = faker.PickRandom(pizzas),

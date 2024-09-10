@@ -50,11 +50,15 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Bogus": {
+              "target": "Package",
+              "version": "[35.6.1, )"
+            },
             "MediatR": {
               "target": "Package",
               "version": "[12.4.1, )"
             },
-            "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
+            "Microsoft.EntityFrameworkCore.InMemory": {
               "target": "Package",
               "version": "[8.0.8, )"
             },
@@ -62,13 +66,13 @@
               "target": "Package",
               "version": "[8.0.8, )"
             },
-            "Microsoft.NET.Test.Sdk": {
+            "Riok.Mapperly": {
               "target": "Package",
-              "version": "[17.8.0, )"
+              "version": "[3.6.0, )"
             },
-            "Swashbuckle.AspNetCore": {
+            "System.Linq.Dynamic.Core": {
               "target": "Package",
-              "version": "[6.7.3, )"
+              "version": "[1.4.5, )"
             }
           },
           "imports": [

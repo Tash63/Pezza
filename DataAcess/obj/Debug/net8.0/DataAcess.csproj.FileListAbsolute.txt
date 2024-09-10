@@ -1,0 +1,15 @@
+C:\Users\kiran.nariansamy\Desktop\repos\Pezza\DataAcess\bin\Debug\net8.0\DataAcess.deps.json
+C:\Users\kiran.nariansamy\Desktop\repos\Pezza\DataAcess\bin\Debug\net8.0\DataAcess.dll
+C:\Users\kiran.nariansamy\Desktop\repos\Pezza\DataAcess\bin\Debug\net8.0\DataAcess.pdb
+C:\Users\kiran.nariansamy\Desktop\repos\Pezza\DataAcess\bin\Debug\net8.0\Common.dll
+C:\Users\kiran.nariansamy\Desktop\repos\Pezza\DataAcess\bin\Debug\net8.0\Common.pdb
+C:\Users\kiran.nariansamy\Desktop\repos\Pezza\DataAcess\obj\Debug\net8.0\DataAcess.csproj.AssemblyReference.cache
+C:\Users\kiran.nariansamy\Desktop\repos\Pezza\DataAcess\obj\Debug\net8.0\DataAcess.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\kiran.nariansamy\Desktop\repos\Pezza\DataAcess\obj\Debug\net8.0\DataAcess.AssemblyInfoInputs.cache
+C:\Users\kiran.nariansamy\Desktop\repos\Pezza\DataAcess\obj\Debug\net8.0\DataAcess.AssemblyInfo.cs
+C:\Users\kiran.nariansamy\Desktop\repos\Pezza\DataAcess\obj\Debug\net8.0\DataAcess.csproj.CoreCompileInputs.cache
+C:\Users\kiran.nariansamy\Desktop\repos\Pezza\DataAcess\obj\Debug\net8.0\DataAcess.csproj.Up2Date
+C:\Users\kiran.nariansamy\Desktop\repos\Pezza\DataAcess\obj\Debug\net8.0\DataAcess.dll
+C:\Users\kiran.nariansamy\Desktop\repos\Pezza\DataAcess\obj\Debug\net8.0\refint\DataAcess.dll
+C:\Users\kiran.nariansamy\Desktop\repos\Pezza\DataAcess\obj\Debug\net8.0\DataAcess.pdb
+C:\Users\kiran.nariansamy\Desktop\repos\Pezza\DataAcess\obj\Debug\net8.0\ref\DataAcess.dll

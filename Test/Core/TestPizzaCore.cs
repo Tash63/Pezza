@@ -1,4 +1,4 @@
-﻿using Test.Setup.TestData.Pizza;
+﻿using Test.Setup.TestData.Pizzas;
 
 namespace Test.Core;
 

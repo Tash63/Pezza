@@ -1,5 +1,15 @@
+C:\Users\kiran.nariansamy\Desktop\repos\Pezza\Core.Contracts\bin\Debug\net8.0\Core.Contracts.deps.json
+C:\Users\kiran.nariansamy\Desktop\repos\Pezza\Core.Contracts\bin\Debug\net8.0\Core.Contracts.dll
+C:\Users\kiran.nariansamy\Desktop\repos\Pezza\Core.Contracts\bin\Debug\net8.0\Core.Contracts.pdb
+C:\Users\kiran.nariansamy\Desktop\repos\Pezza\Core.Contracts\bin\Debug\net8.0\Common.dll
+C:\Users\kiran.nariansamy\Desktop\repos\Pezza\Core.Contracts\bin\Debug\net8.0\Common.pdb
 C:\Users\kiran.nariansamy\Desktop\repos\Pezza\Core.Contracts\obj\Debug\net8.0\Core.Contracts.csproj.AssemblyReference.cache
 C:\Users\kiran.nariansamy\Desktop\repos\Pezza\Core.Contracts\obj\Debug\net8.0\Core.Contracts.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\kiran.nariansamy\Desktop\repos\Pezza\Core.Contracts\obj\Debug\net8.0\Core.Contracts.AssemblyInfoInputs.cache
 C:\Users\kiran.nariansamy\Desktop\repos\Pezza\Core.Contracts\obj\Debug\net8.0\Core.Contracts.AssemblyInfo.cs
 C:\Users\kiran.nariansamy\Desktop\repos\Pezza\Core.Contracts\obj\Debug\net8.0\Core.Contracts.csproj.CoreCompileInputs.cache
+C:\Users\kiran.nariansamy\Desktop\repos\Pezza\Core.Contracts\obj\Debug\net8.0\Core.Con.4DD50222.Up2Date
+C:\Users\kiran.nariansamy\Desktop\repos\Pezza\Core.Contracts\obj\Debug\net8.0\Core.Contracts.dll
+C:\Users\kiran.nariansamy\Desktop\repos\Pezza\Core.Contracts\obj\Debug\net8.0\refint\Core.Contracts.dll
+C:\Users\kiran.nariansamy\Desktop\repos\Pezza\Core.Contracts\obj\Debug\net8.0\Core.Contracts.pdb
+C:\Users\kiran.nariansamy\Desktop\repos\Pezza\Core.Contracts\obj\Debug\net8.0\ref\Core.Contracts.dll
