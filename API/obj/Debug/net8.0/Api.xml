@@ -4,13 +4,13 @@
         <name>Api</name>
     </assembly>
     <members>
-        <member name="M:Api.Controllers.fuckController.Search">
+        <member name="M:Api.Controllers.PizzaController.Search">
             <summary>
             Get all Pizzas.
             </summary>
             <returns>ActionResult</returns>
         </member>
-        <member name="M:Api.Controllers.fuckController.Create(Common.Models.PizzaModel)">
+        <member name="M:Api.Controllers.PizzaController.Create(Common.Models.PizzaModel)">
              <summary>
              Create Pizza.
              </summary>
@@ -27,7 +27,7 @@
              <param name="model">Pizza Model</param>
              <returns>ActionResult</returns>
         </member>
-        <member name="M:Api.Controllers.fuckController.Update(Common.Models.PizzaModel)">
+        <member name="M:Api.Controllers.PizzaController.Update(Common.Models.PizzaModel)">
              <summary>
              Update Pizza.
              </summary>
@@ -42,7 +42,7 @@
              <param name="model">Pizza Model</param>
              <returns>ActionResult</returns>
         </member>
-        <member name="M:Api.Controllers.fuckController.Delete(System.Int32)">
+        <member name="M:Api.Controllers.PizzaController.Delete(System.Int32)">
             <summary>
             Delete Pizza by Id.
             </summary>
