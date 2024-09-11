@@ -1,7 +1,4 @@
-﻿using MediatR;
-using System.Diagnostics;
-
-namespace Common.Behaviour;
+﻿namespace Common.Behaviour;
 
 public class PerformanceBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
 {
@@ -9,18 +6,18 @@ public class PerformanceBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequ
 
     public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
     {
-        timer.Restart();
+        this.timer.Restart();
 
         var response = await next();
 
-        timer.Stop();
+        this.timer.Stop();
 
-        var elapsedMilliseconds = timer.ElapsedMilliseconds;
+        var elapsedMilliseconds = this.timer.ElapsedMilliseconds;
 
         if (elapsedMilliseconds > 500)
         {
             var requestName = typeof(TRequest).Name;
-            //this.logger.LogInformation($"CleanArchitecture Long Running Request: {requestName} ({elapsedMilliseconds} milliseconds)", request);
+            Logging.LogInfo($"CleanArchitecture Long Running Request: {requestName} ({elapsedMilliseconds} milliseconds)", request);
         }
 
         return response;

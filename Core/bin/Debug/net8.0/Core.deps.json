@@ -15,6 +15,7 @@
           "MediatR": "12.4.1",
           "Microsoft.AspNetCore.Http": "2.2.2",
           "Microsoft.EntityFrameworkCore.Relational": "8.0.8",
+          "StyleCop.Analyzers": "1.1.118",
           "System.Linq.Dynamic.Core": "1.4.5"
         },
         "runtime": {
@@ -293,6 +294,7 @@
           }
         }
       },
+      "StyleCop.Analyzers/1.1.118": {},
       "System.Buffers/4.5.0": {},
       "System.Linq.Dynamic.Core/1.4.5": {
         "runtime": {
@@ -530,6 +532,13 @@
       "sha512": "sha512-eQkT3evicd5fdb8HgAJjJ+uvbhfA76ozZZsBtounFrOvk0mj+9tozv1hCYV0f0cTmXIZsxtU93FMWPzd76wSaw==",
       "path": "riok.mapperly/3.6.0",
       "hashPath": "riok.mapperly.3.6.0.nupkg.sha512"
+    },
+    "StyleCop.Analyzers/1.1.118": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Onx6ovGSqXSK07n/0eM3ZusiNdB6cIlJdabQhWGgJp3Vooy9AaLS/tigeybOJAobqbtggTamoWndz72JscZBvw==",
+      "path": "stylecop.analyzers/1.1.118",
+      "hashPath": "stylecop.analyzers.1.1.118.nupkg.sha512"
     },
     "System.Buffers/4.5.0": {
       "type": "package",

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "1Nj1DdtrvgA=",
+  "dgSpecHash": "DI4hhw0OY8M=",
   "success": true,
   "projectFilePath": "C:\\Users\\kiran.nariansamy\\Desktop\\repos\\Pezza\\DataAcess\\DataAcess.csproj",
   "expectedPackageFiles": [
@@ -30,6 +30,9 @@
     "C:\\Users\\kiran.nariansamy\\.nuget\\packages\\microsoft.extensions.primitives\\8.0.0\\microsoft.extensions.primitives.8.0.0.nupkg.sha512",
     "C:\\Users\\kiran.nariansamy\\.nuget\\packages\\microsoft.net.http.headers\\2.2.0\\microsoft.net.http.headers.2.2.0.nupkg.sha512",
     "C:\\Users\\kiran.nariansamy\\.nuget\\packages\\riok.mapperly\\3.6.0\\riok.mapperly.3.6.0.nupkg.sha512",
+    "C:\\Users\\kiran.nariansamy\\.nuget\\packages\\serilog\\4.0.0\\serilog.4.0.0.nupkg.sha512",
+    "C:\\Users\\kiran.nariansamy\\.nuget\\packages\\serilog.sinks.file\\6.0.0\\serilog.sinks.file.6.0.0.nupkg.sha512",
+    "C:\\Users\\kiran.nariansamy\\.nuget\\packages\\stylecop.analyzers\\1.1.118\\stylecop.analyzers.1.1.118.nupkg.sha512",
     "C:\\Users\\kiran.nariansamy\\.nuget\\packages\\system.buffers\\4.5.0\\system.buffers.4.5.0.nupkg.sha512",
     "C:\\Users\\kiran.nariansamy\\.nuget\\packages\\system.linq.dynamic.core\\1.4.5\\system.linq.dynamic.core.1.4.5.nupkg.sha512",
     "C:\\Users\\kiran.nariansamy\\.nuget\\packages\\system.text.encodings.web\\4.5.0\\system.text.encodings.web.4.5.0.nupkg.sha512"
