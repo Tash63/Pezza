@@ -9,13 +9,13 @@ public class PerformanceBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequ
 
     public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
     {
-        this.timer.Restart();
+        timer.Restart();
 
         var response = await next();
 
-        this.timer.Stop();
+        timer.Stop();
 
-        var elapsedMilliseconds = this.timer.ElapsedMilliseconds;
+        var elapsedMilliseconds = timer.ElapsedMilliseconds;
 
         if (elapsedMilliseconds > 500)
         {

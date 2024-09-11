@@ -4,6 +4,7 @@
     {
         public UpdateCustomerCommandValidator()
         {
+            this.RuleFor(r => r.Id).NotEmpty().NotNull();
             this.RuleFor(r => r.Data).NotNull();
             this.RuleFor(r => r.Data.Name).MaximumLength(100);
             this.RuleFor(r=>r.Data.Address).MaximumLength(500);

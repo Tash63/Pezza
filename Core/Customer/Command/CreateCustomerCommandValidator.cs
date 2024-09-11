@@ -4,7 +4,7 @@
     {
         public CreateCustomerCommandValidator()
         {
-            this.RuleFor(r => r.Data).Null();
+            this.RuleFor(r => r.Data).NotEmpty();
             this.RuleFor(r => r.Data.Name).MaximumLength(100).NotEmpty();
             this.RuleFor(r=>r.Data.Address).MaximumLength(100).NotEmpty();
             this.RuleFor(r=>r.Data.Email).MaximumLength(500).NotEmpty().EmailAddress();
