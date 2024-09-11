@@ -7,7 +7,7 @@
         public PagingArgs PagingArgs { get; set; } = PagingArgs.NoPaging;
         public int Id { get; set; }
 
-        public required string Name { get; set; }
+        public required string? Name { get; set; }
 
         public string? Address { get; set; }
 
@@ -15,7 +15,7 @@
 
         public string? Cellphone { get; set; }
 
-        public DateTime DateCreated { get; set; }
+        public DateTime? DateCreated { get; set; }
     }
 }
 

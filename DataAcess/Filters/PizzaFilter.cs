@@ -15,14 +15,14 @@ namespace Common.Filters
             return query.Where(x => x.Name.Contains( name));
         }
 
-        public static IQueryable<Pizza> FilterByPrice(this IQueryable<Pizza> query,float? price)
+        public static IQueryable<Pizza> FilterByPrice(this IQueryable<Pizza> query,decimal? price)
         {
             if(!price.HasValue)
             {
                 return query;
             }
             //nullable types can get the actual value by using the nullable.Value
-            return query.Where(x => x.Price == (decimal)price.Value);
+            return query.Where(x => x.Price == price.Value);
         }
 
         public static IQueryable<Pizza> FilterByDate(this IQueryable<Pizza> query,DateTime? date)

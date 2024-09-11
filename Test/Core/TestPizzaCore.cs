@@ -54,10 +54,77 @@ public class TestPizzaCore : QueryTestBase
     }
 
     [Test]
-    public async Task GetAllAsync()
+    public async Task GetAllFilterByNameAsync()
     {
         var sutGetAll = new GetPizzasQueryHandler(this.Context);
-        var resultGetAll = await sutGetAll.Handle(new GetPizzasQuery(), CancellationToken.None);
+        var resultGetAll = await sutGetAll.Handle(new GetPizzasQuery
+        {
+            Data = new SearchPizzaModel
+            {
+                OrderBy = null,
+                PagingArgs = new Common.Models.PagingArgs
+                {
+                    Offset = 0,
+                    Limit = 0,
+                    UsePaging = true,
+                },
+                Id = 0,
+                Name = this.model.Name,
+                Description = "",
+                Price = null,
+                DateCreated=null
+            }
+        }, CancellationToken.None);
+
+        Assert.IsTrue(resultGetAll?.Data.Count == 1);
+    }
+    [Test]
+    public async Task GetAllFilterByPriceAsync()
+    {
+        var sutGetAll = new GetPizzasQueryHandler(this.Context);
+        var resultGetAll = await sutGetAll.Handle(new GetPizzasQuery
+        {
+            Data = new SearchPizzaModel
+            {
+                OrderBy = null,
+                PagingArgs = new Common.Models.PagingArgs
+                {
+                    Offset = 0,
+                    Limit = 0,
+                    UsePaging = true,
+                },
+                Id = 0,
+                Name = "",
+                Description = "",
+                Price = this.model.Price,
+                DateCreated = null
+            }
+        }, CancellationToken.None);
+
+        Assert.IsTrue(resultGetAll?.Data.Count == 1);
+    }
+    [Test]
+    public async Task GetAllFilterByDateCreatedAsync()
+    {
+        var sutGetAll = new GetPizzasQueryHandler(this.Context);
+        var resultGetAll = await sutGetAll.Handle(new GetPizzasQuery
+        {
+            Data = new SearchPizzaModel
+            {
+                OrderBy = null,
+                PagingArgs = new Common.Models.PagingArgs
+                {
+                    Offset = 0,
+                    Limit = 0,
+                    UsePaging = true,
+                },
+                Id = 0,
+                Name = "",
+                Description = "",
+                Price = null,
+                DateCreated = this.model.DateCreated
+            }
+        }, CancellationToken.None);
 
         Assert.IsTrue(resultGetAll?.Data.Count == 1);
     }

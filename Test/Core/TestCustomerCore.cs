@@ -54,10 +54,109 @@ public class TestCustomerCore : QueryTestBase
     }
 
     [Test]
-    public async Task GetAllAsync()
+    public async Task GetAllByNameAsync()
     {
         var sutGetAll = new GetCustomersQueryHandler(this.Context);
-        var resultGetAll = await sutGetAll.Handle(new GetCustomersQuery(), CancellationToken.None);
+        var resultGetAll = await sutGetAll.Handle(new GetCustomersQuery
+        {
+            Data=new SearchCustomerModel
+            {
+                OrderBy=null,
+                PagingArgs=new Common.Models.PagingArgs
+                {
+                    Offset=0,
+                    Limit=0,
+                    UsePaging=true
+                },
+                Id=0,
+                Name=this.model.Name,
+                Address="",
+                Email="",
+                Cellphone="",
+                DateCreated=this.model.DateCreated
+            }
+        }, CancellationToken.None);
+
+        Assert.IsTrue(resultGetAll?.Data.Count == 1);
+    }
+
+    [Test]
+    public async Task GetAllByAdresssync()
+    {
+        var sutGetAll = new GetCustomersQueryHandler(this.Context);
+        var resultGetAll = await sutGetAll.Handle(new GetCustomersQuery
+        {
+            Data = new SearchCustomerModel
+            {
+                OrderBy = null,
+                PagingArgs = new Common.Models.PagingArgs
+                {
+                    Offset = 0,
+                    Limit = 0,
+                    UsePaging = true
+                },
+                Id = 0,
+                Name = "",
+                Address = this.model.Address,
+                Email = "",
+                Cellphone = "",
+                DateCreated = this.model.DateCreated
+            }
+        }, CancellationToken.None);
+
+        Assert.IsTrue(resultGetAll?.Data.Count == 1);
+    }
+
+    [Test]
+    public async Task GetAllByEmailAsync()
+    {
+        var sutGetAll = new GetCustomersQueryHandler(this.Context);
+        var resultGetAll = await sutGetAll.Handle(new GetCustomersQuery
+        {
+            Data = new SearchCustomerModel
+            {
+                OrderBy = null,
+                PagingArgs = new Common.Models.PagingArgs
+                {
+                    Offset = 0,
+                    Limit = 0,
+                    UsePaging = true
+                },
+                Id = 0,
+                Name = "",
+                Address = "",
+                Email = this.model.Email,
+                Cellphone = "",
+                DateCreated = this.model.DateCreated
+            }
+        }, CancellationToken.None);
+
+        Assert.IsTrue(resultGetAll?.Data.Count == 1);
+    }
+
+    [Test]
+    public async Task GetAllByCellPhoneAsync()
+    {
+        var sutGetAll = new GetCustomersQueryHandler(this.Context);
+        var resultGetAll = await sutGetAll.Handle(new GetCustomersQuery
+        {
+            Data = new SearchCustomerModel
+            {
+                OrderBy = null,
+                PagingArgs = new Common.Models.PagingArgs
+                {
+                    Offset = 0,
+                    Limit = 0,
+                    UsePaging = true
+                },
+                Id = 0,
+                Name = null,
+                Address = null,
+                Email = null,
+                Cellphone = this.model.Cellphone,
+                DateCreated = this.model.DateCreated
+            }
+        }, CancellationToken.None);
 
         Assert.IsTrue(resultGetAll?.Data.Count == 1);
     }
