@@ -1,12 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Common.Models.Pizza
+﻿namespace Common.Models.Pizza
 {
-    internal class SearchPizzaModel
+    public class SearchPizzaModel
     {
+        public string? OrderBy { get; set; }
+
+        public PagingArgs PagingArgs { get; set; } = PagingArgs.NoPaging;
+        public int Id { get; set; }
+
+        public required string Name { get; set; }
+
+        public string? Description { get; set; }
+
+        public decimal? Price { get; set; }
+
+        public DateTime? DateCreated { get; set; }
     }
 }

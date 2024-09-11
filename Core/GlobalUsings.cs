@@ -1,4 +1,7 @@
-﻿global using Common.Mappers;
+﻿global using System.Linq.Dynamic.Core;
+global using Common.Extensions;
+global using Common.Filters;
+global using Common.Mappers;
 global using Common.Models;
 global using Common.Models.Pizza;
 global using Core.Pizza.Commands;
