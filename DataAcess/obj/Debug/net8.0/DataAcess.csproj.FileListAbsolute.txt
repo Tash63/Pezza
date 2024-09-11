@@ -13,3 +13,4 @@ C:\Users\kiran.nariansamy\Desktop\repos\Pezza\DataAcess\obj\Debug\net8.0\DataAce
 C:\Users\kiran.nariansamy\Desktop\repos\Pezza\DataAcess\obj\Debug\net8.0\refint\DataAcess.dll
 C:\Users\kiran.nariansamy\Desktop\repos\Pezza\DataAcess\obj\Debug\net8.0\DataAcess.pdb
 C:\Users\kiran.nariansamy\Desktop\repos\Pezza\DataAcess\obj\Debug\net8.0\ref\DataAcess.dll
+C:\Users\kiran.nariansamy\Desktop\repos\Pezza\DataAcess\obj\Debug\net8.0\DataAcess.sourcelink.json

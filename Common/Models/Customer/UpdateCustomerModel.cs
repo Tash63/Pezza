@@ -8,7 +8,6 @@ namespace Common.Models.Customer
 {
     public class UpdateCustomerModel
     {
-        public int Id { get; set; }
 
         public  string? Name { get; set; }
 
@@ -17,7 +16,5 @@ namespace Common.Models.Customer
         public string? Email { get; set; }
 
         public string? Cellphone { get; set; }
-
-        public DateTime DateCreated { get; set; }
     }
 }

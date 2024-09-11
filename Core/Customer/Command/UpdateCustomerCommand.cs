@@ -21,6 +21,7 @@ public class UpdateCustomerCommandHandler(DatabaseContext databaseContext) : IRe
 
         var model = request.Data;
         var query = EF.CompileAsyncQuery((DatabaseContext db, int id) => db.Customers.FirstOrDefault(c => c.Id == id));
+        //this is getting the acutal entry into thhe database so we can modify what needs to
         var findEntity = await query(databaseContext, request.Id.Value);
         if (findEntity == null)
         {
@@ -31,7 +32,6 @@ public class UpdateCustomerCommandHandler(DatabaseContext databaseContext) : IRe
         findEntity.Address=string.IsNullOrEmpty(model.Address)?findEntity.Address:model.Address;
         findEntity.Email=string.IsNullOrEmpty(model.Email)?findEntity.Email:model.Email;
         findEntity.Cellphone=string.IsNullOrEmpty(model.Cellphone)?findEntity.Cellphone:model.Cellphone;
-        findEntity.DateCreated=model.DateCreated;
 
         var outcome = databaseContext.Customers.Update(findEntity);
         var result = await databaseContext.SaveChangesAsync(cancellationToken);

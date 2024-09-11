@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "VzI3j2kAIu0=",
+  "dgSpecHash": "LsvkP8AwMGw=",
   "success": true,
   "projectFilePath": "C:\\Users\\kiran.nariansamy\\Desktop\\repos\\Pezza\\Test\\Test.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\kiran.nariansamy\\.nuget\\packages\\bogus\\35.6.1\\bogus.35.6.1.nupkg.sha512",
     "C:\\Users\\kiran.nariansamy\\.nuget\\packages\\coverlet.collector\\6.0.0\\coverlet.collector.6.0.0.nupkg.sha512",
+    "C:\\Users\\kiran.nariansamy\\.nuget\\packages\\fluentvalidation\\11.9.2\\fluentvalidation.11.9.2.nupkg.sha512",
     "C:\\Users\\kiran.nariansamy\\.nuget\\packages\\mediatr\\12.4.1\\mediatr.12.4.1.nupkg.sha512",
     "C:\\Users\\kiran.nariansamy\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",
     "C:\\Users\\kiran.nariansamy\\.nuget\\packages\\microsoft.codecoverage\\17.8.0\\microsoft.codecoverage.17.8.0.nupkg.sha512",
