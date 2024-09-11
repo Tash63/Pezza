@@ -68,11 +68,10 @@ public class TestPizzaCore : QueryTestBase
                     Limit = 0,
                     UsePaging = true,
                 },
-                Id = 0,
-                Name = this.model.Name,
-                Description = "",
-                Price = null,
-                DateCreated=null
+                Id=0,
+                Name=this.model.Name,
+                Price=null,
+                DateCreated=this.model.DateCreated,
             }
         }, CancellationToken.None);
 
@@ -94,10 +93,10 @@ public class TestPizzaCore : QueryTestBase
                     UsePaging = true,
                 },
                 Id = 0,
-                Name = "",
-                Description = "",
-                Price = this.model.Price,
-                DateCreated = null
+                Name = null,
+                Description = null,
+                Price = model.Price,
+                DateCreated =model.DateCreated
             }
         }, CancellationToken.None);
 

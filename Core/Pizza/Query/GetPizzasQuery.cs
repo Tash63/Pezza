@@ -23,7 +23,7 @@ public class GetPizzasQueryHandler(DatabaseContext databaseContext) : IRequestHa
         }
 
 
-        var entities = databaseContext.Pizzas.Select(x => x).AsNoTracking().FilterByDate(entity.DateCreated).FilterByName(entity.Name).FilterByPrice(entity.Price).OrderBy(entity.OrderBy);
+        var entities = databaseContext.Pizzas.Select(x => x).AsNoTracking().FilterByPrice(entity.Price).FilterByDate(entity.DateCreated).FilterByName(entity.Name).OrderBy(entity.OrderBy);
 
         var count = entities.Count();
         var paged = await entities.ApplyPaging(entity.PagingArgs).ToListAsync(cancellationToken);
