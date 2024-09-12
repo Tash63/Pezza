@@ -29,4 +29,10 @@
     <ProjectReference Include="..\DataAcess\DataAcess.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Email\Templates\OrderCompleted.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

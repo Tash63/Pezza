@@ -1,8 +1,9 @@
 ﻿namespace Core.Order.Events;
 
 using System.Text;
+using Common.Entities;
 using Common.Models.Order;
-using Core.Email;
+using DataAccess;
 
 public class OrderEvent : INotification
 {
@@ -25,12 +26,15 @@ public class OrderEventHandler(DatabaseContext databaseContext) : INotificationH
         }
 
         html = html.Replace("%pizzas%", pizzasContent.ToString());
-        var emailService = new EmailService
-        {
-            Customer = notification.Data.Customer,
-            HtmlContent = html
-        };
 
-        var send = await emailService.SendEmail();
+        databaseContext.Notifies.Add(new Notify
+        {
+            CustomerId = notification.Data.Customer.Id,
+            CustomerEmail = notification.Data?.Customer?.Email,
+            DateSent = null,
+            EmailContent = html,
+            Sent = false
+        });
+        await databaseContext.SaveChangesAsync(cancellationToken);
     }
 }

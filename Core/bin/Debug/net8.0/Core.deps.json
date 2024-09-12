@@ -10,8 +10,11 @@
         "dependencies": {
           "Common": "1.0.0",
           "DataAcess": "1.0.0",
+          "FluentEmail.Core": "3.0.2",
+          "FluentEmail.Smtp": "3.0.2",
           "FluentValidation": "11.9.2",
           "FluentValidation.DependencyInjectionExtensions": "11.9.2",
+          "HtmlAgilityPack": "1.11.65",
           "LazyCache.AspNetCore": "2.4.0",
           "MediatR": "12.4.1",
           "Microsoft.AspNetCore.Http": "2.2.2",
@@ -32,6 +35,28 @@
           }
         }
       },
+      "FluentEmail.Core/3.0.2": {
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/FluentEmail.Core.dll": {
+            "assemblyVersion": "3.0.2.0",
+            "fileVersion": "3.0.2.0"
+          }
+        }
+      },
+      "FluentEmail.Smtp/3.0.2": {
+        "dependencies": {
+          "FluentEmail.Core": "3.0.2"
+        },
+        "runtime": {
+          "lib/netstandard2.0/FluentEmail.Smtp.dll": {
+            "assemblyVersion": "3.0.2.0",
+            "fileVersion": "3.0.2.0"
+          }
+        }
+      },
       "FluentValidation/11.9.2": {
         "runtime": {
           "lib/net8.0/FluentValidation.dll": {
@@ -49,6 +74,14 @@
           "lib/netstandard2.1/FluentValidation.DependencyInjectionExtensions.dll": {
             "assemblyVersion": "11.0.0.0",
             "fileVersion": "11.9.2.0"
+          }
+        }
+      },
+      "HtmlAgilityPack/1.11.65": {
+        "runtime": {
+          "lib/netstandard2.0/HtmlAgilityPack.dll": {
+            "assemblyVersion": "1.11.65.0",
+            "fileVersion": "1.11.65.0"
           }
         }
       },
@@ -407,6 +440,20 @@
       "path": "bogus/35.6.1",
       "hashPath": "bogus.35.6.1.nupkg.sha512"
     },
+    "FluentEmail.Core/3.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-uQFFbJgMhhCFUti7pfMi429fMNi7fLGMj+7uDtD7POlQzLxlhXJ6tmt4Y1SI51sZsA36GO5b7+o29eY/dKiICQ==",
+      "path": "fluentemail.core/3.0.2",
+      "hashPath": "fluentemail.core.3.0.2.nupkg.sha512"
+    },
+    "FluentEmail.Smtp/3.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Y5pZKS/mXSl7D5WJWecvfo1kpIMDc6U0VRU6wRbE9wEv2IqMH3cQXa/97Pwi+m31COepIqc6dMhGMtAJ2Qh7rw==",
+      "path": "fluentemail.smtp/3.0.2",
+      "hashPath": "fluentemail.smtp.3.0.2.nupkg.sha512"
+    },
     "FluentValidation/11.9.2": {
       "type": "package",
       "serviceable": true,
@@ -420,6 +467,13 @@
       "sha512": "sha512-PMAdnR1fX1c8DyUvu5YvRa0V0JHES8vzXnVX0OSS3z9W/SkuHqcGrtiSOdW1QehG3vZhXsKhqf3wgDzW/OYahA==",
       "path": "fluentvalidation.dependencyinjectionextensions/11.9.2",
       "hashPath": "fluentvalidation.dependencyinjectionextensions.11.9.2.nupkg.sha512"
+    },
+    "HtmlAgilityPack/1.11.65": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Skse4MVlRcHHyP88x+v/uQrMxTPaBIwQodiQ/y59jxs8vHlqTR5M3jt5Wk+csYFnR4rX6I4ndqDji2M8p9kAzw==",
+      "path": "htmlagilitypack/1.11.65",
+      "hashPath": "htmlagilitypack.1.11.65.nupkg.sha512"
     },
     "LazyCache/2.4.0": {
       "type": "package",

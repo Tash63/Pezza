@@ -16,3 +16,4 @@ C:\Users\kiran.nariansamy\Desktop\repos\Pezza\Core\obj\Debug\net8.0\refint\Core.
 C:\Users\kiran.nariansamy\Desktop\repos\Pezza\Core\obj\Debug\net8.0\Core.pdb
 C:\Users\kiran.nariansamy\Desktop\repos\Pezza\Core\obj\Debug\net8.0\ref\Core.dll
 C:\Users\kiran.nariansamy\Desktop\repos\Pezza\Core\obj\Debug\net8.0\Core.sourcelink.json
+C:\Users\kiran.nariansamy\Desktop\repos\Pezza\Core\bin\Debug\net8.0\Email\Templates\OrderCompleted.html

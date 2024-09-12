@@ -1,9 +1,5 @@
 ﻿namespace DataAccess;
 
-using Common.Entities;
-using DataAccess.Mapping;
-using Microsoft.EntityFrameworkCore;
-
 public class DatabaseContext : DbContext
 {
     public DatabaseContext()
@@ -18,12 +14,14 @@ public class DatabaseContext : DbContext
 
     public virtual DbSet<Pizza> Pizzas { get; set; }
 
+    public virtual DbSet<Notify> Notifies { get; set; }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfiguration(new CustomerMap());
         modelBuilder.ApplyConfiguration(new PizzaMap());
+        modelBuilder.ApplyConfiguration(new NotifyMap());
     }
 
-    protected override void OnConfiguring
-       (DbContextOptionsBuilder optionsBuilder) => optionsBuilder.UseInMemoryDatabase(databaseName: "PezzaDb");
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) => optionsBuilder.UseInMemoryDatabase(databaseName: "PezzaDb");
 }
