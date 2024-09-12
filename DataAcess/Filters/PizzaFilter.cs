@@ -1,37 +1,67 @@
-﻿using System.Linq.Dynamic.Core;
-using System.Security.Cryptography.X509Certificates;
+﻿namespace Common.Filters;
 
-namespace Common.Filters
+using Common.Models;
+using Common.Models.Pizza;
+
+public static class PizzaFilter
 {
-    public static class PizzaFilter
+    public static IQueryable<Pizza> FilterByName(this IQueryable<Pizza> query, string name)
     {
-        //the Iquerable is a generic which we can pass a type wich is Pizza so it acesses the contents of it
-        public static IQueryable<Pizza> FilterByName(this IQueryable<Pizza> query,string name)
+        if (string.IsNullOrWhiteSpace(name))
         {
-            if(string.IsNullOrWhiteSpace(name))
-            {
-                return query;
-            }
-            return query.Where(x => x.Name.Equals(name));
+            return query;
         }
 
-        public static IQueryable<Pizza> FilterByPrice(this IQueryable<Pizza> query,decimal? price)
+        return query.Where(x => x.Name.Contains(name));
+    }
+
+    public static IEnumerable<PizzaModel> FilterByName(this IEnumerable<PizzaModel> query, string name)
+    {
+        if (string.IsNullOrWhiteSpace(name))
         {
-            if (!price.HasValue)
-            {
-                return query;
-            }
-            //nullable types can get the actual value by using the nullable.Value
-            return query.Where(x => x.Price==price.Value);
+            return query;
         }
 
-        public static IQueryable<Pizza> FilterByDate(this IQueryable<Pizza> query,DateTime? date)
+        return query.Where(x => x.Name.Contains(name));
+    }
+
+    public static IQueryable<Pizza> FilterByDescription(this IQueryable<Pizza> query, string description)
+    {
+        if (string.IsNullOrWhiteSpace(description))
         {
-            if(date==null)
-            {
-                return query;
-            }
-            return query.Where(x => x.DateCreated == date.Value);
+            return query;
         }
+
+        return query.Where(x => x.Description.Contains(description));
+    }
+
+    public static IEnumerable<PizzaModel> FilterByDescription(this IEnumerable<PizzaModel> query, string description)
+    {
+        if (string.IsNullOrWhiteSpace(description))
+        {
+            return query;
+        }
+
+        return query.Where(x => x.Description.Contains(description));
+    }
+
+    public static IQueryable<Pizza> FilterByDateCreated(this IQueryable<Pizza> query, DateTime? dateCreated)
+    {
+        if (!dateCreated.HasValue)
+        {
+            return query;
+        }
+
+        return query.Where(x => x.DateCreated == dateCreated.Value);
+    }
+
+    public static IEnumerable<PizzaModel> FilterByDateCreated(this IEnumerable<PizzaModel> query, DateTime? dateCreated)
+    {
+        if (!dateCreated.HasValue)
+        {
+            return query;
+        }
+
+        return query.Where(x => x.DateCreated == dateCreated.Value);
     }
 }

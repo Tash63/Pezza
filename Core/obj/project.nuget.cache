@@ -1,12 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "teagKa9tAbY=",
+  "dgSpecHash": "Ls6OsqSKf6Q=",
   "success": true,
   "projectFilePath": "C:\\Users\\kiran.nariansamy\\Desktop\\repos\\Pezza\\Core\\Core.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\kiran.nariansamy\\.nuget\\packages\\bogus\\35.6.1\\bogus.35.6.1.nupkg.sha512",
     "C:\\Users\\kiran.nariansamy\\.nuget\\packages\\fluentvalidation\\11.9.2\\fluentvalidation.11.9.2.nupkg.sha512",
     "C:\\Users\\kiran.nariansamy\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.9.2\\fluentvalidation.dependencyinjectionextensions.11.9.2.nupkg.sha512",
+    "C:\\Users\\kiran.nariansamy\\.nuget\\packages\\lazycache\\2.4.0\\lazycache.2.4.0.nupkg.sha512",
+    "C:\\Users\\kiran.nariansamy\\.nuget\\packages\\lazycache.aspnetcore\\2.4.0\\lazycache.aspnetcore.2.4.0.nupkg.sha512",
     "C:\\Users\\kiran.nariansamy\\.nuget\\packages\\mediatr\\12.4.1\\mediatr.12.4.1.nupkg.sha512",
     "C:\\Users\\kiran.nariansamy\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",
     "C:\\Users\\kiran.nariansamy\\.nuget\\packages\\microsoft.aspnetcore.http\\2.2.2\\microsoft.aspnetcore.http.2.2.2.nupkg.sha512",

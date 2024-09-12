@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using LazyCache;
+using MediatR;
 
 namespace Core.Pizza.Commands;
 
@@ -9,7 +10,7 @@ public class UpdatePizzaCommand : IRequest<Result<PizzaModel>>
     public UpdatePizzaModel? Data { get; set; }
 }
 
-public class UpdatePizzaCommandHandler(DatabaseContext databaseContext) : IRequestHandler<UpdatePizzaCommand, Result<PizzaModel>>
+public class UpdatePizzaCommandHandler(DatabaseContext databaseContext,IAppCache cache) : IRequestHandler<UpdatePizzaCommand, Result<PizzaModel>>
 {
     public async Task<Result<PizzaModel>> Handle(UpdatePizzaCommand request, CancellationToken cancellationToken)
     {
@@ -32,7 +33,7 @@ public class UpdatePizzaCommandHandler(DatabaseContext databaseContext) : IReque
 
         var outcome = databaseContext.Pizzas.Update(findEntity);
         var result = await databaseContext.SaveChangesAsync(cancellationToken);
-
+        cache.Remove(Common.Data.CacheKey);
         return result > 0 ? Result<PizzaModel>.Success(findEntity.Map()) : Result<PizzaModel>.Failure("Error");
     }
 }

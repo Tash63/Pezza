@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using LazyCache;
+using MediatR;
 
 namespace Core.Pizza.Commands;
 
@@ -7,7 +8,7 @@ public class DeletePizzaCommand : IRequest<Result>
     public int? Id { get; set; }
 }
 
-public class DeletePizzaCommandHandler(DatabaseContext databaseContext) : IRequestHandler<DeletePizzaCommand, Result>
+public class DeletePizzaCommandHandler(DatabaseContext databaseContext,IAppCache cache) : IRequestHandler<DeletePizzaCommand, Result>
 {
     public async Task<Result> Handle(DeletePizzaCommand request, CancellationToken cancellationToken)
     {
@@ -25,7 +26,7 @@ public class DeletePizzaCommandHandler(DatabaseContext databaseContext) : IReque
 
         databaseContext.Pizzas.Remove(findEntity);
         var result = await databaseContext.SaveChangesAsync(cancellationToken);
-
+        cache.Remove(Common.Data.CacheKey);
         return result > 0 ? Result.Success() : Result.Failure("Error");
     }
 }

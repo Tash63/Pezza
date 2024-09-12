@@ -178,6 +178,10 @@
               "target": "Package",
               "version": "[11.9.2, )"
             },
+            "LazyCache.AspNetCore": {
+              "target": "Package",
+              "version": "[2.4.0, )"
+            },
             "MediatR": {
               "target": "Package",
               "version": "[12.4.1, )"

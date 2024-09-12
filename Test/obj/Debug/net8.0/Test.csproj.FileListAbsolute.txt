@@ -131,3 +131,7 @@ C:\Users\kiran.nariansamy\Desktop\repos\Pezza\Test\bin\Debug\net8.0\Microsoft.As
 C:\Users\kiran.nariansamy\Desktop\repos\Pezza\Test\bin\Debug\net8.0\Microsoft.Extensions.ObjectPool.dll
 C:\Users\kiran.nariansamy\Desktop\repos\Pezza\Test\bin\Debug\net8.0\Microsoft.Net.Http.Headers.dll
 C:\Users\kiran.nariansamy\Desktop\repos\Pezza\Test\obj\Debug\net8.0\Test.sourcelink.json
+C:\Users\kiran.nariansamy\Desktop\repos\Pezza\Test\bin\Debug\net8.0\LazyCache.dll
+C:\Users\kiran.nariansamy\Desktop\repos\Pezza\Test\bin\Debug\net8.0\LazyCache.AspNetCore.dll
+C:\Users\kiran.nariansamy\Desktop\repos\Pezza\Test\bin\Debug\net8.0\Serilog.dll
+C:\Users\kiran.nariansamy\Desktop\repos\Pezza\Test\bin\Debug\net8.0\Serilog.Sinks.File.dll

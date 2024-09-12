@@ -19,7 +19,7 @@ public class TestPizzaCore : QueryTestBase
     public async Task Init()
     {
         this.model = PizzaTestData.PizzaModel;
-        var sutCreate = new CreatePizzaCommandHandler(this.Context);
+        var sutCreate = new CreatePizzaCommandHandler(this.Context,this.CachingService);
         var resultCreate = await sutCreate.Handle(
             new CreatePizzaCommand
             {
@@ -56,7 +56,7 @@ public class TestPizzaCore : QueryTestBase
     [Test]
     public async Task GetAllFilterByNameAsync()
     {
-        var sutGetAll = new GetPizzasQueryHandler(this.Context);
+        var sutGetAll = new GetPizzasQueryHandler(this.Context,this.CachingService);
         var resultGetAll = await sutGetAll.Handle(new GetPizzasQuery
         {
             Data = new SearchPizzaModel
@@ -80,7 +80,7 @@ public class TestPizzaCore : QueryTestBase
     [Test]
     public async Task GetAllFilterByPriceAsync()
     {
-        var sutGetAll = new GetPizzasQueryHandler(this.Context);
+        var sutGetAll = new GetPizzasQueryHandler(this.Context,this.CachingService);
         var resultGetAll = await sutGetAll.Handle(new GetPizzasQuery
         {
             Data = new SearchPizzaModel
@@ -105,7 +105,7 @@ public class TestPizzaCore : QueryTestBase
     [Test]
     public async Task GetAllFilterByDateCreatedAsync()
     {
-        var sutGetAll = new GetPizzasQueryHandler(this.Context);
+        var sutGetAll = new GetPizzasQueryHandler(this.Context, this.CachingService);
         var resultGetAll = await sutGetAll.Handle(new GetPizzasQuery
         {
             Data = new SearchPizzaModel
@@ -134,7 +134,7 @@ public class TestPizzaCore : QueryTestBase
     [Test]
     public async Task UpdateAsync()
     {
-        var sutUpdate = new UpdatePizzaCommandHandler(this.Context);
+        var sutUpdate = new UpdatePizzaCommandHandler(this.Context, this.CachingService);
         var resultUpdate = await sutUpdate.Handle(
             new UpdatePizzaCommand
             {
@@ -151,7 +151,7 @@ public class TestPizzaCore : QueryTestBase
     [Test]
     public async Task DeleteAsync()
     {
-        var sutDelete = new DeletePizzaCommandHandler(this.Context);
+        var sutDelete = new DeletePizzaCommandHandler(this.Context, this.CachingService);
         var outcomeDelete = await sutDelete.Handle(
             new DeletePizzaCommand
             {

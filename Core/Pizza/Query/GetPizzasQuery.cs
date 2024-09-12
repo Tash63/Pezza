@@ -1,33 +1,59 @@
-﻿using MediatR;
+﻿namespace Core.Pizza.Queries;
 
-namespace Core.Pizza.Queries;
+using System.Linq;
+using LazyCache;
 
 public class GetPizzasQuery : IRequest<ListResult<PizzaModel>>
 {
     public SearchPizzaModel Data { get; set; }
-}
 
-public class GetPizzasQueryHandler(DatabaseContext databaseContext) : IRequestHandler<GetPizzasQuery, ListResult<PizzaModel>>
-{
-    /*so the models are used to expose certain things we need from the body of the request inorder to forfuil the request like here we added paging parameters to the search models and thats whats 
-     exposed and the filter we can return the query when entred if we check if that filed was not filled in the model
-    and the where clause appends a where when we call filter*/
-    public async Task<ListResult<PizzaModel>> Handle(GetPizzasQuery request, CancellationToken cancellationToken)
+    public class GetPizzasQueryHandler(DatabaseContext databaseContext, IAppCache cache) : IRequestHandler<GetPizzasQuery, ListResult<PizzaModel>>
     {
+        private readonly TimeSpan cacheExpiry = new(12, 0, 0);
 
-        var entity = request.Data;
-        //add a switch statement to this and the customer one incase something defualts and we get 500
-        if(string.IsNullOrEmpty(entity.OrderBy))
+        public async Task<ListResult<PizzaModel>> Handle(GetPizzasQuery request, CancellationToken cancellationToken)
         {
-            entity.OrderBy = "DateCreated desc";
+            var entity = request.Data;
+
+            Task<IEnumerable<PizzaModel>> DataDelegate() => this.GetData();
+            var cachedData = await cache.GetOrAddAsync(Common.Data.CacheKey, DataDelegate, this.cacheExpiry);
+
+            if (cachedData != null)
+            {
+                var data = cachedData?
+                    .FilterByName(entity.Name)
+                    .FilterByDescription(entity.Description)
+                    .OrderBy(x => x.DateCreated)
+                    .ToList();
+
+                return ListResult<PizzaModel>.Success(data, cachedData.Count());
+            }
+
+            if (string.IsNullOrEmpty(entity.OrderBy))
+            {
+                entity.OrderBy = "DateCreated desc";
+            }
+
+            var entities = databaseContext.Pizzas
+                .Select(x => x)
+                .AsNoTracking()
+                .FilterByName(entity.Name)
+                .FilterByDescription(entity.Description)
+                .OrderBy(entity.OrderBy);
+
+            var count = entities.Count();
+            var paged = await entities.ApplyPaging(entity.PagingArgs).ToListAsync(cancellationToken);
+
+            return ListResult<PizzaModel>.Success(paged.Map(), count);
         }
 
+        private async Task<IEnumerable<PizzaModel>> GetData()
+        {
+            var entities = await databaseContext.Pizzas.Select(x => x)
+                .AsNoTracking()
+                .ToListAsync();
 
-        var entities = databaseContext.Pizzas.Select(x => x).AsNoTracking().FilterByPrice(entity.Price).FilterByDate(entity.DateCreated).FilterByName(entity.Name).OrderBy(entity.OrderBy);
-
-        var count = entities.Count();
-        var paged = await entities.ApplyPaging(entity.PagingArgs).ToListAsync(cancellationToken);
-
-        return ListResult<PizzaModel>.Success(paged.Map(), count);
+            return entities.Map();
+        }
     }
 }
