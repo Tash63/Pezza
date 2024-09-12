@@ -17,4 +17,5 @@ public class Order
     public List<int> PizzaIds { get; set; } // List of Pizza IDs
 
     public ICollection<Pizza> Pizzas { get; set; }
+
 }
