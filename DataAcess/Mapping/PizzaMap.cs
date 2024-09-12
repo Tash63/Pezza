@@ -1,38 +1,40 @@
-﻿namespace DataAccess.Mapping;
+﻿using Common.Models.Pizza;
 
-public sealed class PizzaMap : IEntityTypeConfiguration<Pizza>
+namespace Common.Mappers;
+
+public static class PizzaMapper
 {
-    public void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<Pizza> builder)
+    public static PizzaModel Map(this Pizza entity)
+        => new()
+        {
+            Id = entity.Id,
+            Name = entity.Name,
+            Description = entity.Description,
+            Price = entity.Price,
+            DateCreated = entity.DateCreated
+        };
+
+    public static Pizza Map(this PizzaModel model)
     {
-        builder.ToTable("Pizza", "dbo");
+        var entity = new Pizza
+        {
+            Id = model.Id,
+            Name = model.Name,
+            Description = model.Description,
+            DateCreated = model.DateCreated
+        };
 
-        builder.HasKey(t => t.Id);
+        if (model.Price.HasValue)
+        {
+            entity.Price = model.Price.Value;
+        }
 
-        builder.Property(t => t.Id)
-            .IsRequired()
-            .HasColumnName("Id")
-            .HasColumnType("int")
-            .ValueGeneratedOnAdd();
-
-        builder.Property(t => t.Name)
-            .IsRequired()
-            .HasColumnName("Name")
-            .HasColumnType("varchar(100)")
-            .HasMaxLength(100);
-
-        builder.Property(t => t.Description)
-            .HasColumnName("Description")
-            .HasColumnType("varchar(500)")
-            .HasMaxLength(500);
-
-        builder.Property(t => t.Price)
-            .HasColumnName("Price")
-            .HasColumnType("decimal(17, 2)");
-
-        builder.Property(t => t.DateCreated)
-            .IsRequired()
-            .HasColumnName("DateCreated")
-            .HasColumnType("datetime")
-            .HasDefaultValueSql("(getdate())");
+        return entity;
     }
+
+    public static List<PizzaModel> Map(this List<Pizza> entities)
+        => entities.Select(x => x.Map()).ToList();
+
+    public static List<Pizza> Map(this List<PizzaModel> models)
+        => models.Select(x => x.Map()).ToList();
 }
