@@ -1,0 +1,1 @@
+2024-09-12 14:22:01.331 +02:00 [INF] CleanArchitecture Long Running Request: GetCustomersQuery (1113 milliseconds)
