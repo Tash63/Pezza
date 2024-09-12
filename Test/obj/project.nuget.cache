@@ -1,13 +1,16 @@
 {
   "version": 2,
-  "dgSpecHash": "4HFS6YZto+4=",
+  "dgSpecHash": "xRXQCqhW7tI=",
   "success": true,
   "projectFilePath": "C:\\Users\\kiran.nariansamy\\Desktop\\repos\\Pezza\\Test\\Test.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\kiran.nariansamy\\.nuget\\packages\\bogus\\35.6.1\\bogus.35.6.1.nupkg.sha512",
     "C:\\Users\\kiran.nariansamy\\.nuget\\packages\\coverlet.collector\\6.0.0\\coverlet.collector.6.0.0.nupkg.sha512",
+    "C:\\Users\\kiran.nariansamy\\.nuget\\packages\\fluentemail.core\\3.0.2\\fluentemail.core.3.0.2.nupkg.sha512",
+    "C:\\Users\\kiran.nariansamy\\.nuget\\packages\\fluentemail.smtp\\3.0.2\\fluentemail.smtp.3.0.2.nupkg.sha512",
     "C:\\Users\\kiran.nariansamy\\.nuget\\packages\\fluentvalidation\\11.9.2\\fluentvalidation.11.9.2.nupkg.sha512",
     "C:\\Users\\kiran.nariansamy\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.9.2\\fluentvalidation.dependencyinjectionextensions.11.9.2.nupkg.sha512",
+    "C:\\Users\\kiran.nariansamy\\.nuget\\packages\\htmlagilitypack\\1.11.65\\htmlagilitypack.1.11.65.nupkg.sha512",
     "C:\\Users\\kiran.nariansamy\\.nuget\\packages\\lazycache\\2.4.0\\lazycache.2.4.0.nupkg.sha512",
     "C:\\Users\\kiran.nariansamy\\.nuget\\packages\\lazycache.aspnetcore\\2.4.0\\lazycache.aspnetcore.2.4.0.nupkg.sha512",
     "C:\\Users\\kiran.nariansamy\\.nuget\\packages\\mediatr\\12.4.1\\mediatr.12.4.1.nupkg.sha512",
