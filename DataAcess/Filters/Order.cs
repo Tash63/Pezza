@@ -1,10 +1,8 @@
-﻿using Common.Models.Order;
-
-namespace Common.Filters;
+﻿namespace Common.Filters;
 
 public static class OrderFilter
 {
-    public static IQueryable<CreateOrderModel> FilterByCustomerId(this IQueryable<CreateOrderModel> query, int? customerID)
+    public static IQueryable<Order> FilterByCustomerId(this IQueryable<Order> query, int? customerID)
     {
         if (!customerID.HasValue)
         {

@@ -3,23 +3,23 @@
 using Common.Models.Order;
 using System.Linq;
 
-public class GetOrdersQuery : IRequest<ListResult<CreateOrderModel>>
+public class GetOrdersQuery : IRequest<ListResult<OrderModel>>
 {
     public int CustomerID { get; set; }
 }
 
-public class GetOrdersQueryHandler(DatabaseContext databaseContext) : IRequestHandler<GetOrdersQuery, ListResult<CreateOrderModel>>
+public class GetOrdersQueryHandler(DatabaseContext databaseContext) : IRequestHandler<GetOrdersQuery, ListResult<OrderModel>>
 {
-    public async Task<ListResult<CreateOrderModel>> Handle(GetOrdersQuery request, CancellationToken cancellationToken)
+    public async Task<ListResult<OrderModel>> Handle(GetOrdersQuery request, CancellationToken cancellationToken)
     {
         var entities = databaseContext.Orders
             .Select(x => x)
             .AsNoTracking()
             .FilterByCustomerId(request.CustomerID)
             .OrderBy("DateCreated desc");
-        List<CreateOrderModel> result=entities.ToList();
+
         var count = entities.Count();
         var paged = await entities.ToListAsync(cancellationToken);
-        return ListResult<CreateOrderModel>.Success(paged, count);
+        return ListResult<OrderModel>.Success(paged.Map(), count);
     }
 }
