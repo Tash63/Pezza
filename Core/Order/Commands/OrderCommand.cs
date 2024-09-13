@@ -5,7 +5,7 @@ using Core.Order.Events;
 
 public class OrderCommand : IRequest<Result>
 {
-    public required OrderModel Data { get; set; }
+    public required CreateOrderModel Data { get; set; }
 }
 
 public class OrderCommandHandler(IMediator mediator) : IRequestHandler<OrderCommand, Result>

@@ -1,4 +1,6 @@
-﻿namespace DataAccess;
+﻿using Common.Models.Order;
+
+namespace DataAccess;
 
 public class DatabaseContext : DbContext
 {
@@ -16,7 +18,7 @@ public class DatabaseContext : DbContext
 
     public virtual DbSet<Notify> Notifies { get; set; }
 
-    public virtual DbSet<Order> Orders { get; set; }
+    public virtual DbSet<CreateOrderModel> Orders { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfiguration(new CustomerMap());
@@ -29,7 +31,9 @@ public class DatabaseContext : DbContext
         new Pizza { Id = 2, Name = "Meat Pizza", Price = 99, Description = string.Empty, DateCreated = DateTime.UtcNow },
         new Pizza { Id = 3, Name = "Margherita Pizza", Price = 79, Description = string.Empty, DateCreated = DateTime.UtcNow },
         new Pizza { Id = 4, Name = "Hawaiian Pizza", Price = 89, Description = string.Empty, DateCreated = DateTime.UtcNow });
-
+        modelBuilder.Entity<Customer>().HasData(
+            new Customer { Id = 1, Name = "Kiran Tash Narianamy", Address = "3 plane crescent waterways", Cellphone = "0659798511", DateCreated = DateTime.UtcNow, Email = "kirannariansamy1967@gmail.com" }
+            );
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) => optionsBuilder.UseInMemoryDatabase(databaseName: "PezzaDb");
