@@ -39,7 +39,6 @@ public sealed class NotifyMap : IEntityTypeConfiguration<Notify>
             .HasColumnType("bool");
 
         builder.Property(t => t.DateSent)
-            .IsRequired()
             .HasColumnName("DateSent")
             .HasColumnType("datetime");
 

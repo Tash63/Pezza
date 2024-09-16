@@ -1,10 +1,12 @@
 ﻿namespace Core.Email;
 
+using System.Net.Mail;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Common.Models;
 using Common.Models.Customer;
 using FluentEmail.Core;
+using FluentEmail.Smtp;
 using HtmlAgilityPack;
 
 public class EmailService
@@ -19,15 +21,22 @@ public class EmailService
         doc.LoadHtml(this.HtmlContent);
         var plainText = doc.DocumentNode.SelectSingleNode("//body").InnerText;
         plainText = Regex.Replace(plainText, @"\s+", " ").Trim();
-
+        var sender = new SmtpSender(() => new System.Net.Mail.SmtpClient("localhost")
+        {
+            EnableSsl = false,
+            DeliveryMethod=SmtpDeliveryMethod.SpecifiedPickupDirectory,
+            PickupDirectoryLocation= "C:\\Users\\kiran.nariansamy\\Desktop\\repos\\Pezza\\Emails",
+            Port=23
+        });
+        Email.DefaultSender = sender;
         var email = await Email
-            .From("notify@pezza.com", "Pezza")
-            .To(this.Customer?.Email, this.Customer?.Name)
+            .From("kirannariansamy85@gmail.com", "Pezza")
+            .To("kirannariansamy1967@gmail.com", "Kiran Tash Nariansamy")
             .Subject("Collect your order it while it's hot")
             .Body(this.HtmlContent)
             .PlaintextAlternativeBody(plainText)
             .SendAsync();
-
+         
         return email.Successful ? Result.Success() : Result.Failure("Email could not send");
     }
 }

@@ -1,0 +1,4 @@
+2024-09-16 08:05:13.017 +02:00 [INF] CleanArchitecture Long Running Request: GetNotifiesQuery (1069 milliseconds)
+2024-09-16 08:07:12.857 +02:00 [INF] CleanArchitecture Long Running Request: GetNotifiesQuery (749 milliseconds)
+2024-09-16 08:08:08.278 +02:00 [INF] CleanArchitecture Long Running Request: GetNotifiesQuery (739 milliseconds)
+2024-09-16 08:10:04.430 +02:00 [INF] CleanArchitecture Long Running Request: GetNotifiesQuery (789 milliseconds)

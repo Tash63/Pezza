@@ -8,16 +8,6 @@ using System.Runtime.CompilerServices;
 
 public static class OrderMapper
 {
-
-    private static List<PizzaModel> GetPizzaModels(ICollection<Pizza> Pizzas)
-    {
-        List<PizzaModel> pizzamodel = new List<PizzaModel>();
-        for (int i = 0; i < Pizzas.Count(); i++)
-        {
-            pizzamodel.Add(Pizzas.ElementAt(i).Map());
-        }
-        return pizzamodel;
-    }
     public static OrderModel Map(this Order entity)
         => new()
         { Id = entity.Id,
