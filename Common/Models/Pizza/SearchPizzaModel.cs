@@ -14,5 +14,7 @@
         public decimal? Price { get; set; }
 
         public DateTime? DateCreated { get; set; }
+        // TODO: Add filtter for this
+        public bool? InStock { get; set; }
     }
 }

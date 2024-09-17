@@ -17,12 +17,15 @@ public class DatabaseContext : DbContext
     public virtual DbSet<Notify> Notifies { get; set; }
 
     public virtual DbSet<Order> Orders { get; set; }
+
+    public virtual DbSet<Side> Sides { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfiguration(new CustomerMap());
         modelBuilder.ApplyConfiguration(new PizzaMap());
         modelBuilder.ApplyConfiguration(new NotifyMap());
         modelBuilder.ApplyConfiguration(new OrderMap());
+        modelBuilder.ApplyConfiguration(new SideMap());
         modelBuilder.Entity<Pizza>()
         .HasData(
         new Pizza { Id = 1, Name = "Pepperoni Pizza", Price = 89, Description = string.Empty, DateCreated = DateTime.UtcNow },

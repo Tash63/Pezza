@@ -10,5 +10,6 @@
         public decimal Price { get; set; }
 
         public DateTime? DateCreated { get; set; }
+        public bool InStock {  get; set; }
     }
 }

@@ -9,7 +9,9 @@ public static class PizzaMapper
             Name = entity.Name,
             Description = entity.Description,
             Price = entity.Price,
-            DateCreated = entity.DateCreated
+            DateCreated = entity.DateCreated,
+            InStock = entity.InStock,
+            
         };
 
     public static Pizza Map(this PizzaModel model)
@@ -19,7 +21,8 @@ public static class PizzaMapper
             Id = model.Id,
             Name = model.Name,
             Description = model.Description,
-            DateCreated = model.DateCreated
+            DateCreated = model.DateCreated,
+            InStock = model.InStock,
         };
 
         if (model.Price.HasValue)

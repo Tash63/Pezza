@@ -23,7 +23,9 @@ public class CreatePizzaCommandHandler(DatabaseContext databaseContext,IAppCache
             Name = request.Data.Name,
             Description = request.Data.Description,
             Price = request.Data.Price,
-            DateCreated = DateTime.UtcNow
+            DateCreated = DateTime.UtcNow,
+            InStock=request.Data.InStock,
+           
         }; 
         databaseContext.Pizzas.Add(entity);
         var result = await databaseContext.SaveChangesAsync(cancellationToken);

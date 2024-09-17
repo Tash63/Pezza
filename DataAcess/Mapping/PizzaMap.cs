@@ -34,5 +34,10 @@ public sealed class PizzaMap : IEntityTypeConfiguration<Pizza>
             .HasColumnName("DateCreated")
             .HasColumnType("datetime")
             .HasDefaultValueSql("(getdate())");
+        builder.Property(t=>t.InStock)
+            .IsRequired()
+            .HasColumnName("InStock")
+            .HasColumnType("bool")
+            .HasDefaultValueSql("true");
     }
 }
