@@ -2,6 +2,7 @@
 
 using System.Linq;
 using LazyCache;
+using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 
 public class GetPizzasQuery : IRequest<ListResult<PizzaModel>>
 {
@@ -23,6 +24,7 @@ public class GetPizzasQuery : IRequest<ListResult<PizzaModel>>
                 var data = cachedData?
                     .FilterByName(entity.Name)
                     .FilterByDescription(entity.Description)
+                    .FilterByStock(entity.InStock)
                     .OrderBy(x => x.DateCreated)
                     .ToList();
 
@@ -39,6 +41,7 @@ public class GetPizzasQuery : IRequest<ListResult<PizzaModel>>
                 .AsNoTracking()
                 .FilterByName(entity.Name)
                 .FilterByDescription(entity.Description)
+                .FilterByStock(entity.InStock)
                 .OrderBy(entity.OrderBy);
 
             var count = entities.Count();

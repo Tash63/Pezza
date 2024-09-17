@@ -15,6 +15,7 @@
 
         public DateTime? DateCreated { get; set; }
         // TODO: Add filtter for this
+        // TODO:Modify the orders to allow for sides as well
         public bool? InStock { get; set; }
     }
 }

@@ -64,4 +64,22 @@ public static class PizzaFilter
 
         return query.Where(x => x.DateCreated == dateCreated.Value);
     }
+
+    public static IQueryable<Pizza> FilterByStock(this IQueryable<Pizza> query, bool? IsInStock)
+    {
+        if(!IsInStock.HasValue)
+        {
+            return query;
+        }
+        return query.Where(x => x.InStock == IsInStock.Value);
+    }
+
+    public static IEnumerable<PizzaModel> FilterByStock(this IEnumerable<PizzaModel> query, bool? IsInStock)
+    {
+        if (!IsInStock.HasValue)
+        {
+            return query;
+        }
+        return query.Where(o => o.InStock == IsInStock.Value);
+    }
 }
