@@ -4,6 +4,7 @@ public sealed class PizzaMap : IEntityTypeConfiguration<Pizza>
 {
     public void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<Pizza> builder)
     {
+        // TODO: Add a category field so we can filtter by category and adjust the select one to allow for this as well as pricing
         builder.ToTable("Pizza", "dbo");
 
         builder.HasKey(t => t.Id);

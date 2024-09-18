@@ -1,6 +1,6 @@
 ﻿namespace Common.Models.Side
 {
-    public class CreateSide
+    public class CreateSideModel
     {
         public string Name { get; set; }
         public string Description { get; set; }
