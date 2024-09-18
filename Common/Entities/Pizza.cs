@@ -1,4 +1,6 @@
-﻿namespace Common.Entities
+﻿using Common.Enums;
+
+namespace Common.Entities
 {
     public class Pizza
     {

@@ -53,7 +53,7 @@ public class GetOrdersQueryHandler(DatabaseContext databaseContext) : IRequestHa
                 CustomerId = paged[i].CustomerId,
                 Pizzas=orderedpizzas,
                 PizzaIds = paged[i].PizzaIds,
-                Completed = paged[i].Completed,
+                Status = paged[i].Status,
                 DateCreated = paged[i].DateCreated,
                 Customer = customerentity,
                 SideIds = paged[i].SideIds,

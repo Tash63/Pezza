@@ -1,11 +1,11 @@
-﻿namespace Common;
+﻿namespace Common.Enums;
 
 public enum PizzaCategory
 {
     [Description("Vegettarian")]
-    Vegiatarian=1,
+    Vegiatarian = 1,
     [Description("Chiken")]
-    Chiken=2,
+    Chiken = 2,
     [Description("Meat")]
-    Meat=3
+    Meat = 3
 }

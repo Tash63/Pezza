@@ -1,4 +1,6 @@
-﻿namespace Common.Models.Order;
+﻿using Common.Enums;
+
+namespace Common.Models.Order;
 
 public sealed class CreateOrderModel
 {
@@ -7,4 +9,6 @@ public sealed class CreateOrderModel
     public required List<int> PizzaIds { get; set; }
 
     public required List<int> SideIds { get; set; }
+
+    public required OrderStatus Status { get; set; }
 }

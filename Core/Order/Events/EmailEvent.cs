@@ -34,6 +34,7 @@ public class OrderEventHandler(DatabaseContext databaseContext) : INotificationH
             {
                 pizzasContent.AppendLine($"<strong>{pizzaentity.Name}</strong> - {pizzaentity.Description}<br/>");
             }
+            // TODO: sort out the exception if an invalid side is entered
         }
           
         for(int i=0;i<notification.Data.SideIds.Count;i++)

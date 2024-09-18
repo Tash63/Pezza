@@ -16,9 +16,10 @@ public sealed class OrderMap : IEntityTypeConfiguration<Order>
             .HasColumnType("int")
             .ValueGeneratedOnAdd();
 
-        builder.Property(t => t.Completed)
+        builder.Property(t => t.Status)
+            .IsRequired()
             .HasColumnName("Completed")
-            .HasColumnType("bool");
+            .HasConversion<int>();
 
         builder.HasOne(o => o.Customer)
             .WithOne()

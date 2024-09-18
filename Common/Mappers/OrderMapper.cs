@@ -1,6 +1,7 @@
 ﻿namespace Common.Mappers;
 
 using Common.Entities;
+using Common.Enums;
 using Common.Models.Customer;
 using Common.Models.Order;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
@@ -12,7 +13,7 @@ public static class OrderMapper
     public static OrderModel Map(this Order entity)
         => new()
         { Id = entity.Id,
-          Completed=entity.Completed,
+         Status=entity.Status,
         CustomerId=entity.CustomerId,
         Customer=entity.Customer.Map(),
         PizzaIds=entity.PizzaIds,
@@ -25,7 +26,7 @@ public static class OrderMapper
         new()
         {
             Id = model.Id,
-            Completed = model.Completed,
+            Status = model.Status,
             CustomerId = model.CustomerId,
             Customer = model.Customer.Map(),
             PizzaIds = model.PizzaIds,
@@ -37,7 +38,7 @@ public static class OrderMapper
     public static Order Map(this CreateOrderModel model)
     => new()
     {
-        Completed = false,
+        Status=model.Status,
         CustomerId = model.CustomerId,
         PizzaIds = model.PizzaIds,
         DateCreated = DateTime.UtcNow,

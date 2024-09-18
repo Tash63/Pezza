@@ -1,4 +1,5 @@
-﻿using Common.Models.Customer;
+﻿using Common.Enums;
+using Common.Models.Customer;
 using Common.Models.Side;
 namespace Common.Models.Order;
 
@@ -20,5 +21,5 @@ public class OrderModel
 
     public DateTime? DateCreated { get; set; }
 
-    public required bool Completed { get; set; }
+    public required OrderStatus Status { get; set; }
 }

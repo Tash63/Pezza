@@ -1,4 +1,5 @@
-﻿using Common.Mappers;
+﻿using Common.Enums;
+using Common.Mappers;
 
 namespace Common.Entities;
 
@@ -14,7 +15,7 @@ public class Order
 
     public DateTime? DateCreated { get; set; }
 
-    public required bool Completed { get; set; }
+    public required OrderStatus Status { get; set; }
 
     public List<int> PizzaIds { get; set; } // List of Pizza IDs
 

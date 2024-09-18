@@ -1,4 +1,6 @@
-﻿namespace Common.Models.Pizza
+﻿using Common.Enums;
+
+namespace Common.Models.Pizza
 {
     public class CreatePizzaModel
     {
