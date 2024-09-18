@@ -25,6 +25,7 @@ public class GetPizzasQuery : IRequest<ListResult<PizzaModel>>
                     .FilterByName(entity.Name)
                     .FilterByDescription(entity.Description)
                     .FilterByStock(entity.InStock)
+                    .FilterByCatergory(entity.Category)
                     .OrderBy(x => x.DateCreated)
                     .ToList();
 
@@ -42,6 +43,7 @@ public class GetPizzasQuery : IRequest<ListResult<PizzaModel>>
                 .FilterByName(entity.Name)
                 .FilterByDescription(entity.Description)
                 .FilterByStock(entity.InStock)
+                .FilterByCatergory(entity.Category)
                 .OrderBy(entity.OrderBy);
 
             var count = entities.Count();

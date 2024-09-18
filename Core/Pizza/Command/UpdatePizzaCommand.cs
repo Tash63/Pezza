@@ -31,6 +31,7 @@ public class UpdatePizzaCommandHandler(DatabaseContext databaseContext,IAppCache
         findEntity.Description = !string.IsNullOrEmpty(model?.Description) ? model?.Description : findEntity.Description;
         findEntity.Price = model.Price.HasValue ? model.Price.Value : findEntity.Price;
         findEntity.InStock=model.InStock.HasValue ? model.InStock.Value : findEntity.InStock;
+        findEntity.Category=model.Category.HasValue ? model.Category.Value : findEntity.Category;
 
         var outcome = databaseContext.Pizzas.Update(findEntity);
         var result = await databaseContext.SaveChangesAsync(cancellationToken);

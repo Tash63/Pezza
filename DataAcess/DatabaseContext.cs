@@ -28,10 +28,10 @@ public class DatabaseContext : DbContext
         modelBuilder.ApplyConfiguration(new SideMap());
         modelBuilder.Entity<Pizza>()
         .HasData(
-        new Pizza { Id = 1, Name = "Pepperoni Pizza", Price = 89, Description = string.Empty, DateCreated = DateTime.UtcNow },
-        new Pizza { Id = 2, Name = "Meat Pizza", Price = 99, Description = string.Empty, DateCreated = DateTime.UtcNow },
-        new Pizza { Id = 3, Name = "Margherita Pizza", Price = 79, Description = string.Empty, DateCreated = DateTime.UtcNow },
-        new Pizza { Id = 4, Name = "Hawaiian Pizza", Price = 89, Description = string.Empty, DateCreated = DateTime.UtcNow });
+        new Pizza { Id = 1, Name = "Pepperoni Pizza", Price = 89, Description = string.Empty, DateCreated = DateTime.UtcNow,Category=Common.PizzaCategory.Meat,InStock=true },
+        new Pizza { Id = 2, Name = "Meat Pizza", Price = 99, Description = string.Empty, DateCreated = DateTime.UtcNow,Category=Common.PizzaCategory.Meat,InStock=true },
+        new Pizza { Id = 3, Name = "Margherita Pizza", Price = 79, Description = string.Empty, DateCreated = DateTime.UtcNow,Category = Common.PizzaCategory.Vegiatarian, InStock = true },
+        new Pizza { Id = 4, Name = "Hawaiian Pizza", Price = 89, Description = string.Empty, DateCreated = DateTime.UtcNow ,Category = Common.PizzaCategory.Meat, InStock = true });
         Customer customer = new Customer()
         {
             Id = 1,

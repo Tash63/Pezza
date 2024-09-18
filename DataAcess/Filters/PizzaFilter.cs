@@ -2,6 +2,7 @@
 
 using Common.Models;
 using Common.Models.Pizza;
+using System.Diagnostics.CodeAnalysis;
 
 public static class PizzaFilter
 {
@@ -81,5 +82,23 @@ public static class PizzaFilter
             return query;
         }
         return query.Where(o => o.InStock == IsInStock.Value);
+    }
+
+    public static IQueryable<Pizza>FilterByCatergory(this IQueryable<Pizza> query,PizzaCategory? cat)
+    {
+        if(!cat.HasValue)
+        {
+            return query;
+        }
+        return query.Where(x=>x.Category.Equals(cat));
+    }
+
+    public static IEnumerable<PizzaModel> FilterByCatergory(this IEnumerable<PizzaModel> query, PizzaCategory? cat)
+    {
+        if (!cat.HasValue)
+        {
+            return query;
+        }
+        return query.Where(x => x.Category.Equals(cat));
     }
 }

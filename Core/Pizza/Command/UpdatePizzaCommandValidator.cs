@@ -21,5 +21,8 @@ public class UpdatePizzaCommandValidator : AbstractValidator<UpdatePizzaCommand>
         this.RuleFor(r => r.Data.Price)
             .PrecisionScale(4, 2, false);
 
+        this.RuleFor(r => r.Data.Category)
+            .IsInEnum();
+
     }
 }

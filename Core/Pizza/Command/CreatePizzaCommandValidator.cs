@@ -15,5 +15,9 @@ public class CreatePizzaCommandValidator : AbstractValidator<CreatePizzaCommand>
 		this.RuleFor(r => r.Data.Price)
 			.PrecisionScale(4, 2, false)
 			.NotEmpty();
+
+		this.RuleFor(r => r.Data.Category)
+			.IsInEnum()
+			.NotEmpty();
 	}
 }

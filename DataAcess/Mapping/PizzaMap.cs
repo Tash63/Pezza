@@ -35,6 +35,13 @@ public sealed class PizzaMap : IEntityTypeConfiguration<Pizza>
             .HasColumnName("DateCreated")
             .HasColumnType("datetime")
             .HasDefaultValueSql("(getdate())");
+
+        builder.Property(t => t.Category)
+            .IsRequired()
+            .HasColumnName("Category")
+            // converts the enum value that is passed into an intger to allow it to be stored
+            .HasConversion<int>();
+
         builder.Property(t=>t.InStock)
             .IsRequired()
             .HasColumnName("InStock")

@@ -9,6 +9,8 @@
         
         public decimal? Price { get; set; }
 
+        public PizzaCategory? Category { get; set; }
+
         public bool? InStock { get; set; }
     }
 }

@@ -12,6 +12,8 @@
 
         public DateTime? DateCreated { get; set; }
 
+        public PizzaCategory Category { get; set; } 
+
         public bool InStock { get; set; }
     }
 }
