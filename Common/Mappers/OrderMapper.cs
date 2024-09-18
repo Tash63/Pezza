@@ -3,6 +3,7 @@
 using Common.Entities;
 using Common.Models.Customer;
 using Common.Models.Order;
+using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using System.Linq;
 using System.Runtime.CompilerServices;
 
@@ -17,6 +18,8 @@ public static class OrderMapper
         PizzaIds=entity.PizzaIds,
         Pizzas=entity.Pizzas.ToList().Map(),
         DateCreated=entity.DateCreated,
+        Sides=entity.Sides.ToList().Map(),
+        SideIds=entity.SideIds
         };
     public static Order Map(this OrderModel model) =>
         new()
@@ -28,6 +31,8 @@ public static class OrderMapper
             PizzaIds = model.PizzaIds,
             Pizzas = model.Pizzas.Map(),
             DateCreated = model.DateCreated,
+            SideIds=model.SideIds,
+            Sides=model.Sides.ToList().Map(),
         };
     public static Order Map(this CreateOrderModel model)
     => new()
@@ -35,7 +40,8 @@ public static class OrderMapper
         Completed = false,
         CustomerId = model.CustomerId,
         PizzaIds = model.PizzaIds,
-        DateCreated = DateTime.UtcNow
+        DateCreated = DateTime.UtcNow,
+        SideIds = model.SideIds,
     };
     public static IEnumerable<OrderModel> Map(this List<Order> entities)
     => entities.Select(x => x.Map());

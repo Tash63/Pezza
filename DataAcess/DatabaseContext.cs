@@ -16,9 +16,10 @@ public class DatabaseContext : DbContext
     
     public virtual DbSet<Notify> Notifies { get; set; }
 
+    public virtual DbSet<Side> Sides { get; set; }
+
     public virtual DbSet<Order> Orders { get; set; }
 
-    public virtual DbSet<Side> Sides { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfiguration(new CustomerMap());

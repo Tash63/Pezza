@@ -32,23 +32,32 @@ public class GetOrdersQueryHandler(DatabaseContext databaseContext) : IRequestHa
             {
                 var pizzaquery = EF.CompileAsyncQuery((DatabaseContext db, int id) => db.Pizzas.FirstOrDefault(c => c.Id == id));
                 var pizzaentity = await pizzaquery(databaseContext, paged[i].PizzaIds[j]);
-                orderedpizzas.Add(new Pizza()
+                if(pizzaentity!=null)
                 {
-                    Id=pizzaentity.Id,
-                    Name=pizzaentity.Name,
-                    DateCreated=pizzaentity.DateCreated,
-                    Description=pizzaentity.Description,
-                    Price=pizzaentity.Price,
-                });
+                    orderedpizzas.Add(pizzaentity);
+                }
+            }
+            List<Side> sides=new List<Side>();
+            for(int j = 0; j < paged[i].SideIds.Count;j++)
+            {
+                var sidequery = EF.CompileAsyncQuery((DatabaseContext db, int id) => db.Sides.FirstOrDefault(s => s.ID == id));
+                var sideentity = await sidequery(databaseContext, paged[i].SideIds.ElementAt(j));
+                if(sideentity != null)
+                {
+                    sides.Add(sideentity);
+                }
             }
             Order tempOrder = new Order()
             {
                 Id = paged[i].Id,
                 CustomerId = paged[i].CustomerId,
+                Pizzas=orderedpizzas,
                 PizzaIds = paged[i].PizzaIds,
                 Completed = paged[i].Completed,
                 DateCreated = paged[i].DateCreated,
                 Customer = customerentity,
+                SideIds = paged[i].SideIds,
+                Sides = sides
             };
             orders.Add(tempOrder);
         }

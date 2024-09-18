@@ -29,6 +29,10 @@ public sealed class OrderMap : IEntityTypeConfiguration<Order>
             .WithMany()
             .UsingEntity(j => j.ToTable("OrderPizzas"));
 
+        builder.HasMany(o => o.Sides)
+            .WithMany()
+            .UsingEntity(j => j.ToTable("OrderSides"));
+
         builder.Property(t => t.DateCreated)
             .IsRequired()
             .HasColumnName("DateCreated")

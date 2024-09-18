@@ -30,7 +30,20 @@ public class OrderEventHandler(DatabaseContext databaseContext) : INotificationH
         {
             var pizzaquery = EF.CompileAsyncQuery((DatabaseContext db, int id) => db.Pizzas.FirstOrDefault(c => c.Id == id));
             var pizzaentity = await pizzaquery(databaseContext, notification.Data.PizzaIds.ElementAt(i));
-            pizzasContent.AppendLine($"<strong>{pizzaentity.Name}</strong> - {pizzaentity.Description}<br/>");
+            if(pizzaentity!=null)
+            {
+                pizzasContent.AppendLine($"<strong>{pizzaentity.Name}</strong> - {pizzaentity.Description}<br/>");
+            }
+        }
+          
+        for(int i=0;i<notification.Data.SideIds.Count;i++)
+        {
+            var sidequery = EF.CompileAsyncQuery((DatabaseContext db, int id) => db.Sides.FirstOrDefault(s => s.ID == id));
+            var side_entity = await sidequery(databaseContext,notification.Data.SideIds.ElementAt(i));
+            if(side_entity!=null)
+            {
+                // TODO : Modify the email body to allow for the additon of sides
+            }
         }
 
         html = html.Replace("%pizzas%", pizzasContent.ToString());
