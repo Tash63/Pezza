@@ -19,8 +19,6 @@ namespace Common.Models.Pizza
 
         public PizzaCategory? Category { get; set; }
 
-        // TODO: Add filtter for this
-        // TODO:Modify the orders to allow for sides as well
         public bool? InStock { get; set; }
     }
 }
