@@ -32,12 +32,16 @@ namespace DataAcess.Mapping
                 .HasColumnType("bool")
                 .IsRequired();
 
+            builder.Property(x=>x.InStock)
+                .HasColumnName("InStock")
+                .HasColumnType("bool")
+                .IsRequired();
+
             builder.Property(x => x.PizzaId)
                  .HasColumnType("int")
                  .HasColumnName("PizzaId")
                  .IsRequired();
     
-
         }
     }
 }
