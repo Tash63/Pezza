@@ -1,12 +1,12 @@
 ﻿using Common.Models.Topping;
 using Microsoft.EntityFrameworkCore.Query;
 using System.Reflection.Metadata;
-
+//TODO: fix update and search
 namespace Core.Topping.Command
 {
     public class UpdateToppingCommand: IRequest<Result<ToppingModel>>
     {
-        public UpdateToppingModel? data;
+        public UpdateToppingModel? Data;
 
         public int? Id;
     }
@@ -17,12 +17,12 @@ namespace Core.Topping.Command
         // Pass the request for update topping (so it can get the request data )as well as the cancellation token into the handle method
         public async Task<Result<ToppingModel>> Handle(UpdateToppingCommand request, CancellationToken cancellationToken)
         {
-            if (request.data == null || request.Id.HasValue)
+            if (request.Data == null || request.Id.HasValue)
             {
                 return Result<ToppingModel>.Failure("Error");
             }
 
-            var model=request.data;
+            var model=request.Data;
 
             // check if the id entred exists in the db
 

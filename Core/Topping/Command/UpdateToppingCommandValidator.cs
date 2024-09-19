@@ -6,10 +6,10 @@ namespace Core.Topping.Command
     {
         public UpdateToppingCommandValidator() {
 
-            this.RuleFor(x => x.data)
+            this.RuleFor(x => x.Data)
                 .NotEmpty();
 
-            this.RuleFor(x => x.data.Name)
+            this.RuleFor(x => x.Data.Name)
                 .MaximumLength(100);
 
             this.RuleFor(x => x.Id)
