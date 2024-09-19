@@ -1,4 +1,5 @@
 ﻿using Common.Enums;
+using DataAcess.Mapping;
 
 namespace DataAccess;
 
@@ -22,6 +23,8 @@ public class DatabaseContext : DbContext
 
     public virtual DbSet<Order> Orders { get; set; }
 
+    public virtual DbSet<Topping> Toppings { get; set; }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfiguration(new CustomerMap());
@@ -29,6 +32,17 @@ public class DatabaseContext : DbContext
         modelBuilder.ApplyConfiguration(new NotifyMap());
         modelBuilder.ApplyConfiguration(new OrderMap());
         modelBuilder.ApplyConfiguration(new SideMap());
+        modelBuilder.ApplyConfiguration(new ToppingMap());
+
+        // Configure relationships between tables
+
+        modelBuilder.Entity<Pizza>()
+            .HasMany<Topping>()
+            .WithOne()
+            .HasForeignKey(e => e.PizzaId)
+            .IsRequired();
+
+        // Seed database with intial data that will be used for testing
         modelBuilder.Entity<Pizza>()
         .HasData(
         new Pizza { Id = 1, Name = "Pepperoni Pizza", Price = 89, Description = string.Empty, DateCreated = DateTime.UtcNow,Category=PizzaCategory.Meat,InStock=true },
@@ -44,11 +58,8 @@ public class DatabaseContext : DbContext
             DateCreated = DateTime.UtcNow,
             Email = "kirannariansamy1967@gmail.com"
         };
-        modelBuilder.Entity<Customer>()
-    .HasData(
-    customer);
-        
-
+        modelBuilder.Entity<Customer>().HasData(customer);
+       
     }
 
 
