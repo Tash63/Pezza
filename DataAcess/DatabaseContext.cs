@@ -25,6 +25,10 @@ public class DatabaseContext : DbContext
 
     public virtual DbSet<Topping> Toppings { get; set; }
 
+    public virtual DbSet<OrderPizza> OrderPizzas { get; set; }
+
+    public virtual DbSet<OrderPizzaTopping> OrderPizzaToppings { get; set; }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfiguration(new CustomerMap());
@@ -33,13 +37,44 @@ public class DatabaseContext : DbContext
         modelBuilder.ApplyConfiguration(new OrderMap());
         modelBuilder.ApplyConfiguration(new SideMap());
         modelBuilder.ApplyConfiguration(new ToppingMap());
+        modelBuilder.ApplyConfiguration(new OrderPizzaMap());
+        modelBuilder.ApplyConfiguration(new OrderPizzaToppingMap());
 
         // Configure relationships between tables
 
+        // Many to one relationship for pizza
         modelBuilder.Entity<Pizza>()
             .HasMany<Topping>()
             .WithOne()
             .HasForeignKey(e => e.PizzaId)
+            .IsRequired();
+
+        // one to many relationship for order to order pizza
+        modelBuilder.Entity<Order>()
+            .HasMany<OrderPizza>()
+            .WithOne()
+            .HasForeignKey(e => e.OrderId)
+            .IsRequired();
+
+        // one to many relationship for pizza to order
+        modelBuilder.Entity<Pizza>()
+            .HasMany<OrderPizza>()
+            .WithOne()
+            .HasForeignKey(e => e.PizzaId)
+            .IsRequired();
+
+        // one to many relationship for OrderPizza to OrderPizzaToppings
+        modelBuilder.Entity<OrderPizza>()
+            .HasMany<OrderPizzaTopping>()
+            .WithOne()
+            .HasForeignKey(e=>e.OrderPizzaId)
+            .IsRequired();
+
+        // one to many relationship for Toppings to OrderPizzaToppings
+        modelBuilder.Entity<Topping>()
+            .HasMany<OrderPizzaTopping>()
+            .WithOne()
+            .HasForeignKey(e=>e.ToppingId)
             .IsRequired();
 
         // Seed database with intial data that will be used for testing
