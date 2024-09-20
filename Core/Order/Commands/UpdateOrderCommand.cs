@@ -34,10 +34,21 @@ namespace Core.Order.Commands
             entity.Status = model.status;
             var outcome=databaseContext.Orders.Update(entity);
             var result=await databaseContext.SaveChangesAsync(cancellationToken);
+
+            // get the Pizza List 
+            List<int> PizzaIds = new List<int>();
+            var pizzas=databaseContext.OrderPizzas
+            .Select(x => x)
+            .AsNoTracking()
+            .Where(x=>x.OrderId==request.Id);
+            for(int i=0;i<pizzas.Count();i++)
+            {
+                PizzaIds.Add(pizzas.ElementAt(i).PizzaId);
+            }
             CreateOrderModel resultModel=new CreateOrderModel()
             {
                 CustomerId = entity.CustomerId,
-                PizzaIds = entity.PizzaIds,
+                PizzaIds = PizzaIds,
                 SideIds=entity.SideIds,
                 Status=entity.Status,
             };

@@ -50,7 +50,8 @@ public class OrderEventHandler(DatabaseContext databaseContext) : INotificationH
         html = html.Replace("%pizzas%", pizzasContent.ToString());
 
         // Add order to data base
-        databaseContext.Orders.Add(notification.Data.Map());
+        var orderesult = notification.Data.Map();
+        databaseContext.Orders.Add(orderesult);
 
         databaseContext.Notifies.Add(new Notify
         {
@@ -62,13 +63,31 @@ public class OrderEventHandler(DatabaseContext databaseContext) : INotificationH
             Customer=entity
         });
 
-        // EmailService emailService= new EmailService()
-        // {
-        //    Customer = entity.Map(),
-        //    HtmlContent=html,
-
-        // };
-        // emailService.SendEmail();
         await databaseContext.SaveChangesAsync(cancellationToken);
+
+        // Add Pizza's to that order
+        int LastOrderId=orderesult.Id;
+        for(int i=0;i<notification.Data.PizzaIds.Count;i++)
+        {
+            var OrderPizzaEntity = new OrderPizza
+            {
+                OrderId = LastOrderId,
+                PizzaId = notification.Data.PizzaIds[i],
+            };
+            databaseContext.OrderPizzas.Add(OrderPizzaEntity);
+            await databaseContext.SaveChangesAsync(cancellationToken);
+            for(int j = 0; j < notification.Data.ToppingIds[i].Count;j++)
+            {
+                databaseContext.OrderPizzaToppings.Add(new OrderPizzaTopping
+                {
+                    OrderPizzaId = OrderPizzaEntity.Id,
+                    ToppingId = notification.Data.ToppingIds[i][j],
+                });
+                await databaseContext.SaveChangesAsync(cancellationToken);
+            }
+        }
+        // TODO : Modify the create order field to add a parllell list of list of topping ids
+        // save changes
+
     }
 }

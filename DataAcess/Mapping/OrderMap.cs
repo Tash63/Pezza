@@ -26,9 +26,6 @@ public sealed class OrderMap : IEntityTypeConfiguration<Order>
             .HasForeignKey<Order>(o => o.CustomerId);
 
         // Many-to-many relationship with Pizza
-        builder.HasMany(o => o.Pizzas)
-            .WithMany()
-            .UsingEntity(j => j.ToTable("OrderPizzas"));
 
         builder.HasMany(o => o.Sides)
             .WithMany()

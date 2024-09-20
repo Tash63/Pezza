@@ -1,6 +1,7 @@
 ﻿using Common.Enums;
 using Common.Models.Customer;
 using Common.Models.Side;
+using Common.Models.Topping;
 namespace Common.Models.Order;
 
 public class OrderModel
@@ -9,15 +10,19 @@ public class OrderModel
 
     public required int CustomerId { get; set; }
 
-    public required CustomerModel Customer { get; set; }
+    public CustomerModel Customer { get; set; }
 
     public List<int> PizzaIds { get; set; } // List of Pizza IDs
 
     public List<int> SideIds { get; set; }
 
-    public required List<PizzaModel> Pizzas { get; set; }
+    public List<List<int>> ToppingIDs { get; set; }
 
-    public required List<SideModel> Sides { get; set; }
+    public List<PizzaModel> Pizzas { get; set; }
+
+    public  List<SideModel> Sides { get; set; }
+
+    public List<List<ToppingModel>> Toppings { get; set; }
 
     public DateTime? DateCreated { get; set; }
 
