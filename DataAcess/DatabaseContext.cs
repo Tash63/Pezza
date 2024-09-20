@@ -94,7 +94,21 @@ public class DatabaseContext : DbContext
             Email = "kirannariansamy1967@gmail.com"
         };
         modelBuilder.Entity<Customer>().HasData(customer);
-       
+
+        modelBuilder.Entity<Side>()
+            .HasData( new Side
+            {
+                ID = 1,
+                Description="A regular coke",
+                InStock = true,
+                Name="Coca Cola",
+                Price=15,
+            }
+            );
+
+        modelBuilder.Entity<Topping>().HasData(
+            new Topping{ Id=1,PizzaId=1,Price = 15,Name="Extra Cheese",InStock=true,Additional=true,},
+            new Topping{Id = 2, PizzaId = 2, Price=23,Name="Extra Cheese",InStock=true});
     }
 
 

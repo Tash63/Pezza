@@ -25,7 +25,8 @@ public class OrderEventHandler(DatabaseContext databaseContext) : INotificationH
         html = html.Replace("%name%", Convert.ToString(entity.Name));
 
         var pizzasContent = new StringBuilder();
-        //get pizzas
+
+        // get pizzas
         for (int i=0;i<notification.Data.PizzaIds.Count;i++)
         {
             var pizzaquery = EF.CompileAsyncQuery((DatabaseContext db, int id) => db.Pizzas.FirstOrDefault(c => c.Id == id));
@@ -34,7 +35,7 @@ public class OrderEventHandler(DatabaseContext databaseContext) : INotificationH
             {
                 pizzasContent.AppendLine($"<strong>{pizzaentity.Name}</strong> - {pizzaentity.Description}<br/>");
             }
-            // TODO: sort out the exception if an invalid side is entered
+            // TODO: move this to a seapreate file to insert into the db
         }
           
         for(int i=0;i<notification.Data.SideIds.Count;i++)
@@ -49,10 +50,6 @@ public class OrderEventHandler(DatabaseContext databaseContext) : INotificationH
 
         html = html.Replace("%pizzas%", pizzasContent.ToString());
 
-        // Add order to data base
-        var orderesult = notification.Data.Map();
-        databaseContext.Orders.Add(orderesult);
-
         databaseContext.Notifies.Add(new Notify
         {
             CustomerId = entity.Id,
@@ -64,31 +61,6 @@ public class OrderEventHandler(DatabaseContext databaseContext) : INotificationH
         });
 
         await databaseContext.SaveChangesAsync(cancellationToken);
-
-        // Add Pizza's to that order
-        int LastOrderId=orderesult.Id;
-        // TODO: issue is coming from instation
-        for(int i=0;i<notification.Data.PizzaIds.Count;i++)
-        {
-            var OrderPizzaEntity = new OrderPizza
-            {
-                OrderId = LastOrderId,
-                PizzaId = notification.Data.PizzaIds[i],
-            };
-            databaseContext.OrderPizzas.Add(OrderPizzaEntity);
-            await databaseContext.SaveChangesAsync(cancellationToken);
-            for(int j = 0; j < notification.Data.ToppingIds[i].Count;j++)
-            {
-                databaseContext.OrderPizzaToppings.Add(new OrderPizzaTopping
-                {
-                    OrderPizzaId = OrderPizzaEntity.Id,
-                    ToppingId = notification.Data.ToppingIds[i][j],
-                });
-                await databaseContext.SaveChangesAsync(cancellationToken);
-            }
-        }
-        // TODO : Modify the create order field to add a parllell list of list of topping ids
-        // save changes
 
     }
 }
