@@ -12,12 +12,6 @@ public class OrderModel
 
     public CustomerModel Customer { get; set; }
 
-    public List<int> PizzaIds { get; set; } // List of Pizza IDs
-
-    public List<int> SideIds { get; set; }
-
-    public List<List<int>> ToppingIDs { get; set; }
-
     public List<PizzaModel> Pizzas { get; set; }
 
     public  List<SideModel> Sides { get; set; }

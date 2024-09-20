@@ -67,6 +67,7 @@ public class OrderEventHandler(DatabaseContext databaseContext) : INotificationH
 
         // Add Pizza's to that order
         int LastOrderId=orderesult.Id;
+        // TODO: issue is coming from instation
         for(int i=0;i<notification.Data.PizzaIds.Count;i++)
         {
             var OrderPizzaEntity = new OrderPizza

@@ -18,7 +18,6 @@ public static class OrderMapper
         Customer=entity.Customer.Map(),
         DateCreated=entity.DateCreated,
         Sides=entity.Sides.ToList().Map(),
-        SideIds=entity.SideIds,
         };
     public static Order Map(this OrderModel model) =>
         new()
@@ -28,7 +27,6 @@ public static class OrderMapper
             CustomerId = model.CustomerId,
             Customer = model.Customer.Map(),
             DateCreated = model.DateCreated,
-            SideIds=model.SideIds,
             Sides=model.Sides.ToList().Map(),
         };
     public static Order Map(this CreateOrderModel model)

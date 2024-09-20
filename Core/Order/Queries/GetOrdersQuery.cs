@@ -83,7 +83,6 @@ public class GetOrdersQueryHandler(DatabaseContext databaseContext) : IRequestHa
                 Status = paged[i].Status,
                 DateCreated = paged[i].DateCreated,
                 Customer = customerentity.Map(),
-                SideIds = paged[i].SideIds,
                 Sides = sides.Map(),
                 Toppings = AllToppings.Map(),
             };

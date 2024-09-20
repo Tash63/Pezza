@@ -114,7 +114,6 @@ namespace Core.Order.Queries
                     Status=paged.ElementAt(i).Status,
                     DateCreated=paged.ElementAt(i).DateCreated,
                     Id=paged.ElementAt(i).Id,
-                    SideIds=paged.ElementAt(i).SideIds,
                     Toppings=toppings,
                 });
             }
