@@ -4,18 +4,24 @@
     {
         public CreateToppingCommandValidator() {
             this.RuleFor(x => x.data)
-                    .NotEmpty();
-            this.RuleFor(x=>x.data.Name)
+                    .NotEmpty()
+                    .NotNull();
+            this.RuleFor(x => x.data.Name)
                 .NotEmpty()
+                .NotNull()
                 .MaximumLength(100);
-            this.RuleFor(x=>x.data.Price)
-                .NotEmpty();
-            this.RuleFor(x=>x.data.PizzaID)
-                .NotEmpty();
+            this.RuleFor(x => x.data.Price)
+                .NotEmpty()
+                .NotNull();
+            this.RuleFor(x => x.data.PizzaID)
+                .NotEmpty()
+                .NotNull();
             this.RuleFor(x=> x.data.InStcok)
-                .NotEmpty();
+                .NotEmpty()
+                .NotNull();
             this.RuleFor(x=> x.data.Additional)
-                .NotEmpty();
+                .NotEmpty()
+                .NotNull();
         }
     }
 }

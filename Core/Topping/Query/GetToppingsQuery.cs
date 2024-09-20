@@ -17,7 +17,7 @@ namespace Core.Topping.Query
                 return ListResult<ToppingModel>.Failure("Error");
             }
 
-            if(request.Data.OrderBy==null)
+            if(string.IsNullOrEmpty(request.Data.OrderBy))
             {
                 request.Data.OrderBy="Price desc";
             }
