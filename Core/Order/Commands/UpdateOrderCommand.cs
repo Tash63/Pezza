@@ -40,7 +40,7 @@ namespace Core.Order.Commands
             var pizzas=databaseContext.OrderPizzas
             .Select(x => x)
             .AsNoTracking()
-            .Where(x=>x.OrderId==request.Id);
+            .Where(x=>x.OrderId==request.Id.Value).ToList();
             for(int i=0;i<pizzas.Count();i++)
             {
                 PizzaIds.Add(pizzas.ElementAt(i).PizzaId);

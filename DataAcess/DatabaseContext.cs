@@ -28,6 +28,8 @@ public class DatabaseContext : DbContext
     public virtual DbSet<OrderPizza> OrderPizzas { get; set; }
 
     public virtual DbSet<OrderPizzaTopping> OrderPizzaToppings { get; set; }
+    public virtual DbSet<Cart> Carts { get; set; }
+    public virtual DbSet<CartTopping> CartToppings { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -39,6 +41,8 @@ public class DatabaseContext : DbContext
         modelBuilder.ApplyConfiguration(new ToppingMap());
         modelBuilder.ApplyConfiguration(new OrderPizzaMap());
         modelBuilder.ApplyConfiguration(new OrderPizzaToppingMap());
+        modelBuilder.ApplyConfiguration(new CartMap());
+        modelBuilder.ApplyConfiguration(new CartToppingMap());
 
         // Configure relationships between tables
 
@@ -75,6 +79,39 @@ public class DatabaseContext : DbContext
             .HasMany<OrderPizzaTopping>()
             .WithOne()
             .HasForeignKey(e=>e.ToppingId)
+            .IsRequired();
+
+        // one to many relationship for customer to cart
+        modelBuilder.Entity<Customer>()
+            .HasMany<Cart>()
+            .WithOne()
+            .HasForeignKey(e => e.CustomerId)
+            .IsRequired();
+
+        // one to many realtionship for side to cart
+        modelBuilder.Entity<Side>()
+            .HasMany<Cart>()
+            .WithOne()
+            .HasForeignKey(e => e.SideID);
+
+        // one to many relationship for pizza to cart
+        modelBuilder.Entity<Pizza>()
+            .HasMany<Cart>()
+            .WithOne()
+            .HasForeignKey(e => e.PizzaID);
+
+        // one to many relationship for cart to cart topping
+        modelBuilder.Entity<Cart>()
+            .HasMany<CartTopping>()
+            .WithOne()
+            .HasForeignKey(e => e.CartID)
+            .IsRequired();
+
+        // one to many relationship for topping to cart topping
+        modelBuilder.Entity<Topping>()
+            .HasMany<CartTopping>()
+            .WithOne()
+            .HasForeignKey(e => e.ToppingId)
             .IsRequired();
 
         // Seed database with intial data that will be used for testing

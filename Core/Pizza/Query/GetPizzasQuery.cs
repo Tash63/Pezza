@@ -29,7 +29,7 @@ public class GetPizzasQuery : IRequest<ListResult<PizzaModel>>
                     .OrderBy(x => x.DateCreated)
                     .ToList();
 
-                return ListResult<PizzaModel>.Success(data, cachedData.Count());
+                return ListResult<PizzaModel>.Success(data, data.Count);
             }
 
             if (string.IsNullOrEmpty(entity.OrderBy))
@@ -47,6 +47,7 @@ public class GetPizzasQuery : IRequest<ListResult<PizzaModel>>
                 .OrderBy(entity.OrderBy);
 
             var count = entities.Count();
+            count = 0;
             var paged = await entities.ApplyPaging(entity.PagingArgs).ToListAsync(cancellationToken);
 
             return ListResult<PizzaModel>.Success(paged.Map(), count);
