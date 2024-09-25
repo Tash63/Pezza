@@ -2,24 +2,24 @@
 
 namespace Core.Customer.Queries;
 
-public class GetCartQuery : IRequest<ListResult<AddToCartModel>>
+public class GetCartQuery : IRequest<ListResult<SearchCartModel>>
 {
     public int? CustomerID { get; set; }
 }
 
-public class GetCartQueryHandler(DatabaseContext databaseContext) : IRequestHandler<GetCartQuery, ListResult<AddToCartModel>>
+public class GetCartQueryHandler(DatabaseContext databaseContext) : IRequestHandler<GetCartQuery, ListResult<SearchCartModel>>
 {
-    public async Task<ListResult<AddToCartModel>> Handle(GetCartQuery request, CancellationToken cancellationToken)
+    public async Task<ListResult<SearchCartModel>> Handle(GetCartQuery request, CancellationToken cancellationToken)
     {
         if(!request.CustomerID.HasValue)
         {
-            return ListResult<AddToCartModel>.Failure("Error");
+            return ListResult<SearchCartModel>.Failure("Error");
         }
         var entities = databaseContext.Carts
             .Select(x => x)
             .AsNoTracking()
             .Where(x=>x.CustomerId==request.CustomerID.Value).ToList();
-        List<AddToCartModel> orders=new List<AddToCartModel>();
+        List<SearchCartModel> orders=new List<SearchCartModel>();
         for(int i=0;i<entities.Count();i++)
         {
             // if the current order is a pizza then find the toppings
@@ -35,14 +35,15 @@ public class GetCartQueryHandler(DatabaseContext databaseContext) : IRequestHand
                     toppingIds.Add(toppingentities[j].ToppingId);
                 }
             }
-            orders.Add(new AddToCartModel
+            orders.Add(new SearchCartModel
             {
                 CustomerId = entities[i].CustomerId,
                 PizzaID = entities[i].PizzaID,
                 SideID = entities[i].SideID,
-                ToppingIds = toppingIds
+                ToppingIds = toppingIds,
+                Id=entities[i].Id
             });
         }
-        return ListResult<AddToCartModel>.Success(orders, orders.Count());
+        return ListResult<SearchCartModel>.Success(orders, orders.Count());
     }
 }

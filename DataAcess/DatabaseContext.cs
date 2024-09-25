@@ -117,7 +117,7 @@ public class DatabaseContext : DbContext
         // Seed database with intial data that will be used for testing
         modelBuilder.Entity<Pizza>()
         .HasData(
-        new Pizza { Id = 1, Name = "Pepperoni Pizza", Price = 89, Description = string.Empty, DateCreated = DateTime.UtcNow,Category=PizzaCategory.Meat,InStock=true },
+        new Pizza { Id = 1, Name = "Pepperoni Pizza", Price = 89, Description = string.Empty, DateCreated = DateTime.UtcNow,Category=PizzaCategory.Chiken,InStock=true },
         new Pizza { Id = 2, Name = "Meat Pizza", Price = 99, Description = string.Empty, DateCreated = DateTime.UtcNow,Category=PizzaCategory.Meat,InStock=true },
         new Pizza { Id = 3, Name = "Margherita Pizza", Price = 79, Description = string.Empty, DateCreated = DateTime.UtcNow,Category = PizzaCategory.Vegiatarian, InStock = true },
         new Pizza { Id = 4, Name = "Hawaiian Pizza", Price = 89, Description = string.Empty, DateCreated = DateTime.UtcNow ,Category = PizzaCategory.Meat, InStock = true });
