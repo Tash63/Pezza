@@ -24,6 +24,14 @@ public class DeletePizzaCommandHandler(DatabaseContext databaseContext,IAppCache
             return Result.Failure("Not found");
         }
 
+        // remove the toppings associated with the Pizza
+        var toppings = databaseContext.Toppings
+            .Select(x => x)
+            .AsNoTracking()
+            .Where(x => x.Id == findEntity.Id);
+        databaseContext.Toppings.RemoveRange(toppings);
+        databaseContext.SaveChanges();
+
         databaseContext.Pizzas.Remove(findEntity);
         var result = await databaseContext.SaveChangesAsync(cancellationToken);
         cache.Remove(Common.Data.CacheKey);
