@@ -5,10 +5,11 @@ using Common.Models.Order;
 using Core.Order.Events;
 using DataAccess;
 using MediatR;
+using System.Security.Principal;
 
 public class OrderCommand : IRequest<Result>
 {
-    public required CreateOrderModel Data { get; set; }
+    public int? CustomerId { get; set; }
 }
 
 public class OrderCommandHandler(IMediator mediator,DatabaseContext databaseContext) : IRequestHandler<OrderCommand, Result>
@@ -16,77 +17,108 @@ public class OrderCommandHandler(IMediator mediator,DatabaseContext databaseCont
 
     public async Task<Result> Handle(OrderCommand request, CancellationToken cancellationToken)
     {
-        if (request.Data == null)
+        if (!request.CustomerId.HasValue)
         {
             return Result.Failure("Error");
         }
 
-        // validate the PizzaIds,sideids and topping ids
-        for(int i=0;i<request.Data.PizzaIds.Count;i++)
-        {
-            var pizzaquery = EF.CompileAsyncQuery((DatabaseContext db,int id)=>db.Pizzas.FirstOrDefault(x=>x.Id==id));
-            var pizzaresult = await pizzaquery(databaseContext,request.Data.PizzaIds.ElementAt(i));
-            if(pizzaresult==null)
-            {
-                return Result.Failure("Not Found");
-            }
-        } 
+        // the order infomation will be stored in the cart so i will build the request.data model together
+        // with insertion into the db
 
-        for(int i=0;i<request.Data.SideIds.Count;i++)
+        // get all cart items for the customer
+        var cartitems=databaseContext.Carts.Select(x=>x).
+            AsNoTracking()
+            .Where(x => x.CustomerId == request.CustomerId.Value).ToList();
+        List<int> PizzaIDs = new List<int>();
+        List<int> SideIDs = new List<int>();
+        List<List<int>> ToppingIDs=new List<List<int>>();
+
+        if(cartitems.Count==0)
         {
-            var Sidequery = EF.CompileAsyncQuery((DatabaseContext db,int id)=>db.Sides.FirstOrDefault(x=>x.ID==id));
-            var Sideresult = await Sidequery(databaseContext,request.Data.SideIds.ElementAt(i));
-            if(Sideresult==null)
-            {
-                return Result.Failure("Not Found");
-            }
+            return Result.Failure("No Items in Cart");
         }
-        
-        for(int i=0;i<request.Data.ToppingIds.Count;i++)
+
+        for(int i=0;i<cartitems.Count();i++)
         {
-            for(int j=0;j<request.Data.ToppingIds.ElementAt(i).Count; j++)
+            if (cartitems[i].PizzaID==null)
             {
-                var toppingquery = EF.CompileAsyncQuery((DatabaseContext db, int id) => db.Toppings.FirstOrDefault(x=>x.Id==id));
-                var toppingresult = await toppingquery(databaseContext, request.Data.ToppingIds.ElementAt(i).ElementAt(j));
-                if(toppingresult==null)
+                SideIDs.Add(cartitems[i].SideID.Value);
+            }
+            else
+            {
+                PizzaIDs.Add(cartitems[i].PizzaID.Value);
+                // if its a pizza in this cart item we need to get the toppings for it from the carttoppings
+                var toppingitems = databaseContext.CartToppings.Select(x => x)
+                    .AsNoTracking()
+                    .Where(x => x.CartID == cartitems[i].Id).ToList();
+                List<int> ToppingId = new List<int>();
+                for(int j=0;j<toppingitems.Count();j++)
                 {
-                    return Result.Failure("Not Found");
+                    ToppingId.Add(toppingitems[j].ToppingId);
                 }
+                ToppingIDs.Add(ToppingId);
             }
         }
-
-
-        var orderesult = request.Data.Map();
-        databaseContext.Orders.Add(orderesult);
-        await databaseContext.SaveChangesAsync(cancellationToken);
-        // Add Pizza's to that order
-        int LastOrderId = orderesult.Id;
-        for (int i = 0; i < request.Data.PizzaIds.Count; i++)
+        // TODO: remove the cart items from the cart table
+        CreateOrderModel createOrder = new CreateOrderModel
         {
-                var OrderPizzaEntity = new OrderPizza
-                {
-                    OrderId = LastOrderId,
-                    PizzaId = request.Data.PizzaIds[i],
-                };
+            CustomerId=request.CustomerId.Value,
+            PizzaIds=PizzaIDs,
+            SideIds=SideIDs,
+            ToppingIds=ToppingIDs,
+            Status=Common.Enums.OrderStatus.Placed,
+        };
+        var order = createOrder.Map();
+        databaseContext.Orders.Add(order);
+        var result = await databaseContext.SaveChangesAsync(cancellationToken);
 
-                databaseContext.OrderPizzas.Add(OrderPizzaEntity);
-                await databaseContext.SaveChangesAsync(cancellationToken);
-                // Add the toppings for this pizza in the orderpizzatoppings
-                for (int j = 0; j < request.Data.ToppingIds[i].Count; j++)
+        if(result > 0)
+        {
+            for(int i=0;i<cartitems.Count;i++)
+            {
+                if (cartitems[i].PizzaID!=null)
                 {
-                    //check if the toppings exisit
-                        databaseContext.OrderPizzaToppings.Add(new OrderPizzaTopping
-                        {
-                            OrderPizzaId = OrderPizzaEntity.Id,
-                            ToppingId = request.Data.ToppingIds[i][j],
-                        });
-                        await databaseContext.SaveChangesAsync(cancellationToken);
+                    var toppingsToDelete = databaseContext.CartToppings
+                        .Where(t => t.CartID.Equals(cartitems[i].Id))
+                        .ToList();
+                    databaseContext.CartToppings.RemoveRange(toppingsToDelete);
+                    databaseContext.SaveChanges();
+                }
+
+                // remove this cart entity
+                databaseContext.Carts.Remove(cartitems[i]);
+                await databaseContext.SaveChangesAsync(cancellationToken);
             }
         }
-        await mediator.Publish(new OrderEvent { Data = request.Data }, cancellationToken);
+        // Add Pizza's to that order
+        int LastOrderId = order.Id;
+        for (int i = 0; i < createOrder.PizzaIds.Count; i++)
+        {
+            var OrderPizzaEntity = new OrderPizza
+            {
+                OrderId = LastOrderId,
+                PizzaId = createOrder.PizzaIds[i],
+            };
+
+            databaseContext.OrderPizzas.Add(OrderPizzaEntity);
+            await databaseContext.SaveChangesAsync(cancellationToken);
+            // Add the toppings for this pizza in the orderpizzatoppings
+            for (int j = 0; j < createOrder.ToppingIds[i].Count; j++)
+            {
+                //check if the toppings exisit
+                databaseContext.OrderPizzaToppings.Add(new OrderPizzaTopping
+                {
+                    OrderPizzaId = OrderPizzaEntity.Id,
+                    ToppingId = createOrder.ToppingIds[i][j],
+                });
+                await databaseContext.SaveChangesAsync(cancellationToken);
+            }
+        }
+
+        await mediator.Publish(new OrderEvent { Data = createOrder }, cancellationToken);
 
         return Result.Success();
     }
 }
 
-// TODO: call a roll back if we cant sucessfully insert the order into the db if forexample an incorrect entry has been made
+// TODO: call a roll back if we cant sucefully insert the order into the db if forexample an incorrect entry has been made

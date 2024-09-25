@@ -21,6 +21,7 @@
                 return Result.Failure("Not found");
             }
             // TODO: perform validation on the topping id before adding toppijng
+            // TODO: change order to allow the order to come from the cart and also add papercut smtp
             var toppingsToDelete = databaseContext.CartToppings
                 .Where(t => t.CartID.Equals(findEntity.Id))
                 .ToList(); 

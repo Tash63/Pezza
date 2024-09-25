@@ -1,0 +1,2 @@
+2024-09-25 08:50:24.253 +02:00 [INF] CleanArchitecture Long Running Request: GetOrdersQuery (809 milliseconds)
+2024-09-25 08:57:44.739 +02:00 [INF] CleanArchitecture Long Running Request: GetOrdersQuery (764 milliseconds)
