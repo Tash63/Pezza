@@ -21,12 +21,9 @@ public sealed class OrderMap : IEntityTypeConfiguration<Order>
             .HasColumnName("Completed")
             .HasConversion<int>();
 
-        //this will need to change to allow one to many with the ASP.Net.User 
         builder.HasOne(o => o.User)
             .WithOne()
             .HasForeignKey<Order>(o => o.UserEmail);
-
-        // Many-to-many relationship with Pizza
 
         builder.HasMany(o => o.Sides)
             .WithMany()
