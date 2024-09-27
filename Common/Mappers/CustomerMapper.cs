@@ -7,7 +7,7 @@ public static class CustomerMapper
     public static CustomerModel Map(this Customer entity)
         => new()
         {
-            Id = entity.,
+            Id = entity.Id,
             Name = entity.Name,
             Address = entity.Address,
             Cellphone = entity.Cellphone,

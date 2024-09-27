@@ -78,7 +78,7 @@ public class Startup
         );
 
         services.AddAuthorization();
-        services.AddIdentityApiEndpoints<IdentityUser>()
+        services.AddIdentityApiEndpoints<ApplicationUser>()
             .AddEntityFrameworkStores<DatabaseContext>();
 
         services.AddResponseCompression(options =>
