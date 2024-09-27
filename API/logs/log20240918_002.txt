@@ -18,3 +18,4 @@ System.NullReferenceException: Object reference not set to an instance of an obj
    at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
    at Common.Behaviour.ExceptionHandlerMiddleware.Invoke(HttpContext context) in C:\Users\kiran.nariansamy\Desktop\repos\Pezza\Common\Behaviour\UnhandledExpectationBehaviour.cs:line 19
+2024-09-18 14:39:32.487 +02:00 [INF] CleanArchitecture Long Running Request: GetOrdersQuery (744 milliseconds)

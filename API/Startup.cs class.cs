@@ -1,4 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Common.Behaviour;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Serialization;
 using System.Reflection;
@@ -20,7 +24,7 @@ public class Startup
              .AddJsonOptions(options => options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()))
              .AddNewtonsoftJson(x => x.SerializerSettings.ContractResolver = new DefaultContractResolver())
              .AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
-
+        services.AddLazyCache();
         DependencyInjection.AddApplication(services);
 
         services.AddSwaggerGen(c =>
@@ -36,16 +40,48 @@ public class Startup
             c.IncludeXmlComments(xmlPath);
         });
 
+        services.AddCors(options =>
+        {
+            options.AddPolicy(
+                "CorsPolicy",
+                builder => builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader());
+        });
+
         services.AddDbContext<DatabaseContext>(options =>
             options.UseInMemoryDatabase(Guid.NewGuid().ToString())
         );
+        services.AddAuthorization();
+        services.AddIdentityApiEndpoints<IdentityUser>()
+            .AddEntityFrameworkStores<DatabaseContext>();
+
+        services.AddResponseCompression(options =>
+        {
+            options.Providers.Add<BrotliCompressionProvider>();
+            options.Providers.Add<GzipCompressionProvider>();
+        });
+        services.AddResponseCompression();
+        using (var serviceProvider = services.BuildServiceProvider())
+        {
+            var dbContext = serviceProvider.GetRequiredService<DatabaseContext>();
+            dbContext.Database.EnsureCreated();
+            dbContext.SaveChanges();
+            dbContext.Dispose();
+        }
+       
     }
     public void Configure(WebApplication app, IWebHostEnvironment env)
     {
+        app.UseCors("CorsPolicy");
+        app.UseOpenApi();
         app.UseSwagger();
         app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Pezza API V1"));
         app.UseHttpsRedirection();
         app.UseRouting();
+        app.UseResponseCompression();
+        app.UseMiddleware(typeof(ExceptionHandlerMiddleware));
+
         app.UseEndpoints(endpoints => endpoints.MapControllers());
         app.UseAuthorization();
         app.Run();

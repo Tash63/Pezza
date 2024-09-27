@@ -1,19 +1,27 @@
 namespace Api.Controllers;
 
+using Api.Helpers;
+using Common.Models.Customer;
+using Common.Models.Pizza;
+using Core.Pizza.Commands;
+using Core.Pizza.Queries;
+
 [ApiController]
 [Route("[controller]")]
-public class PizzaController(IPizzaCore pizzaCore) : ControllerBase
+public class PizzaController() : ApiController
 {
-
+    /// <summary>
+    /// Get Pizza by Id.
+    /// </summary>
+    /// <param name="id">Pizza Id</param>
+    /// <returns>ActionResult</returns>
     [HttpGet("{id}")]
     [ProducesResponseType(200)]
     [ProducesResponseType(404)]
     public async Task<ActionResult> Get(int id)
     {
-        Console.WriteLine("hello");
-        var search = await pizzaCore.GetAsync(id);
-
-        return (search == null) ? this.NotFound() : this.Ok(search);
+        var result = await this.Mediator.Send(new GetPizzaQuery { Id = id });
+        return ResponseHelper.ResponseOutcome(result, this);
     }
 
     /// <summary>
@@ -21,9 +29,14 @@ public class PizzaController(IPizzaCore pizzaCore) : ControllerBase
     /// </summary>
     /// <returns>ActionResult</returns>
     [HttpPost("Search")]
-    [ProducesResponseType(200)]
-    public async Task<ActionResult> Search()
-        => this.Ok(await pizzaCore.GetAllAsync());
+    [ProducesResponseType(typeof(ListResult<CustomerModel>), 200)]
+    [ProducesResponseType(typeof(ErrorResult), 400)]
+    //whats in gere is required by the request
+    public async Task<ActionResult> Search(SearchPizzaModel data)
+    {
+        var result = await this.Mediator.Send(new GetPizzasQuery() { Data=data});
+        return ResponseHelper.ResponseOutcome(result, this);
+    }
 
     /// <summary>
     /// Create Pizza.
@@ -43,11 +56,14 @@ public class PizzaController(IPizzaCore pizzaCore) : ControllerBase
     [HttpPost]
     [ProducesResponseType(200)]
     [ProducesResponseType(400)]
-    public async Task<ActionResult<Pizza>> Create([FromBody] PizzaModel model)
+    public async Task<ActionResult<Pizza>> Create([FromBody] CreatePizzaModel model)
     {
-        var result = await pizzaCore.SaveAsync(model);
+        var result = await this.Mediator.Send(new CreatePizzaCommand
+        {
+            Data = model
+        });
 
-        return (result == null) ? this.BadRequest() : this.Ok(result);
+        return ResponseHelper.ResponseOutcome(result, this);
     }
 
 
@@ -64,14 +80,18 @@ public class PizzaController(IPizzaCore pizzaCore) : ControllerBase
     /// </remarks>
     /// <param name="model">Pizza Model</param>
     /// <returns>ActionResult</returns>
-    [HttpPut]
+    [HttpPut("{Pizzaid}")]
     [ProducesResponseType(200)]
     [ProducesResponseType(400)]
-    public async Task<ActionResult> Update([FromBody] PizzaModel model)
+    public async Task<ActionResult> Update([FromBody] UpdatePizzaModel model,int Pizzaid)
     {
-        var result = await pizzaCore.UpdateAsync(model);
+        var result = await this.Mediator.Send(new UpdatePizzaCommand
+        {
+            Data = model,
+            Id = Pizzaid,
+        });
 
-        return (result == null) ? this.BadRequest() : this.Ok(result);
+        return ResponseHelper.ResponseOutcome(result, this);
     }
 
     /// <summary>
@@ -84,8 +104,7 @@ public class PizzaController(IPizzaCore pizzaCore) : ControllerBase
     [ProducesResponseType(400)]
     public async Task<ActionResult> Delete(int id)
     {
-        var result = await pizzaCore.DeleteAsync(id);
-
-        return (!result) ? this.BadRequest() : this.Ok(result);
+        var result = await this.Mediator.Send(new DeletePizzaCommand { Id = id });
+        return ResponseHelper.ResponseOutcome(result, this);
     }
 }

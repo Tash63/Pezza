@@ -21,6 +21,7 @@ public sealed class OrderMap : IEntityTypeConfiguration<Order>
             .HasColumnName("Completed")
             .HasConversion<int>();
 
+        //this will need to change to allow one to many with the ASP.Net.User 
         builder.HasOne(o => o.Customer)
             .WithOne()
             .HasForeignKey<Order>(o => o.CustomerId);

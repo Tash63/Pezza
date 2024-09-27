@@ -4,13 +4,71 @@
         <name>Api</name>
     </assembly>
     <members>
-        <member name="M:Api.Controllers.PizzaController.Search">
+        <member name="M:Api.Controllers.CustomerController.Search(Common.Models.Customer.SearchCustomerModel)">
+            <summary>
+            Get all Customers.
+            </summary>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> repres
+            enting the asynchronous operation.</returns>
+            <response code="200">Customer Search</response>
+            <response code="400">Error searching for customers</response>
+        </member>
+        <member name="M:Api.Controllers.CustomerController.GetOrders(System.Int32)">
+            <summary>
+            Get Customer Orders by Id.
+            </summary>
+            <param name="id">int.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the asynchronous operation.</returns>
+            <response code="200">Get customer orders</response>
+            <response code="400">Error getting customer orders</response>
+            <response code="404">Customer orders not found</response>
+        </member>
+        <member name="M:Api.Controllers.OrderController.Create(System.Int32)">
+             <summary>
+             Order Pizza.
+             </summary>
+             <remarks>
+             Sample request:
+            
+                 POST /Order
+                 {
+                   "customerId": 1,
+                   "pizzaIds": [1, 2, 3, 4, 5]
+                 }
+             </remarks>
+             <param name="model">Create Order Model</param>
+             <returns>ActionResult</returns>
+        </member>
+        <member name="M:Api.Controllers.OrderController.Update(Common.Models.OrderModel.UpdateOrderModel,System.Int32)">
+             <summary>
+             Update Pizza Status.
+             </summary>
+             <remarks>
+             Sample request:
+            
+                 Patch /Update/{id}
+                 {
+                   "Id": id,
+                   "OrderStatus": Accepted
+                 }
+             </remarks>
+             <param name="model">Update Order Model</param>
+             <returns>ActionResult</returns>
+        </member>
+        <member name="M:Api.Controllers.PizzaController.Get(System.Int32)">
+            <summary>
+            Get Pizza by Id.
+            </summary>
+            <param name="id">Pizza Id</param>
+            <returns>ActionResult</returns>
+        </member>
+        <member name="M:Api.Controllers.PizzaController.Search(Common.Models.Pizza.SearchPizzaModel)">
             <summary>
             Get all Pizzas.
             </summary>
             <returns>ActionResult</returns>
         </member>
-        <member name="M:Api.Controllers.PizzaController.Create(Common.Models.PizzaModel)">
+        <member name="M:Api.Controllers.PizzaController.Create(Common.Models.Pizza.CreatePizzaModel)">
              <summary>
              Create Pizza.
              </summary>
@@ -27,7 +85,7 @@
              <param name="model">Pizza Model</param>
              <returns>ActionResult</returns>
         </member>
-        <member name="M:Api.Controllers.PizzaController.Update(Common.Models.PizzaModel)">
+        <member name="M:Api.Controllers.PizzaController.Update(Common.Models.Pizza.UpdatePizzaModel,System.Int32)">
              <summary>
              Update Pizza.
              </summary>
