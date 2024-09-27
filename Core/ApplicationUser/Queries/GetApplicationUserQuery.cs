@@ -1,5 +1,4 @@
 ﻿using Common.Models.ApplicationUser;
-using Common.Models.Customer;
 using MediatR;
 
 namespace Core.Customer.Queries;

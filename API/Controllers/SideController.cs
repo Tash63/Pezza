@@ -1,5 +1,4 @@
-﻿using Common.Models.Customer;
-using Common.Models.Side;
+﻿using Common.Models.Side;
 using Core.Side.Command;
 using Core.Side.Query;
 using Microsoft.AspNetCore.Mvc;

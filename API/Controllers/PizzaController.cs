@@ -1,7 +1,6 @@
 namespace Api.Controllers;
 
 using Api.Helpers;
-using Common.Models.Customer;
 using Common.Models.Pizza;
 using Core.Pizza.Commands;
 using Core.Pizza.Queries;
@@ -29,7 +28,7 @@ public class PizzaController() : ApiController
     /// </summary>
     /// <returns>ActionResult</returns>
     [HttpPost("Search")]
-    [ProducesResponseType(typeof(ListResult<CustomerModel>), 200)]
+    [ProducesResponseType(typeof(ListResult<PizzaModel>), 200)]
     [ProducesResponseType(typeof(ErrorResult), 400)]
     //whats in gere is required by the request
     public async Task<ActionResult> Search(SearchPizzaModel data)

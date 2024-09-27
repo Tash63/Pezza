@@ -9,8 +9,7 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddApplication(this IServiceCollection services)
     {
-        services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<CreateCustomerCommand>());
-
+        services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<UpdateApplicationUserCommand>());
         AssemblyScanner.FindValidatorsInAssembly(typeof(CreatePizzaCommand).Assembly)
            .ForEach(item => services.AddScoped(item.InterfaceType, item.ValidatorType));
 

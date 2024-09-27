@@ -2,7 +2,6 @@
 
 using Common.Entities;
 using Common.Enums;
-using Common.Models.Customer;
 using Common.Models.Order;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using System.Linq;

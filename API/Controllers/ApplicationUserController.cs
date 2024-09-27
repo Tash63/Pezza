@@ -42,7 +42,7 @@ public class ApplicationUserController() : ApiController
     [HttpPut("Update/{email}")]
     [ProducesResponseType(200)]
     [ProducesResponseType(400)]
-    public async Task<ActionResult> UpdateApplicationUser([FromBody] UpdateApplicationUserModel model,string email)
+    public async Task<ActionResult> UpdateApplicationUser([FromBody] UpdateApplicationUserModel? model,string? email)
     {
         var result = await this.Mediator.Send(new UpdateApplicationUserCommand() {
          Data=model,

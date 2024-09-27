@@ -1,7 +1,6 @@
 ﻿using Common.Enums;
 using Common.Mappers;
 using Common.Models.ApplicationUser;
-using Common.Models.Customer;
 using Common.Models.Side;
 using Common.Models.Topping;
 namespace Common.Models.Order;

@@ -15,8 +15,6 @@ public class DatabaseContext : IdentityDbContext<ApplicationUser>
     {
     }
 
-    public virtual DbSet<Customer> Customers { get; set; }
-
     public virtual DbSet<Pizza> Pizzas { get; set; }
 
     public virtual DbSet<Notify> Notifies { get; set; }
@@ -36,7 +34,6 @@ public class DatabaseContext : IdentityDbContext<ApplicationUser>
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-        modelBuilder.ApplyConfiguration(new CustomerMap());
         modelBuilder.ApplyConfiguration(new PizzaMap());
         modelBuilder.ApplyConfiguration(new NotifyMap());
         modelBuilder.ApplyConfiguration(new OrderMap());
@@ -130,16 +127,7 @@ public class DatabaseContext : IdentityDbContext<ApplicationUser>
         new Pizza { Id = 2, Name = "Meat Pizza", Price = 99, Description = string.Empty, DateCreated = DateTime.UtcNow, Category = PizzaCategory.Meat, InStock = true },
         new Pizza { Id = 3, Name = "Margherita Pizza", Price = 79, Description = string.Empty, DateCreated = DateTime.UtcNow, Category = PizzaCategory.Vegiatarian, InStock = true },
         new Pizza { Id = 4, Name = "Hawaiian Pizza", Price = 89, Description = string.Empty, DateCreated = DateTime.UtcNow, Category = PizzaCategory.Meat, InStock = true });
-        Customer customer = new Customer()
-        {
-            Id = 1,
-            Name = "Kiran Tash Nariansamy",
-            Address = "3 plane crescent",
-            Cellphone = "065 979 8511",
-            DateCreated = DateTime.UtcNow,
-            Email = "kirannariansamy1967@gmail.com"
-        };
-        modelBuilder.Entity<Customer>().HasData(customer);
+
 
         modelBuilder.Entity<Side>()
             .HasData(new Side

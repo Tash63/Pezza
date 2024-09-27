@@ -4,7 +4,6 @@ using System.Net.Mail;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Common.Models;
-using Common.Models.Customer;
 using FluentEmail.Core;
 using FluentEmail.Smtp;
 using HtmlAgilityPack;
@@ -12,8 +11,6 @@ using HtmlAgilityPack;
 public class EmailService
 {
     public string HtmlContent { get; set; }
-
-    public CustomerModel Customer { get; set; }
 
     public async Task<Result> SendEmail()
     {

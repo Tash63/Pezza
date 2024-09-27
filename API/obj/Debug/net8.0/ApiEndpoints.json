@@ -88,6 +88,44 @@
   },
   {
     "ContainingType": "Api.Controllers.ApplicationUserController",
+    "Method": "GetOrders",
+    "RelativePath": "ApplicationUser/{Email}/Orders",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Email",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Common.Models.ListResult\u00601[[Common.Models.Order.OrderModel, Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Common.Models.ErrorResult",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "Common.Models.ErrorResult",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 404
+      }
+    ]
+  },
+  {
+    "ContainingType": "Api.Controllers.ApplicationUserController",
     "Method": "Search",
     "RelativePath": "ApplicationUser/Search",
     "HttpMethod": "POST",
@@ -128,7 +166,7 @@
       {
         "Name": "model",
         "Type": "Common.Models.ApplicationUser.UpdateApplicationUserModel",
-        "IsRequired": true
+        "IsRequired": false
       },
       {
         "Name": "email",
@@ -276,196 +314,6 @@
       }
     ],
     "EndpointName": "MapIdentityApi-/confirmEmail"
-  },
-  {
-    "ContainingType": "Api.Controllers.CustomerController",
-    "Method": "GetOrders",
-    "RelativePath": "Customer/{Email}/Orders",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "Email",
-        "Type": "System.String",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "Common.Models.ListResult\u00601[[Common.Models.Order.OrderModel, Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "application/json"
-        ],
-        "StatusCode": 200
-      },
-      {
-        "Type": "Common.Models.ErrorResult",
-        "MediaTypes": [
-          "application/json"
-        ],
-        "StatusCode": 400
-      },
-      {
-        "Type": "Common.Models.ErrorResult",
-        "MediaTypes": [
-          "application/json"
-        ],
-        "StatusCode": 404
-      }
-    ]
-  },
-  {
-    "ContainingType": "Api.Controllers.CustomerController",
-    "Method": "Get",
-    "RelativePath": "Customer/{id}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 200
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "application/json"
-        ],
-        "StatusCode": 400
-      }
-    ]
-  },
-  {
-    "ContainingType": "Api.Controllers.CustomerController",
-    "Method": "DeleteCustomer",
-    "RelativePath": "Customer/{id}",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 200
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "application/json"
-        ],
-        "StatusCode": 400
-      }
-    ]
-  },
-  {
-    "ContainingType": "Api.Controllers.CustomerController",
-    "Method": "CreateCustomer",
-    "RelativePath": "Customer/Add",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "model",
-        "Type": "Common.Models.Customer.CreateCustomerModel",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 200
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "application/json"
-        ],
-        "StatusCode": 400
-      }
-    ]
-  },
-  {
-    "ContainingType": "Api.Controllers.CustomerController",
-    "Method": "Search",
-    "RelativePath": "Customer/Search",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "data",
-        "Type": "Common.Models.Customer.SearchCustomerModel",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "Common.Models.ListResult\u00601[[Common.Models.Customer.CustomerModel, Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "application/json"
-        ],
-        "StatusCode": 200
-      },
-      {
-        "Type": "Common.Models.ErrorResult",
-        "MediaTypes": [
-          "application/json"
-        ],
-        "StatusCode": 400
-      }
-    ]
-  },
-  {
-    "ContainingType": "Api.Controllers.CustomerController",
-    "Method": "UpdateCustomer",
-    "RelativePath": "Customer/Update/{id}",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "model",
-        "Type": "Common.Models.Customer.UpdateCustomerModel",
-        "IsRequired": true
-      },
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 200
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "application/json"
-        ],
-        "StatusCode": 400
-      }
-    ]
   },
   {
     "ContainingType": "Microsoft.AspNetCore.Routing.IdentityApiEndpointRouteBuilderExtensions\u002B\u003C\u003Ec__DisplayClass1_0\u00601[[Common.Entities.ApplicationUser, Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
@@ -869,7 +717,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "Common.Models.ListResult\u00601[[Common.Models.Customer.CustomerModel, Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "Common.Models.ListResult\u00601[[Common.Models.Pizza.PizzaModel, Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "application/json"
         ],
