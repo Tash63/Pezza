@@ -12,7 +12,7 @@ namespace Common.Models.Order
 
         public int Id {  get; set; }
 
-        public int? CustomerId { get; set; }
+        public string? UserEmail { get; set; }
 
         public DateTime? DateCreated { get; set; }
 

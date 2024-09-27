@@ -22,9 +22,9 @@ public sealed class OrderMap : IEntityTypeConfiguration<Order>
             .HasConversion<int>();
 
         //this will need to change to allow one to many with the ASP.Net.User 
-        builder.HasOne(o => o.Customer)
+        builder.HasOne(o => o.User)
             .WithOne()
-            .HasForeignKey<Order>(o => o.CustomerId);
+            .HasForeignKey<Order>(o => o.UserEmail);
 
         // Many-to-many relationship with Pizza
 

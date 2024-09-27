@@ -5,7 +5,7 @@ using System.Linq;
 using Common.Entities;
 public class GetOrdersQuery : IRequest<ListResult<OrderModel>>
 {
-    public int CustomerID { get; set; }
+    public string CustomerEmail { get; set; }
 }
 
 public class GetOrdersQueryHandler(DatabaseContext databaseContext) : IRequestHandler<GetOrdersQuery, ListResult<OrderModel>>
@@ -15,15 +15,15 @@ public class GetOrdersQueryHandler(DatabaseContext databaseContext) : IRequestHa
         var entities = databaseContext.Orders
             .Select(x => x)
             .AsNoTracking()
-            .FilterByCustomerId(request.CustomerID)
+            .FilterByCustomerEmail(request.CustomerEmail)
             .OrderBy("DateCreated desc");
         var count = entities.Count();
         var paged = await entities.ToListAsync(cancellationToken);
 
         // get customer details
         Customer customer;
-        var customerquery = EF.CompileAsyncQuery((DatabaseContext db, int id) => db.Customers.FirstOrDefault(c => c.Id == id));
-        var customerentity = await customerquery(databaseContext, paged.ElementAt(0).CustomerId);
+        var customerquery = EF.CompileAsyncQuery((DatabaseContext db, string email) => db.Users.FirstOrDefault(c => c.Email == email));
+        var customerentity = await customerquery(databaseContext, paged.ElementAt(0).UserEmail);
         List<OrderModel> orders=new List<OrderModel>();
 
         // genereate order
@@ -78,11 +78,11 @@ public class GetOrdersQueryHandler(DatabaseContext databaseContext) : IRequestHa
             OrderModel tempOrder = new OrderModel()
             {
                 Id = paged[i].Id,
-                CustomerId = paged[i].CustomerId,
+                UserEmail = paged[i].UserEmail,
                 Pizzas = pizzas.Map(),
                 Status = paged[i].Status,
                 DateCreated = paged[i].DateCreated,
-                Customer = customerentity.Map(),
+                User = customerentity.Map(),
                 Sides = sides.Map(),
                 Toppings = AllToppings.Map(),
             };

@@ -47,10 +47,10 @@ namespace Core.Order.Commands
             }
             CreateOrderModel resultModel=new CreateOrderModel()
             {
-                CustomerId = entity.CustomerId,
                 PizzaIds = PizzaIds,
                 SideIds=entity.SideIds,
                 Status=entity.Status,
+                UserEmail=entity.UserEmail,
             };
             return result > 0 ? Result<CreateOrderModel>.Success(resultModel) : Result<CreateOrderModel>.Failure("Error");
         }

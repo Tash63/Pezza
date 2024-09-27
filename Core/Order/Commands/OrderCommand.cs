@@ -9,7 +9,7 @@ using System.Security.Principal;
 
 public class OrderCommand : IRequest<Result>
 {
-    public int? CustomerId { get; set; }
+    public string? CustomerEmail { get; set; }
 }
 
 public class OrderCommandHandler(IMediator mediator,DatabaseContext databaseContext) : IRequestHandler<OrderCommand, Result>
@@ -17,7 +17,7 @@ public class OrderCommandHandler(IMediator mediator,DatabaseContext databaseCont
 
     public async Task<Result> Handle(OrderCommand request, CancellationToken cancellationToken)
     {
-        if (!request.CustomerId.HasValue)
+        if (string.IsNullOrEmpty(request.CustomerEmail))
         {
             return Result.Failure("Error");
         }
@@ -28,7 +28,7 @@ public class OrderCommandHandler(IMediator mediator,DatabaseContext databaseCont
         // get all cart items for the customer
         var cartitems=databaseContext.Carts.Select(x=>x).
             AsNoTracking()
-            .Where(x => x.CustomerId == request.CustomerId.Value).ToList();
+            .Where(x => x.UserEmail == request.CustomerEmail).ToList();
         List<int> PizzaIDs = new List<int>();
         List<int> SideIDs = new List<int>();
         List<List<int>> ToppingIDs=new List<List<int>>();
@@ -62,11 +62,11 @@ public class OrderCommandHandler(IMediator mediator,DatabaseContext databaseCont
         // TODO: remove the cart items from the cart table
         CreateOrderModel createOrder = new CreateOrderModel
         {
-            CustomerId=request.CustomerId.Value,
             PizzaIds=PizzaIDs,
             SideIds=SideIDs,
             ToppingIds=ToppingIDs,
             Status=Common.Enums.OrderStatus.Placed,
+            UserEmail=request.CustomerEmail
         };
         var order = createOrder.Map();
         databaseContext.Orders.Add(order);

@@ -27,14 +27,14 @@ public class OrderController() : ApiController
     /// </remarks>
     /// <param name="model">Create Order Model</param>
     /// <returns>ActionResult</returns>
-    [HttpPost("{id}")]
+    [HttpPost("{Email}")]
     [ProducesResponseType(200)]
     [ProducesResponseType(400)]
-    public async Task<ActionResult<CreateOrderModel>> Create(int id)
+    public async Task<ActionResult<CreateOrderModel>> Create(string Email)
     {
         var result = await this.Mediator.Send(new OrderCommand
         {
-            CustomerId =id,
+           CustomerEmail=Email,
         });
 
         return ResponseHelper.ResponseOutcome(result, this);

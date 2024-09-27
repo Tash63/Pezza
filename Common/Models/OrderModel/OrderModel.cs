@@ -1,4 +1,6 @@
 ﻿using Common.Enums;
+using Common.Mappers;
+using Common.Models.ApplicationUser;
 using Common.Models.Customer;
 using Common.Models.Side;
 using Common.Models.Topping;
@@ -8,9 +10,9 @@ public class OrderModel
 {
     public int Id { get; set; }
 
-    public required int CustomerId { get; set; }
+    public required string UserEmail { get; set; }
 
-    public CustomerModel Customer { get; set; }
+    public ApplicationUserModel User { get; set; }
 
     public List<PizzaModel> Pizzas { get; set; }
 

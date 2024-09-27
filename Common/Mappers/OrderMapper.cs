@@ -14,28 +14,28 @@ public static class OrderMapper
         => new()
         { Id = entity.Id,
          Status=entity.Status,
-        CustomerId=entity.CustomerId,
-        Customer=entity.Customer.Map(),
         DateCreated=entity.DateCreated,
         Sides=entity.Sides.ToList().Map(),
+        User=entity.User.Map(),
+        UserEmail=entity.UserEmail,
         };
     public static Order Map(this OrderModel model) =>
         new()
         {
             Id = model.Id,
             Status = model.Status,
-            CustomerId = model.CustomerId,
-            Customer = model.Customer.Map(),
             DateCreated = model.DateCreated,
             Sides=model.Sides.ToList().Map(),
+            User = model.User.Map(),
+            UserEmail=model.UserEmail,  
         };
     public static Order Map(this CreateOrderModel model)
     => new()
     {
         Status=model.Status,
-        CustomerId = model.CustomerId,
         DateCreated = DateTime.UtcNow,
         SideIds = model.SideIds,
+        UserEmail=model.UserEmail,
     };
     public static IEnumerable<OrderModel> Map(this List<Order> entities)
     => entities.Select(x => x.Map());

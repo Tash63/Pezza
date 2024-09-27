@@ -88,13 +88,13 @@ public class CustomerController() : ApiController
     /// <response code="200">Get customer orders</response>
     /// <response code="400">Error getting customer orders</response>
     /// <response code="404">Customer orders not found</response>
-    [HttpGet("{id}/Orders")]
+    [HttpGet("{Email}/Orders")]
     [ProducesResponseType(typeof(ListResult<OrderModel>), 200)]
     [ProducesResponseType(typeof(ErrorResult), 400)]
     [ProducesResponseType(typeof(ErrorResult), 404)]
-    public async Task<ActionResult> GetOrders(int id)
+    public async Task<ActionResult> GetOrders(string Email)
     {
-        var result = await this.Mediator.Send(new GetOrdersQuery { CustomerID = id });
+        var result = await this.Mediator.Send(new GetOrdersQuery { CustomerEmail=Email });
         return ResponseHelper.ResponseOutcome(result, this);
     }
 

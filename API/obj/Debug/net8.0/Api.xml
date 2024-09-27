@@ -22,7 +22,7 @@
             <response code="200">Customer Search</response>
             <response code="400">Error searching for customers</response>
         </member>
-        <member name="M:Api.Controllers.CustomerController.GetOrders(System.Int32)">
+        <member name="M:Api.Controllers.CustomerController.GetOrders(System.String)">
             <summary>
             Get Customer Orders by Id.
             </summary>
@@ -32,7 +32,7 @@
             <response code="400">Error getting customer orders</response>
             <response code="404">Customer orders not found</response>
         </member>
-        <member name="M:Api.Controllers.OrderController.Create(System.Int32)">
+        <member name="M:Api.Controllers.OrderController.Create(System.String)">
              <summary>
              Order Pizza.
              </summary>

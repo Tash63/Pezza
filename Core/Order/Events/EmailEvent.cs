@@ -21,7 +21,8 @@ public class OrderEventHandler(DatabaseContext databaseContext) : INotificationH
         var html = File.ReadAllText(path);
         // find the customer with the specified ID
         var query = EF.CompileAsyncQuery((DatabaseContext db, int id) => db.Customers.FirstOrDefault(c => c.Id == id));
-        var entity = await query(databaseContext, notification.Data.CustomerId);
+        // TODO: fix this
+        var entity = await query(databaseContext, 1);
         html = html.Replace("%name%", Convert.ToString(entity.Name));
 
         var pizzasContent = new StringBuilder();

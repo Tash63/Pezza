@@ -4,14 +4,14 @@ namespace Common.Filters;
 
 public static class OrderFilter
 {
-    public static IQueryable<Order> FilterByCustomerId(this IQueryable<Order> query, int? customerID)
+    public static IQueryable<Order> FilterByCustomerEmail(this IQueryable<Order> query, string? CustomerEmail)
     {
-        if (!customerID.HasValue)
+        if (string.IsNullOrEmpty(CustomerEmail))
         {
             return query;
         }
 
-        return query.Where(x => x.CustomerId == customerID.Value);
+        return query.Where(x => x.UserEmail == CustomerEmail);
     }
 
     public static IQueryable<Order> FilterByStatus(this IQueryable<Order> query,OrderStatus? status)

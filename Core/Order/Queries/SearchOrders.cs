@@ -25,7 +25,7 @@ namespace Core.Order.Queries
                 model.OrderBy = "DateCreated desc";
             }
             var entities = databaseContext.Orders
-                .FilterByCustomerId(model.CustomerId)
+                .FilterByCustomerEmail(model.UserEmail)
                 .FilterByDateCreated(model.DateCreated)
                 .FilterByStatus(model.Status)
                 .OrderBy(model.OrderBy);
@@ -103,12 +103,12 @@ namespace Core.Order.Queries
                     }
                 }
                 //get the customer associated with the order
-                var customerquery = EF.CompileAsyncQuery((DatabaseContext db, int id) => db.Customers.FirstOrDefault(x => x.Id == id));
-                var customereneity = await customerquery(databaseContext, paged[i].CustomerId);
+                var customerquery = EF.CompileAsyncQuery((DatabaseContext db, string email) => db.Users.FirstOrDefault(x => x.Email == email));
+                var customereneity = await customerquery(databaseContext, paged[i].UserEmail);
                 orders.Add(new OrderModel
                 {
-                    Customer=customereneity.Map(),
-                    CustomerId=customereneity.Id,
+                    User=customereneity.Map(),
+                    UserEmail=customereneity.Email,
                     Pizzas=pizzas,
                     Sides=sides,
                     Status=paged.ElementAt(i).Status,
