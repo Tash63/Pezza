@@ -2,8 +2,7 @@
 {
     public class SearchCartModel
     {
-        public int CustomerId { get; set; }
-
+        public string UserEmail { get; set; }
         public int? PizzaID { get; set; }
 
         public int? SideID { get; set; }

@@ -19,9 +19,9 @@ namespace Core.Cart.Command
             // create an entry into the cart table and enter the username and either side or pizza entity
             var entity = new Common.Entities.Cart
             {
-                CustomerId = request.Data.CustomerId,
                 PizzaID = request.Data.PizzaID,
                 SideID = request.Data.SideID,
+                UserEmail = request.Data.UserEmail,
             };
             databaseContext.Carts.Add(entity);
             var result = await databaseContext.SaveChangesAsync(cancellationToken);

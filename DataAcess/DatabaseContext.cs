@@ -84,12 +84,12 @@ public class DatabaseContext : IdentityDbContext<ApplicationUser>
             .HasForeignKey(e => e.ToppingId)
             .IsRequired();
 
-        // one to many relationship for customer to cart
-        modelBuilder.Entity<Customer>()
-            .HasMany<Cart>()
-            .WithOne()
-            .HasForeignKey(e => e.CustomerId)
-            .IsRequired();
+        // one to many relationship for ApplicationUser to cart
+        modelBuilder.Entity<ApplicationUser>()
+         .HasMany<Cart>()
+         .WithOne()
+         .HasForeignKey(e => e.UserEmail)
+         .IsRequired();
 
         // one to many realtionship for side to cart
         modelBuilder.Entity<Side>()

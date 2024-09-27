@@ -2,7 +2,7 @@
 {
     public class AddToCartModel
     {
-        public required int CustomerId { get; set; }
+        public required string UserEmail { get; set; }
 
         public int? PizzaID { get; set; }
 

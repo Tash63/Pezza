@@ -7,5 +7,6 @@
         public int? PizzaID { get; set; }
 
         public int? SideID {  get; set; }
+        public string UserEmail { get; set; }
     }
 }

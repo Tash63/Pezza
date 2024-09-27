@@ -4,21 +4,21 @@ namespace Core.Customer.Queries;
 
 public class GetCartQuery : IRequest<ListResult<SearchCartModel>>
 {
-    public int? CustomerID { get; set; }
+    public string? CustomerEmail { get; set; }
 }
 
 public class GetCartQueryHandler(DatabaseContext databaseContext) : IRequestHandler<GetCartQuery, ListResult<SearchCartModel>>
 {
     public async Task<ListResult<SearchCartModel>> Handle(GetCartQuery request, CancellationToken cancellationToken)
     {
-        if(!request.CustomerID.HasValue)
+        if(string.IsNullOrEmpty(request.CustomerEmail))
         {
             return ListResult<SearchCartModel>.Failure("Error");
         }
         var entities = databaseContext.Carts
             .Select(x => x)
             .AsNoTracking()
-            .Where(x=>x.CustomerId==request.CustomerID.Value).ToList();
+            .Where(x=>x.UserEmail==request.CustomerEmail).ToList();
         List<SearchCartModel> orders=new List<SearchCartModel>();
         for(int i=0;i<entities.Count();i++)
         {
@@ -37,7 +37,7 @@ public class GetCartQueryHandler(DatabaseContext databaseContext) : IRequestHand
             }
             orders.Add(new SearchCartModel
             {
-                CustomerId = entities[i].CustomerId,
+                UserEmail=request.CustomerEmail,
                 PizzaID = entities[i].PizzaID,
                 SideID = entities[i].SideID,
                 ToppingIds = toppingIds,

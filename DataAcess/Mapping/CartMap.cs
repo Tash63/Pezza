@@ -25,9 +25,9 @@ namespace DataAcess.Mapping
                 .HasColumnType("int")
                 .HasColumnName("PizzaID");
 
-            builder.Property(t => t.CustomerId)
-                .HasColumnType("int")
-                .HasColumnName("CustomerID")
+            builder.Property(t=>t.UserEmail)
+                .HasColumnType("varchar(100)")
+                .HasColumnName("UserEmail")
                 .IsRequired();
         }
     }

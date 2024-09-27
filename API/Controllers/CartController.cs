@@ -31,12 +31,12 @@ namespace Api.Controllers
             return ResponseHelper.ResponseOutcome(result, this);
         }
 
-        [HttpGet("CustomerCart/{id}")]
+        [HttpGet("CustomerCart/{UserEmail}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
-        public async Task<ActionResult<GetCartQuery>> CustomerCart(int? id)
+        public async Task<ActionResult<GetCartQuery>> CustomerCart(string UserEmail)
         {
-            var result = await Mediator.Send(new GetCartQuery { CustomerID = id });
+            var result = await Mediator.Send(new GetCartQuery { CustomerEmail = UserEmail });
             return ResponseHelper.ResponseOutcome(result, this);
         }
     }
