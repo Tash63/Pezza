@@ -19,14 +19,9 @@ public sealed class NotifyMap : IEntityTypeConfiguration<Notify>
             .HasColumnType("int")
             .ValueGeneratedOnAdd();
 
-        builder.Property(t => t.CustomerId)
+        builder.Property(t => t.UserEmail)
             .IsRequired()
-            .HasColumnName("CustomerId")
-            .HasColumnType("int");
-
-        builder.Property(t => t.CustomerEmail)
-            .IsRequired()
-            .HasColumnName("CustomerEmail")
+            .HasColumnName("UserEmail")
             .HasColumnType("varchar(500)")
             .HasMaxLength(500);
 
@@ -42,8 +37,5 @@ public sealed class NotifyMap : IEntityTypeConfiguration<Notify>
             .HasColumnName("DateSent")
             .HasColumnType("datetime");
 
-        builder.HasOne(y => y.Customer)
-            .WithMany(x => x.Notifies)
-            .HasForeignKey(x => x.CustomerId);
     }
 }

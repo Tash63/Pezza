@@ -20,10 +20,10 @@ public class OrderEventHandler(DatabaseContext databaseContext) : INotificationH
         var path = AppDomain.CurrentDomain.BaseDirectory + "\\Email\\Templates\\OrderCompleted.html";
         var html = File.ReadAllText(path);
         // find the customer with the specified ID
-        var query = EF.CompileAsyncQuery((DatabaseContext db, int id) => db.Customers.FirstOrDefault(c => c.Id == id));
+        var query = EF.CompileAsyncQuery((DatabaseContext db, string email) => db.Users.FirstOrDefault(c => c.Email == email));
         // TODO: fix this
-        var entity = await query(databaseContext, 1);
-        html = html.Replace("%name%", Convert.ToString(entity.Name));
+        var entity = await query(databaseContext, notification.Data.UserEmail);
+        html = html.Replace("%name%", Convert.ToString(entity.FullName));
 
         var pizzasContent = new StringBuilder();
 
@@ -53,12 +53,10 @@ public class OrderEventHandler(DatabaseContext databaseContext) : INotificationH
 
         databaseContext.Notifies.Add(new Notify
         {
-            CustomerId = entity.Id,
-            CustomerEmail = entity.Email,
             DateSent = null,
             EmailContent = html,
             Sent = false,
-            Customer=entity
+            UserEmail=entity.Email,
         });
 
         await databaseContext.SaveChangesAsync(cancellationToken);

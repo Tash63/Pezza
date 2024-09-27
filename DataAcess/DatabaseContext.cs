@@ -117,6 +117,12 @@ public class DatabaseContext : IdentityDbContext<ApplicationUser>
             .HasForeignKey(e => e.ToppingId)
             .IsRequired();
 
+        // one to many relationship for User to noitify
+        modelBuilder.Entity<ApplicationUser>()
+            .HasMany<Notify>()
+            .WithOne()
+            .HasForeignKey(e => e.UserEmail);
+
         // Seed database with intial data that will be used for testing
         modelBuilder.Entity<Pizza>()
         .HasData(
