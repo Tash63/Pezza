@@ -1,9 +1,11 @@
 ﻿using Common.Enums;
 using DataAcess.Mapping;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace DataAccess;
 
-public class DatabaseContext : DbContext
+public class DatabaseContext : IdentityDbContext<IdentityUser>
 {
     public DatabaseContext()
     {
@@ -114,6 +116,7 @@ public class DatabaseContext : DbContext
             .HasForeignKey(e => e.ToppingId)
             .IsRequired();
 
+        base.OnModelCreating(modelBuilder);
         // Seed database with intial data that will be used for testing
         modelBuilder.Entity<Pizza>()
         .HasData(

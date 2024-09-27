@@ -3161,6 +3161,7 @@
           "FluentValidation.DependencyInjectionExtensions": "11.9.2",
           "MediatR": "12.4.1",
           "Microsoft.AspNetCore.Http": "2.2.2",
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "8.0.8",
           "Microsoft.EntityFrameworkCore.InMemory": "8.0.8",
           "Microsoft.EntityFrameworkCore.Relational": "8.0.8",
           "Riok.Mapperly": "3.6.0",
@@ -3188,6 +3189,7 @@
           "LazyCache.AspNetCore": "2.4.0",
           "MediatR": "12.4.1",
           "Microsoft.AspNetCore.Http": "2.2.2",
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "8.0.8",
           "Microsoft.EntityFrameworkCore.Relational": "8.0.8",
           "Serilog.Sinks.File": "6.0.0",
           "System.Linq.Dynamic.Core": "1.4.5"
@@ -3209,6 +3211,7 @@
           "FluentValidation.DependencyInjectionExtensions": "11.9.2",
           "MediatR": "12.4.1",
           "Microsoft.AspNetCore.Http": "2.2.2",
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "8.0.8",
           "Microsoft.EntityFrameworkCore.InMemory": "8.0.8",
           "Microsoft.EntityFrameworkCore.Relational": "8.0.8",
           "Serilog.Sinks.File": "6.0.0",

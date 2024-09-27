@@ -27,6 +27,7 @@ public class Startup
         services.AddLazyCache();
         DependencyInjection.AddApplication(services);
 
+        // Swagger Config
         services.AddSwaggerGen(c =>
         {
             c.SwaggerDoc("v1", new OpenApiInfo
@@ -38,6 +39,29 @@ public class Startup
             var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
             var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
             c.IncludeXmlComments(xmlPath);
+            c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+            {
+                In=Microsoft.OpenApi.Models.ParameterLocation.Header,
+                Description="Please enter the auth token",
+                Name="Authorization",
+                Type=Microsoft.OpenApi.Models.SecuritySchemeType.Http,
+                BearerFormat="JWT",
+                Scheme="bearer"
+            });
+            c.AddSecurityRequirement(new OpenApiSecurityRequirement
+            {
+                {
+                    new OpenApiSecurityScheme
+                    {
+                        Reference=new OpenApiReference
+                        {
+                            Type=ReferenceType.SecurityScheme,
+                            Id="Bearer"
+                        }
+                    },
+                    []
+                }
+            });
         });
 
         services.AddCors(options =>
@@ -52,6 +76,7 @@ public class Startup
         services.AddDbContext<DatabaseContext>(options =>
             options.UseInMemoryDatabase(Guid.NewGuid().ToString())
         );
+
         services.AddAuthorization();
         services.AddIdentityApiEndpoints<IdentityUser>()
             .AddEntityFrameworkStores<DatabaseContext>();
