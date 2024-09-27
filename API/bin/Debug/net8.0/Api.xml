@@ -4,6 +4,15 @@
         <name>Api</name>
     </assembly>
     <members>
+        <member name="M:Api.Controllers.ApplicationUserController.Search(Common.Models.ApplicationUser.SearchApplicationUserModel)">
+            <summary>
+            Get all Users.
+            </summary>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> repres
+            enting the asynchronous operation.</returns>
+            <response code="200">Customer Search</response>
+            <response code="400">Error searching for customers</response>
+        </member>
         <member name="M:Api.Controllers.CustomerController.Search(Common.Models.Customer.SearchCustomerModel)">
             <summary>
             Get all Customers.
