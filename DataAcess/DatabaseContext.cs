@@ -30,7 +30,6 @@ public class DatabaseContext : IdentityDbContext<ApplicationUser>
     public virtual DbSet<OrderPizzaTopping> OrderPizzaToppings { get; set; }
     public virtual DbSet<Cart> Carts { get; set; }
     public virtual DbSet<CartTopping> CartToppings { get; set; }
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
@@ -121,6 +120,7 @@ public class DatabaseContext : IdentityDbContext<ApplicationUser>
             .HasForeignKey(e => e.UserEmail);
 
         // Seed database with intial data that will be used for testing
+
         modelBuilder.Entity<Pizza>()
         .HasData(
         new Pizza { Id = 1, Name = "Pepperoni Pizza", Price = 89, Description = string.Empty, DateCreated = DateTime.UtcNow, Category = PizzaCategory.Chiken, InStock = true },

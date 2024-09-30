@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Serialization;
+using NuGet.Protocol;
 using System.Reflection;
 using System.Text.Json.Serialization;
 
@@ -78,8 +79,13 @@ public class Startup
         );
 
         services.AddAuthorization();
-        services.AddIdentityApiEndpoints<ApplicationUser>()
-            .AddEntityFrameworkStores<DatabaseContext>();
+
+        services.AddIdentity<ApplicationUser,IdentityRole>()
+            .AddRoles<ApplicationRole>();
+
+        /*services.AddIdentityApiEndpoints<ApplicationUser>()
+             .AddEntityFrameworkStores<DatabaseContext>();*/
+
 
         services.AddResponseCompression(options =>
         {
@@ -96,7 +102,7 @@ public class Startup
         }
        
     }
-    public void Configure(WebApplication app, IWebHostEnvironment env)
+    public async void Configure(WebApplication app, IWebHostEnvironment env)
     {
         app.UseCors("CorsPolicy");
         app.UseOpenApi();
@@ -110,6 +116,21 @@ public class Startup
         app.UseMiddleware(typeof(ExceptionHandlerMiddleware));
         app.UseEndpoints(endpoints => endpoints.MapControllers());
         app.UseAuthorization();
+
+        // seeding the application with the roles we want
+        /*using (var scope = app.Services.CreateScope())
+        {
+            var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            var roles = new[] { "Admin", "Staff", "Customer" };
+            foreach (var role in roles)
+            {
+                //this is nesscary when migrating to mysql becuase we dont want to add these roles again if they already exists
+                if(! await roleManager.RoleExistsAsync(role))
+                {
+                    await roleManager.CreateAsync(new IdentityRole(role));
+                }
+            }
+        }*/
         app.Run();
     }
 }
