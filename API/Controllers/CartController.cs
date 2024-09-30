@@ -1,6 +1,7 @@
 ﻿using Common.Models.Cart;
 using Core.Cart.Command;
 using Core.Customer.Queries;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Policy;
 
@@ -10,6 +11,7 @@ namespace Api.Controllers
     [Route("[controller]")]
     public class CartController : ApiController
     {
+        [Authorize]
         [HttpPost]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
@@ -22,6 +24,7 @@ namespace Api.Controllers
             return ResponseHelper.ResponseOutcome(result, this);
         }
 
+        [Authorize]
         [HttpDelete("{id}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
@@ -31,6 +34,7 @@ namespace Api.Controllers
             return ResponseHelper.ResponseOutcome(result, this);
         }
 
+        [Authorize]
         [HttpGet("CustomerCart/{UserEmail}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]

@@ -4,6 +4,7 @@ using Api.Helpers;
 using Common.Models.Pizza;
 using Core.Pizza.Commands;
 using Core.Pizza.Queries;
+using Microsoft.AspNetCore.Authorization;
 
 [ApiController]
 [Route("[controller]")]
@@ -14,6 +15,7 @@ public class PizzaController() : ApiController
     /// </summary>
     /// <param name="id">Pizza Id</param>
     /// <returns>ActionResult</returns>
+    [Authorize]
     [HttpGet("{id}")]
     [ProducesResponseType(200)]
     [ProducesResponseType(404)]
@@ -27,6 +29,7 @@ public class PizzaController() : ApiController
     /// Get all Pizzas.
     /// </summary>
     /// <returns>ActionResult</returns>
+    [Authorize]
     [HttpPost("Search")]
     [ProducesResponseType(typeof(ListResult<PizzaModel>), 200)]
     [ProducesResponseType(typeof(ErrorResult), 400)]
@@ -52,6 +55,7 @@ public class PizzaController() : ApiController
     /// </remarks>
     /// <param name="model">Pizza Model</param>
     /// <returns>ActionResult</returns>
+    [Authorize]
     [HttpPost]
     [ProducesResponseType(200)]
     [ProducesResponseType(400)]
@@ -79,6 +83,7 @@ public class PizzaController() : ApiController
     /// </remarks>
     /// <param name="model">Pizza Model</param>
     /// <returns>ActionResult</returns>
+    [Authorize]
     [HttpPut("{Pizzaid}")]
     [ProducesResponseType(200)]
     [ProducesResponseType(400)]
@@ -98,6 +103,7 @@ public class PizzaController() : ApiController
     /// </summary>
     /// <param name="id">Pizza Id</param>
     /// <returns>ActionResult</returns>
+    [Authorize]
     [HttpDelete("{id}")]
     [ProducesResponseType(200)]
     [ProducesResponseType(400)]

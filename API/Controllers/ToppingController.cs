@@ -3,6 +3,7 @@ using Common.Models.Topping;
 using Core.Topping.Command;
 using Core.Topping.Query;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Api.Controllers
 {
@@ -10,6 +11,7 @@ namespace Api.Controllers
     [Route("[controller]")]
     public class ToppingController : ApiController
     {
+        [Authorize]
         [HttpGet("/{id}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
@@ -19,6 +21,7 @@ namespace Api.Controllers
             return ResponseHelper.ResponseOutcome(result, this);
         }
 
+        [Authorize]
         [HttpPost("Search")]
         [ProducesResponseType(typeof(ListResult<ToppingModel>),200)]
         [ProducesResponseType(typeof(ErrorResult),400)]
@@ -31,6 +34,7 @@ namespace Api.Controllers
             return ResponseHelper.ResponseOutcome(result, this);
         }
 
+        [Authorize]
         [HttpPost]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
@@ -43,10 +47,10 @@ namespace Api.Controllers
             return ResponseHelper.ResponseOutcome(result, this);
         }
 
+        [Authorize]
         [HttpPut("Update/{id}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
-
         public async Task<ActionResult> Update([FromBody] UpdateToppingModel model,int id)
         {
             var result = await this.Mediator.Send(new UpdateToppingCommand
@@ -57,6 +61,7 @@ namespace Api.Controllers
             return ResponseHelper.ResponseOutcome(result, this);
         }
 
+        [Authorize]
         [HttpDelete("{id}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]

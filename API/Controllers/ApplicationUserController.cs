@@ -3,6 +3,7 @@ using Common.Models.Order;
 using Core.Customer.Commands;
 using Core.Customer.Queries;
 using Core.Order.Queries;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Api.Controllers;
 
@@ -10,6 +11,7 @@ namespace Api.Controllers;
 [Route("[controller]")]
 public class ApplicationUserController() : ApiController
 {
+    [Authorize]
     [HttpGet("{Email}")]
     [ProducesResponseType(200)]
     [ProducesResponseType(400)]
@@ -26,6 +28,7 @@ public class ApplicationUserController() : ApiController
     /// enting the asynchronous operation.</returns>
     /// <response code="200">Customer Search</response>
     /// <response code="400">Error searching for customers</response>
+    [Authorize]
     [HttpPost]
     [ProducesResponseType(typeof(ListResult<ApplicationUserModel>), 200)]
     [ProducesResponseType(typeof(ErrorResult), 400)]
@@ -39,6 +42,7 @@ public class ApplicationUserController() : ApiController
         return ResponseHelper.ResponseOutcome(result, this);
     }
 
+    [Authorize]
     [HttpPut("Update/{email}")]
     [ProducesResponseType(200)]
     [ProducesResponseType(400)]
@@ -51,6 +55,7 @@ public class ApplicationUserController() : ApiController
         return ResponseHelper.ResponseOutcome(result, this);
     }
 
+    [Authorize]
     [HttpDelete("{email}")]
     [ProducesResponseType(200)]
     [ProducesResponseType(400)]
@@ -70,6 +75,7 @@ public class ApplicationUserController() : ApiController
     /// <response code="200">Get customer orders</response>
     /// <response code="400">Error getting customer orders</response>
     /// <response code="404">Customer orders not found</response>
+    [Authorize]
     [HttpGet("{Email}/Orders")]
     [ProducesResponseType(typeof(ListResult<OrderModel>), 200)]
     [ProducesResponseType(typeof(ErrorResult), 400)]

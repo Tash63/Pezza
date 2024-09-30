@@ -7,6 +7,7 @@ using Core.Order.Commands;
 using Core.Order.Queries;
 using DataAccess;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 
 [ApiController]
@@ -27,6 +28,7 @@ public class OrderController() : ApiController
     /// </remarks>
     /// <param name="model">Create Order Model</param>
     /// <returns>ActionResult</returns>
+    [Authorize]
     [HttpPost("{Email}")]
     [ProducesResponseType(200)]
     [ProducesResponseType(400)]
@@ -55,6 +57,7 @@ public class OrderController() : ApiController
     /// </remarks>
     /// <param name="model">Update Order Model</param>
     /// <returns>ActionResult</returns>
+    [Authorize]
     [HttpPatch("Update/{id}")]
     [ProducesResponseType(200)]
     [ProducesResponseType(400)]
@@ -67,11 +70,10 @@ public class OrderController() : ApiController
         });
         return ResponseHelper.ResponseOutcome(result, this);
     }
-
+    [Authorize]
     [HttpPost("Search")]
     [ProducesResponseType(200)]
     [ProducesResponseType(400)]
-
     public async Task<ActionResult<SearchOrdersQuery>> Search([FromBody] SearchOrderModel model)
     {
         var result = await Mediator.Send(new SearchOrdersQuery

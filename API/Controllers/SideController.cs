@@ -1,6 +1,7 @@
 ﻿using Common.Models.Side;
 using Core.Side.Command;
 using Core.Side.Query;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
@@ -11,6 +12,7 @@ namespace Api.Controllers
     public class SideController : ApiController
     {
 
+        [Authorize]
         [HttpGet("{id}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
@@ -20,6 +22,7 @@ namespace Api.Controllers
             return ResponseHelper.ResponseOutcome(result, this);
         }
 
+        [Authorize]
         [HttpDelete("{id}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
@@ -29,6 +32,7 @@ namespace Api.Controllers
             return ResponseHelper.ResponseOutcome(result, this);
         }
 
+        [Authorize]
         [HttpPost("Search")]
         [ProducesResponseType(typeof(ListResult<SideModel>), 200)]
         [ProducesResponseType(typeof(ErrorResult), 400)]
@@ -40,6 +44,8 @@ namespace Api.Controllers
             });
             return ResponseHelper.ResponseOutcome(result, this);
         }
+
+        [Authorize]
         [HttpPost("Add")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
@@ -52,6 +58,7 @@ namespace Api.Controllers
             return ResponseHelper.ResponseOutcome(result,this);
         }
 
+        [Authorize]
         [HttpPut("Update/{id}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]

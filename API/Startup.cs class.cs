@@ -103,10 +103,11 @@ public class Startup
         app.UseSwagger();
         app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Pezza API V1"));
         app.UseHttpsRedirection();
+        app.UseAuthentication();
         app.UseRouting();
+        app.UseAuthorization();
         app.UseResponseCompression();
         app.UseMiddleware(typeof(ExceptionHandlerMiddleware));
-
         app.UseEndpoints(endpoints => endpoints.MapControllers());
         app.UseAuthorization();
         app.Run();
