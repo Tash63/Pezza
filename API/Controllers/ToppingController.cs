@@ -3,7 +3,7 @@ using Common.Models.Topping;
 using Core.Topping.Command;
 using Core.Topping.Query;
 using MediatR;
-// TODO: Documentation
+
 namespace Api.Controllers
 {
     [ApiController]

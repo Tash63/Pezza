@@ -4,7 +4,6 @@ public sealed class PizzaMap : IEntityTypeConfiguration<Pizza>
 {
     public void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<Pizza> builder)
     {
-        // TODO : do filttering for withing a price range as pricing
         builder.ToTable("Pizza", "dbo");
 
         builder.HasKey(t => t.Id);

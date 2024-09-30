@@ -36,3 +36,23 @@ System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative
    at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
    at Common.Behaviour.ExceptionHandlerMiddleware.Invoke(HttpContext context) in C:\Users\kiran.nariansamy\Desktop\repos\Pezza\Common\Behaviour\UnhandledExpectationBehaviour.cs:line 19
+2024-09-27 14:40:58.779 +02:00 [FTL] Exception
+System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at System.Linq.Enumerable.ElementAt[TSource](IEnumerable`1 source, Int32 index)
+   at Core.Order.Queries.GetOrdersQueryHandler.Handle(GetOrdersQuery request, CancellationToken cancellationToken) in C:\Users\kiran.nariansamy\Desktop\repos\Pezza\Core\Order\Queries\GetOrdersQuery.cs:line 25
+   at Common.Behaviour.ValidationBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in C:\Users\kiran.nariansamy\Desktop\repos\Pezza\Common\Behaviour\ValidationBehaviour.cs:line 27
+   at Common.Behaviour.PerformanceBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in C:\Users\kiran.nariansamy\Desktop\repos\Pezza\Common\Behaviour\PerfomanceBehaviours.cs:line 11
+   at Api.Controllers.ApplicationUserController.GetOrders(String Email) in C:\Users\kiran.nariansamy\Desktop\repos\Pezza\Api\Controllers\ApplicationUserController.cs:line 79
+   at lambda_method398(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Common.Behaviour.ExceptionHandlerMiddleware.Invoke(HttpContext context) in C:\Users\kiran.nariansamy\Desktop\repos\Pezza\Common\Behaviour\UnhandledExpectationBehaviour.cs:line 19

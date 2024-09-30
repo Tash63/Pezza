@@ -28,8 +28,6 @@ namespace Common.Mappers
                 FullName = model.FullName,
             };
         }
-
-        // TODO: Add the same mappers for the list of these
         public static IEnumerable<ApplicationUserModel> Map(this List<ApplicationUser> entities)
             => entities.Select(x => x.Map());
 
