@@ -15,7 +15,7 @@ public class PizzaController() : ApiController
     /// </summary>
     /// <param name="id">Pizza Id</param>
     /// <returns>ActionResult</returns>
-    [Authorize]
+    [Authorize(Policy = "CustomerPolicy")]
     [HttpGet("{id}")]
     [ProducesResponseType(200)]
     [ProducesResponseType(404)]
@@ -29,7 +29,7 @@ public class PizzaController() : ApiController
     /// Get all Pizzas.
     /// </summary>
     /// <returns>ActionResult</returns>
-    [Authorize]
+    [Authorize(Policy = "CustomerPolicy")]
     [HttpPost("Search")]
     [ProducesResponseType(typeof(ListResult<PizzaModel>), 200)]
     [ProducesResponseType(typeof(ErrorResult), 400)]
@@ -55,7 +55,7 @@ public class PizzaController() : ApiController
     /// </remarks>
     /// <param name="model">Pizza Model</param>
     /// <returns>ActionResult</returns>
-    [Authorize]
+    [Authorize(Policy = "StaffPolicy")]
     [HttpPost]
     [ProducesResponseType(200)]
     [ProducesResponseType(400)]
@@ -83,7 +83,7 @@ public class PizzaController() : ApiController
     /// </remarks>
     /// <param name="model">Pizza Model</param>
     /// <returns>ActionResult</returns>
-    [Authorize]
+    [Authorize(Policy = "StaffPolicy")]
     [HttpPut("{Pizzaid}")]
     [ProducesResponseType(200)]
     [ProducesResponseType(400)]

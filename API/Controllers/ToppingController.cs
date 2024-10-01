@@ -11,7 +11,7 @@ namespace Api.Controllers
     [Route("[controller]")]
     public class ToppingController : ApiController
     {
-        [Authorize]
+        [Authorize(Policy = "CustomerPolicy")]
         [HttpGet("/{id}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
@@ -21,7 +21,7 @@ namespace Api.Controllers
             return ResponseHelper.ResponseOutcome(result, this);
         }
 
-        [Authorize]
+        [Authorize(Policy = "CustomerPolicy")]
         [HttpPost("Search")]
         [ProducesResponseType(typeof(ListResult<ToppingModel>),200)]
         [ProducesResponseType(typeof(ErrorResult),400)]
@@ -34,7 +34,7 @@ namespace Api.Controllers
             return ResponseHelper.ResponseOutcome(result, this);
         }
 
-        [Authorize]
+        [Authorize(Policy = "StaffPolicy")]
         [HttpPost]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
@@ -47,7 +47,7 @@ namespace Api.Controllers
             return ResponseHelper.ResponseOutcome(result, this);
         }
 
-        [Authorize]
+        [Authorize(Policy = "StaffPolicy")]
         [HttpPut("Update/{id}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
@@ -61,7 +61,7 @@ namespace Api.Controllers
             return ResponseHelper.ResponseOutcome(result, this);
         }
 
-        [Authorize]
+        [Authorize(Policy = "StaffPolicy")]
         [HttpDelete("{id}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]

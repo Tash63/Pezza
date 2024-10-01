@@ -11,7 +11,7 @@ namespace Api.Controllers
     [Route("[controller]")]
     public class CartController : ApiController
     {
-        [Authorize]
+        [Authorize(Policy ="CustomerPolicy")]
         [HttpPost]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
@@ -24,7 +24,7 @@ namespace Api.Controllers
             return ResponseHelper.ResponseOutcome(result, this);
         }
 
-        [Authorize]
+        [Authorize(Policy = "CustomerPolicy")]
         [HttpDelete("{id}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
@@ -34,7 +34,7 @@ namespace Api.Controllers
             return ResponseHelper.ResponseOutcome(result, this);
         }
 
-        [Authorize]
+        [Authorize(Policy = "CustomerPolicy")]
         [HttpGet("CustomerCart/{UserEmail}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]

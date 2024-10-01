@@ -28,7 +28,7 @@ public class OrderController() : ApiController
     /// </remarks>
     /// <param name="model">Create Order Model</param>
     /// <returns>ActionResult</returns>
-    [Authorize]
+    [Authorize(Policy = "CustomerPolicy")]
     [HttpPost("{Email}")]
     [ProducesResponseType(200)]
     [ProducesResponseType(400)]
@@ -57,7 +57,7 @@ public class OrderController() : ApiController
     /// </remarks>
     /// <param name="model">Update Order Model</param>
     /// <returns>ActionResult</returns>
-    [Authorize]
+    [Authorize(Policy = "CustomerPolicy")]
     [HttpPatch("Update/{id}")]
     [ProducesResponseType(200)]
     [ProducesResponseType(400)]
@@ -70,7 +70,7 @@ public class OrderController() : ApiController
         });
         return ResponseHelper.ResponseOutcome(result, this);
     }
-    [Authorize]
+    [Authorize(Policy = "CustomerPolicy")]
     [HttpPost("Search")]
     [ProducesResponseType(200)]
     [ProducesResponseType(400)]

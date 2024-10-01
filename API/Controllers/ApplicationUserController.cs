@@ -13,7 +13,7 @@ namespace Api.Controllers;
 public class ApplicationUserController() : ApiController
 {
 
-    [Authorize]
+    [Authorize(policy: "CustomerPolicy")]
     [HttpGet("{Email}")]
     [ProducesResponseType(200)]
     [ProducesResponseType(400)]
@@ -30,7 +30,7 @@ public class ApplicationUserController() : ApiController
     /// enting the asynchronous operation.</returns>
     /// <response code="200">Customer Search</response>
     /// <response code="400">Error searching for customers</response>
-    [Authorize]
+    [Authorize(Policy = "StaffPolicy")]
     [HttpPost]
     [ProducesResponseType(typeof(ListResult<ApplicationUserModel>), 200)]
     [ProducesResponseType(typeof(ErrorResult), 400)]
@@ -44,7 +44,7 @@ public class ApplicationUserController() : ApiController
         return ResponseHelper.ResponseOutcome(result, this);
     }
 
-    [Authorize]
+    [Authorize(Policy = "CustomerPolicy")]
     [HttpPut("Update/{email}")]
     [ProducesResponseType(200)]
     [ProducesResponseType(400)]
@@ -57,7 +57,7 @@ public class ApplicationUserController() : ApiController
         return ResponseHelper.ResponseOutcome(result, this);
     }
 
-    [Authorize]
+    [Authorize(Policy = "CustomerPolicy")]
     [HttpDelete("{email}")]
     [ProducesResponseType(200)]
     [ProducesResponseType(400)]
@@ -103,7 +103,7 @@ public class ApplicationUserController() : ApiController
     /// <response code="200">Get customer orders</response>
     /// <response code="400">Error getting customer orders</response>
     /// <response code="404">Customer orders not found</response>
-    [Authorize]
+    [Authorize(Policy = "CustomerPolicy")]
     [HttpGet("{Email}/Orders")]
     [ProducesResponseType(typeof(ListResult<OrderModel>), 200)]
     [ProducesResponseType(typeof(ErrorResult), 400)]
