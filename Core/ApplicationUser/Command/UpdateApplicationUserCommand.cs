@@ -1,4 +1,7 @@
-﻿using Common.Models.ApplicationUser;
+﻿using Common.Entities;
+using Common.Models.ApplicationUser;
+using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 namespace Core.Customer.Commands;
 
 public class UpdateApplicationUserCommand : IRequest<Result<UpdateApplicationUserModel>>
@@ -8,7 +11,7 @@ public class UpdateApplicationUserCommand : IRequest<Result<UpdateApplicationUse
     public UpdateApplicationUserModel? Data { get; set; }
 }
 
-public class UpdateApplicationUserCommandHandler(DatabaseContext databaseContext) : IRequestHandler<UpdateApplicationUserCommand, Result<UpdateApplicationUserModel>>
+public class UpdateApplicationUserCommandHandler(DatabaseContext databaseContext,UserManager<ApplicationUser> userManager) : IRequestHandler<UpdateApplicationUserCommand, Result<UpdateApplicationUserModel>>
 {
     public async Task<Result<UpdateApplicationUserModel>> Handle(UpdateApplicationUserCommand request, CancellationToken cancellationToken)
     {
@@ -33,6 +36,9 @@ public class UpdateApplicationUserCommandHandler(DatabaseContext databaseContext
         {
             // add date created
             ApplicationUserResult.DateCreated = request.Data.CreatedDate.Value;
+            //add claims
+            var claim = new Claim("Role", "customer");
+            await userManager.AddClaimAsync(ApplicationUserResult, claim);
         }
 
         // Update user entity in data base

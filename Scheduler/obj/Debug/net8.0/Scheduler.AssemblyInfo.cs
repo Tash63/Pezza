@@ -11,10 +11,11 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.AspNetCore.Identity.UI.UIFrameworkAttribute("Bootstrap5")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("Scheduler")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+597ad3973b4674dfcae60777a19d159fb21983b9")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+dba875d2e5b1e1772cd2c93ebb9372e3f51e82ba")]
 [assembly: System.Reflection.AssemblyProductAttribute("Scheduler")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Scheduler")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

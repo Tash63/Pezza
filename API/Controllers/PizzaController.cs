@@ -103,7 +103,7 @@ public class PizzaController() : ApiController
     /// </summary>
     /// <param name="id">Pizza Id</param>
     /// <returns>ActionResult</returns>
-    [Authorize]
+    [Authorize(Policy = "StaffPolicy")]
     [HttpDelete("{id}")]
     [ProducesResponseType(200)]
     [ProducesResponseType(400)]

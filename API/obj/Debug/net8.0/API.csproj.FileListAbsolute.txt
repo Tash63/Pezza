@@ -281,3 +281,6 @@ C:\Users\kiran.nariansamy\Desktop\repos\Pezza\Api\bin\Debug\net8.0\Microsoft.Ide
 C:\Users\kiran.nariansamy\Desktop\repos\Pezza\Api\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\Users\kiran.nariansamy\Desktop\repos\Pezza\Api\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
 C:\Users\kiran.nariansamy\Desktop\repos\Pezza\Api\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\kiran.nariansamy\Desktop\repos\Pezza\Api\bin\Debug\net8.0\Api.staticwebassets.runtime.json
+C:\Users\kiran.nariansamy\Desktop\repos\Pezza\Api\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.UI.dll
+C:\Users\kiran.nariansamy\Desktop\repos\Pezza\Api\bin\Debug\net8.0\Microsoft.Extensions.FileProviders.Embedded.dll

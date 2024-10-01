@@ -1,7 +1,10 @@
-﻿using Common.Enums;
+﻿using Bogus.DataSets;
+using Common.Enums;
 using DataAcess.Mapping;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace DataAccess;
 
@@ -30,7 +33,7 @@ public class DatabaseContext : IdentityDbContext<ApplicationUser>
     public virtual DbSet<OrderPizzaTopping> OrderPizzaToppings { get; set; }
     public virtual DbSet<Cart> Carts { get; set; }
     public virtual DbSet<CartTopping> CartToppings { get; set; }
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    protected override async void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
         modelBuilder.ApplyConfiguration(new PizzaMap());
@@ -120,6 +123,36 @@ public class DatabaseContext : IdentityDbContext<ApplicationUser>
             .HasForeignKey(e => e.UserEmail);
 
         // Seed database with intial data that will be used for testing
+
+        // seed  SuperAdmin data
+        string ADMIN_ID = "02174cf0–9412–4cfe - afbf - 59f706d72cf6";
+        //create user
+        var appUser = new ApplicationUser
+        {
+            Id = ADMIN_ID,
+            Email = "frankofoedu@gmail.com",
+            EmailConfirmed = true,
+            UserName = "frankofoedu@gmail.com",
+            NormalizedUserName = "FRANKOFOEDU@GMAIL.COM",
+            FullName="Frank Ofoedu",
+        };
+
+        //set user password
+        PasswordHasher<ApplicationUser> ph = new PasswordHasher<ApplicationUser>();
+        appUser.PasswordHash = ph.HashPassword(appUser, "mypassword_ ?");
+
+        //seed user
+        modelBuilder.Entity<ApplicationUser>().HasData(appUser);
+
+        modelBuilder.Entity<IdentityUserClaim<string>>().HasData(
+            new IdentityUserClaim<string>
+            {
+                ClaimType = "Role",
+                ClaimValue="Admin",
+                Id=1,
+                UserId=appUser.Id
+            }
+            );
 
         modelBuilder.Entity<Pizza>()
         .HasData(

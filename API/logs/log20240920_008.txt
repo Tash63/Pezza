@@ -1,1 +1,0 @@
-2024-09-20 12:01:54.312 +02:00 [INF] CleanArchitecture Long Running Request: GetOrdersQuery (23742 milliseconds)

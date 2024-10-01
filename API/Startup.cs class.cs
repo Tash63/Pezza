@@ -3,12 +3,13 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Serialization;
-using NuGet.Protocol;
 using System.Reflection;
+using System.Security.Claims;
 using System.Text.Json.Serialization;
-
+using Microsoft.AspNetCore.Identity;
 public class Startup
 {
     public IConfiguration configRoot
@@ -42,12 +43,12 @@ public class Startup
             c.IncludeXmlComments(xmlPath);
             c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
             {
-                In=Microsoft.OpenApi.Models.ParameterLocation.Header,
-                Description="Please enter the auth token",
-                Name="Authorization",
-                Type=Microsoft.OpenApi.Models.SecuritySchemeType.Http,
-                BearerFormat="JWT",
-                Scheme="bearer"
+                In = Microsoft.OpenApi.Models.ParameterLocation.Header,
+                Description = "Please enter the auth token",
+                Name = "Authorization",
+                Type = Microsoft.OpenApi.Models.SecuritySchemeType.Http,
+                BearerFormat = "JWT",
+                Scheme = "bearer"
             });
             c.AddSecurityRequirement(new OpenApiSecurityRequirement
             {
@@ -58,7 +59,7 @@ public class Startup
                         {
                             Type=ReferenceType.SecurityScheme,
                             Id="Bearer"
-                        }
+                        },
                     },
                     []
                 }
@@ -78,14 +79,17 @@ public class Startup
             options.UseInMemoryDatabase(Guid.NewGuid().ToString())
         );
 
-        services.AddAuthorization();
+        // adds a ploicy for each claim so if an endpoint has the follwoing prlocuy it will check if a user has the claim they say they do
+        //TODO: continue with the authrization
+        services.AddAuthorization(options =>
+        {
+            options.AddPolicy("StaffPolicy", policy => policy.RequireClaim("Role", "Staff"));
+            options.AddPolicy("CustomerPolicy", policy => policy.RequireClaim("Role", "Customer"));
+            options.AddPolicy("AdminPolicy", policy => policy.RequireClaim("Role", "Admin"));
+        });
 
-        services.AddIdentity<ApplicationUser,IdentityRole>()
-            .AddRoles<ApplicationRole>();
-
-        /*services.AddIdentityApiEndpoints<ApplicationUser>()
-             .AddEntityFrameworkStores<DatabaseContext>();*/
-
+        services.AddIdentityApiEndpoints<ApplicationUser>()
+            .AddEntityFrameworkStores<DatabaseContext>();
 
         services.AddResponseCompression(options =>
         {
@@ -100,9 +104,8 @@ public class Startup
             dbContext.SaveChanges();
             dbContext.Dispose();
         }
-       
     }
-    public async void Configure(WebApplication app, IWebHostEnvironment env)
+    public void  Configure(WebApplication app, IWebHostEnvironment env)
     {
         app.UseCors("CorsPolicy");
         app.UseOpenApi();
@@ -116,21 +119,6 @@ public class Startup
         app.UseMiddleware(typeof(ExceptionHandlerMiddleware));
         app.UseEndpoints(endpoints => endpoints.MapControllers());
         app.UseAuthorization();
-
-        // seeding the application with the roles we want
-        /*using (var scope = app.Services.CreateScope())
-        {
-            var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-            var roles = new[] { "Admin", "Staff", "Customer" };
-            foreach (var role in roles)
-            {
-                //this is nesscary when migrating to mysql becuase we dont want to add these roles again if they already exists
-                if(! await roleManager.RoleExistsAsync(role))
-                {
-                    await roleManager.CreateAsync(new IdentityRole(role));
-                }
-            }
-        }*/
         app.Run();
     }
 }

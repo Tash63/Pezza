@@ -4,13 +4,15 @@ using Core.Customer.Commands;
 using Core.Customer.Queries;
 using Core.Order.Queries;
 using Microsoft.AspNetCore.Authorization;
-
+using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 namespace Api.Controllers;
 
 [ApiController]
 [Route("[controller]")]
 public class ApplicationUserController() : ApiController
 {
+
     [Authorize]
     [HttpGet("{Email}")]
     [ProducesResponseType(200)]
@@ -63,6 +65,32 @@ public class ApplicationUserController() : ApiController
     {
         var result = await this.Mediator.Send(new DeleteApplicationUserCommand() {
             UserEmail = email,
+        });
+        return ResponseHelper.ResponseOutcome(result, this);
+    }
+
+    [HttpPost("AddCustomer")]
+    [ProducesResponseType(200)]
+    [ProducesResponseType(400)]
+    public async Task<ActionResult> AddCustomerApplicationUser([FromBody] CreateApplicationUserModel model)
+    {
+        var result = await this.Mediator.Send(new CreateApplicationUserCommand()
+        {
+            Data = model,
+            userClaim = new Claim("Role", "Customer")
+        });
+        return ResponseHelper.ResponseOutcome(result, this);
+    }
+    [Authorize(Policy ="AdminPolicy")]
+    [HttpPost("AddStaff")]
+    [ProducesResponseType(200)]
+    [ProducesResponseType(400)]
+    public async Task<ActionResult> AddStaffApplicationUser([FromBody] CreateApplicationUserModel model)
+    {
+        var result = await this.Mediator.Send(new CreateApplicationUserCommand()
+        {
+            Data = model,
+            userClaim = new Claim("Role", "Staff")
         });
         return ResponseHelper.ResponseOutcome(result, this);
     }

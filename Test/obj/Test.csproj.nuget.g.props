@@ -20,6 +20,7 @@
     <Import Project="$(NuGetPackageRoot)microsoft.codecoverage\17.8.0\build\netstandard2.0\Microsoft.CodeCoverage.props" Condition="Exists('$(NuGetPackageRoot)microsoft.codecoverage\17.8.0\build\netstandard2.0\Microsoft.CodeCoverage.props')" />
     <Import Project="$(NuGetPackageRoot)microsoft.net.test.sdk\17.8.0\build\netcoreapp3.1\Microsoft.NET.Test.Sdk.props" Condition="Exists('$(NuGetPackageRoot)microsoft.net.test.sdk\17.8.0\build\netcoreapp3.1\Microsoft.NET.Test.Sdk.props')" />
     <Import Project="$(NuGetPackageRoot)microsoft.entityframeworkcore\8.0.8\buildTransitive\net8.0\Microsoft.EntityFrameworkCore.props" Condition="Exists('$(NuGetPackageRoot)microsoft.entityframeworkcore\8.0.8\buildTransitive\net8.0\Microsoft.EntityFrameworkCore.props')" />
+    <Import Project="$(NuGetPackageRoot)microsoft.aspnetcore.identity.ui\8.0.8\build\Microsoft.AspNetCore.Identity.UI.props" Condition="Exists('$(NuGetPackageRoot)microsoft.aspnetcore.identity.ui\8.0.8\build\Microsoft.AspNetCore.Identity.UI.props')" />
   </ImportGroup>
   <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
     <PkgStyleCop_Analyzers Condition=" '$(PkgStyleCop_Analyzers)' == '' ">C:\Users\kiran.nariansamy\.nuget\packages\stylecop.analyzers\1.1.118</PkgStyleCop_Analyzers>

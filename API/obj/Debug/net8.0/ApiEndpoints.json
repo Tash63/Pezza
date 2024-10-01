@@ -126,6 +126,64 @@
   },
   {
     "ContainingType": "Api.Controllers.ApplicationUserController",
+    "Method": "AddCustomerApplicationUser",
+    "RelativePath": "ApplicationUser/AddCustomer",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "Common.Models.ApplicationUser.CreateApplicationUserModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 400
+      }
+    ]
+  },
+  {
+    "ContainingType": "Api.Controllers.ApplicationUserController",
+    "Method": "AddStaffApplicationUser",
+    "RelativePath": "ApplicationUser/AddStaff",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "Common.Models.ApplicationUser.CreateApplicationUserModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 400
+      }
+    ]
+  },
+  {
+    "ContainingType": "Api.Controllers.ApplicationUserController",
     "Method": "Search",
     "RelativePath": "ApplicationUser/Search",
     "HttpMethod": "POST",
