@@ -83,8 +83,8 @@ public class Startup
         //TODO: continue with the authrization
         services.AddAuthorization(options =>
         {
-            options.AddPolicy("StaffPolicy", policy => policy.RequireClaim("Role", "Staff").RequireClaim("Role","Admin"));
-            options.AddPolicy("CustomerPolicy", policy => policy.RequireClaim("Role", "Customer").RequireClaim("Role","Customer").RequireClaim("Role","Staff"));
+            options.AddPolicy("StaffPolicy", policy => policy.RequireClaim("Role", "Staff"));
+            options.AddPolicy("CustomerPolicy", policy => policy.RequireClaim("Role", "Customer"));
             options.AddPolicy("AdminPolicy", policy => policy.RequireClaim("Role", "Admin"));
         });
 

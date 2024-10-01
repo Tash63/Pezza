@@ -11,7 +11,7 @@ namespace Api.Controllers
     [Route("[controller]")]
     public class CartController : ApiController
     {
-        [Authorize(Policy ="CustomerPolicy")]
+        [Authorize(Policy = "CustomerPolicy")]
         [HttpPost]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]

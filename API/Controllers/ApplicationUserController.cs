@@ -77,11 +77,11 @@ public class ApplicationUserController() : ApiController
         var result = await this.Mediator.Send(new CreateApplicationUserCommand()
         {
             Data = model,
-            userClaim = new Claim("Role", "Customer")
+            userClaim = new Claim[1] { new Claim("Role", "Customer") }
         });
         return ResponseHelper.ResponseOutcome(result, this);
     }
-    [Authorize(Policy ="AdminPolicy")]
+    [Authorize(Policy = "AdminPolicy")]
     [HttpPost("AddStaff")]
     [ProducesResponseType(200)]
     [ProducesResponseType(400)]
@@ -90,7 +90,7 @@ public class ApplicationUserController() : ApiController
         var result = await this.Mediator.Send(new CreateApplicationUserCommand()
         {
             Data = model,
-            userClaim = new Claim("Role", "Staff")
+            userClaim =new Claim[2] { new Claim("Role", "Staff"),new Claim("Role", "Customer") }
         });
         return ResponseHelper.ResponseOutcome(result, this);
     }

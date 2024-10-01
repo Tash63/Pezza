@@ -151,6 +151,20 @@ public class DatabaseContext : IdentityDbContext<ApplicationUser>
                 ClaimValue="Admin",
                 Id=1,
                 UserId=appUser.Id
+            },
+            new IdentityUserClaim<string>
+            {
+                ClaimType="Role",
+                ClaimValue="Customer",
+                UserId=appUser.Id,
+                Id=2
+            },
+            new IdentityUserClaim<string>
+            {
+                ClaimType="Role",
+                ClaimValue="Staff",
+                UserId=appUser.Id,
+                Id=3
             }
             );
 
