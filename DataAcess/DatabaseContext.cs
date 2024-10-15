@@ -75,7 +75,7 @@ public class DatabaseContext : IdentityDbContext<ApplicationUser>
             .WithOne()
             .HasForeignKey(e => e.OrderPizzaId)
             .IsRequired();
-
+        //TODO: Add wuanity to the cart table so we know how many of a certain menue item was ordered
         // one to many relationship for Toppings to OrderPizzaToppings
         modelBuilder.Entity<Topping>()
             .HasMany<OrderPizzaTopping>()
@@ -170,10 +170,10 @@ public class DatabaseContext : IdentityDbContext<ApplicationUser>
 
         modelBuilder.Entity<Pizza>()
         .HasData(
-        new Pizza { Id = 1, Name = "Pepperoni Pizza", Price = 89, Description = string.Empty, DateCreated = DateTime.UtcNow, Category = PizzaCategory.Chiken, InStock = true },
-        new Pizza { Id = 2, Name = "Meat Pizza", Price = 99, Description = string.Empty, DateCreated = DateTime.UtcNow, Category = PizzaCategory.Meat, InStock = true },
-        new Pizza { Id = 3, Name = "Margherita Pizza", Price = 79, Description = string.Empty, DateCreated = DateTime.UtcNow, Category = PizzaCategory.Vegiatarian, InStock = true },
-        new Pizza { Id = 4, Name = "Hawaiian Pizza", Price = 89, Description = string.Empty, DateCreated = DateTime.UtcNow, Category = PizzaCategory.Meat, InStock = true });
+        new Pizza { Id = 1, Name = "Pepperoni Pizza", Price = 89, Description = "This is a peparoni Pizza", DateCreated = DateTime.UtcNow, Category = PizzaCategory.Chiken, InStock = true },
+        new Pizza { Id = 2, Name = "Meat Pizza", Price = 99, Description = "This is a meat Pizza", DateCreated = DateTime.UtcNow, Category = PizzaCategory.Meat, InStock = true },
+        new Pizza { Id = 3, Name = "Margherita Pizza", Price = 79, Description = "This is a Margherita pizza", DateCreated = DateTime.UtcNow, Category = PizzaCategory.Vegiatarian, InStock = true },
+        new Pizza { Id = 4, Name = "Hawaiian Pizza", Price = 89, Description = "This is a Hawaiin pizza", DateCreated = DateTime.UtcNow, Category = PizzaCategory.Meat, InStock = true });
 
 
         modelBuilder.Entity<Side>()
@@ -182,14 +182,17 @@ public class DatabaseContext : IdentityDbContext<ApplicationUser>
                 ID = 1,
                 Description = "A regular coke",
                 InStock = true,
-                Name = "Coca Cola",
                 Price = 15,
+                Name="Coke"
             }
             );
 
         modelBuilder.Entity<Topping>().HasData(
             new Topping { Id = 1, PizzaId = 1, Price = 15, Name = "Extra Cheese", InStock = true, Additional = true, },
-            new Topping { Id = 2, PizzaId = 2, Price = 23, Name = "Extra Cheese", InStock = true });
+            new Topping { Id = 2, PizzaId = 1, Price = 27, Name = "Feta", InStock = true, Additional = true, },
+            new Topping { Id = 3, PizzaId = 1, Price = 30, Name = "Olives", InStock = true, Additional = true, },
+            new Topping { Id=4,PizzaId=1,Price=0,Name="Peporaini",InStock=true,Additional=false},
+            new Topping { Id = 5, PizzaId = 2, Price = 23, Name = "Extra Cheese", InStock = true });
     }
 
 

@@ -66,15 +66,6 @@ public class Startup
             });
         });
 
-        services.AddCors(options =>
-        {
-            options.AddPolicy(
-                "CorsPolicy",
-                builder => builder.AllowAnyOrigin()
-                    .AllowAnyMethod()
-                    .AllowAnyHeader());
-        });
-
         services.AddDbContext<DatabaseContext>(options =>
             options.UseInMemoryDatabase(Guid.NewGuid().ToString())
         );
@@ -104,6 +95,17 @@ public class Startup
             dbContext.SaveChanges();
             dbContext.Dispose();
         }
+
+        services.AddCors(options =>
+        {
+            options.AddPolicy(
+                "CorsPolicy",
+                builder => builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    );
+        });
+
     }
     public void  Configure(WebApplication app, IWebHostEnvironment env)
     {
@@ -112,13 +114,12 @@ public class Startup
         app.UseSwagger();
         app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Pezza API V1"));
         app.UseHttpsRedirection();
-        app.UseAuthentication();
         app.UseRouting();
+        app.UseAuthentication();
         app.UseAuthorization();
         app.UseResponseCompression();
         app.UseMiddleware(typeof(ExceptionHandlerMiddleware));
         app.UseEndpoints(endpoints => endpoints.MapControllers());
-        app.UseAuthorization();
         app.Run();
     }
 }

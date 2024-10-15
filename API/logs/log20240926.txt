@@ -1,4 +1,0 @@
-2024-09-26 07:53:42.958 +02:00 [INF] CleanArchitecture Long Running Request: GetToppingsQuery (535 milliseconds)
-2024-09-26 09:55:57.114 +02:00 [INF] CleanArchitecture Long Running Request: GetToppingsQuery (1044 milliseconds)
-2024-09-26 12:15:45.157 +02:00 [INF] CleanArchitecture Long Running Request: GetToppingsQuery (508 milliseconds)
-2024-09-26 14:58:04.816 +02:00 [INF] CleanArchitecture Long Running Request: GetToppingsQuery (764 milliseconds)

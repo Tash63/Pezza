@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Common.Entities;
+using Microsoft.AspNetCore.Cors;
 
 var builder = WebApplication.CreateBuilder(args);
 var startup = new Startup(builder.Configuration);
