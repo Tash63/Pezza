@@ -41,7 +41,8 @@ public class GetCartQueryHandler(DatabaseContext databaseContext) : IRequestHand
                 PizzaID = entities[i].PizzaID,
                 SideID = entities[i].SideID,
                 ToppingIds = toppingIds,
-                Id=entities[i].Id
+                Id=entities[i].Id,
+                Quantity = entities[i].Quantity,
             });
         }
         return ListResult<SearchCartModel>.Success(orders, orders.Count());

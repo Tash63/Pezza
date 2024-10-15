@@ -311,6 +311,42 @@
   },
   {
     "ContainingType": "Api.Controllers.CartController",
+    "Method": "UpdateCart",
+    "RelativePath": "Cart/CustomerCart/{CartId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "Common.Models.Cart.UpdateCartModel",
+        "IsRequired": true
+      },
+      {
+        "Name": "CartId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Core.Pizza.Commands.UpdateCartCommand",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 400
+      }
+    ]
+  },
+  {
+    "ContainingType": "Api.Controllers.CartController",
     "Method": "CustomerCart",
     "RelativePath": "Cart/CustomerCart/{UserEmail}",
     "HttpMethod": "GET",

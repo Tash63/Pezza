@@ -8,6 +8,8 @@
 
         public int? SideID { get; set; }
 
+        public int Quantity { get; set; }
+
         public List<int> ToppingIds { get; set; }
     }
 }

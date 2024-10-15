@@ -42,21 +42,27 @@ public class OrderCommandHandler(IMediator mediator,DatabaseContext databaseCont
         {
             if (cartitems[i].PizzaID==null)
             {
-                SideIDs.Add(cartitems[i].SideID.Value);
+                for(int j = 0; j < cartitems[i].Quantity;j++)
+                {
+                    SideIDs.Add(cartitems[i].SideID.Value);
+                }
             }
             else
             {
-                PizzaIDs.Add(cartitems[i].PizzaID.Value);
-                // if its a pizza in this cart item we need to get the toppings for it from the carttoppings
-                var toppingitems = databaseContext.CartToppings.Select(x => x)
-                    .AsNoTracking()
-                    .Where(x => x.CartID == cartitems[i].Id).ToList();
-                List<int> ToppingId = new List<int>();
-                for(int j=0;j<toppingitems.Count();j++)
+                for(int k = 0; k < cartitems[i].Quantity;k++)
                 {
-                    ToppingId.Add(toppingitems[j].ToppingId);
+                    PizzaIDs.Add(cartitems[i].PizzaID.Value);
+                    // if its a pizza in this cart item we need to get the toppings for it from the carttoppings
+                    var toppingitems = databaseContext.CartToppings.Select(x => x)
+                        .AsNoTracking()
+                        .Where(x => x.CartID == cartitems[i].Id).ToList();
+                    List<int> ToppingId = new List<int>();
+                    for (int j = 0; j < toppingitems.Count(); j++)
+                    {
+                        ToppingId.Add(toppingitems[j].ToppingId);
+                    }
+                    ToppingIDs.Add(ToppingId);
                 }
-                ToppingIDs.Add(ToppingId);
             }
         }
         // TODO: remove the cart items from the cart table

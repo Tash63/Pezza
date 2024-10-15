@@ -22,6 +22,7 @@ namespace Core.Cart.Command
                 PizzaID = request.Data.PizzaID,
                 SideID = request.Data.SideID,
                 UserEmail = request.Data.UserEmail,
+                Quantity = request.Data.Quantity,
             };
             databaseContext.Carts.Add(entity);
             var result = await databaseContext.SaveChangesAsync(cancellationToken);
