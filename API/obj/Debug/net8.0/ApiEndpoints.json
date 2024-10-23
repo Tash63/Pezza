@@ -612,7 +612,13 @@
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "data",
+        "Type": "Common.Models.OrderModel.StaffOrderModel",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": [
       {
         "Type": "Core.Order.Queries.GetOrdersStaff",

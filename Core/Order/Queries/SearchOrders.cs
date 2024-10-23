@@ -10,44 +10,44 @@ namespace Core.Order.Queries
         public SearchOrderModel? data { get; set; }
     }
 
-    class SearchOrdersHandler(DatabaseContext databaseContext) : IRequestHandler<SearchOrdersQuery,ListResult<OrderModel>>
+    class SearchOrdersHandler(DatabaseContext databaseContext) : IRequestHandler<SearchOrdersQuery, ListResult<OrderModel>>
     {
-        public async Task<ListResult<OrderModel>> Handle(SearchOrdersQuery request,CancellationToken cancellationToken)
+        public async Task<ListResult<OrderModel>> Handle(SearchOrdersQuery request, CancellationToken cancellationToken)
         {
-            var model=request.data;
-            if(request.data==null)
+            var model = request.data;
+            if (request.data == null)
             {
                 return ListResult<OrderModel>.Failure("Error");
             }
 
-            if(string.IsNullOrEmpty(request.data.OrderBy))
+            if (string.IsNullOrEmpty(request.data.OrderBy))
             {
                 model.OrderBy = "DateCreated desc";
             }
-            var entities = databaseContext.Orders.Select(x=>x)
+            var entities = databaseContext.Orders.Select(x => x)
                 .FilterByCustomerEmail(model.UserEmail)
                 .FilterByDateCreated(model.DateCreated)
                 .FilterByStatus(model.Status)
                 .FilterByOrderID(model.Id)
                 .OrderBy(model.OrderBy);
 
-            var count=entities.Count();
-            var paged=await entities.ApplyPaging(model.PagingArgs).ToListAsync();
+            var count = entities.Count();
+            var paged = await entities.ApplyPaging(model.PagingArgs).ToListAsync();
             // for each order we going to genereate the order model with the sides and the pizzas and customer data
-            List<OrderModel> orders=new List<OrderModel>();
-            for(int i=0;i<paged.Count;i++)
+            List<OrderModel> orders = new List<OrderModel>();
+            for (int i = 0; i < paged.Count; i++)
             {
                 // get the list of pizzas
-                List<PizzaModel> pizzas=new List<PizzaModel>();
-                List<int> pizzaQuantity=new List<int>();
-                List<int> sideQuantity=new List<int>();
+                List<PizzaModel> pizzas = new List<PizzaModel>();
+                List<int> pizzaQuantity = new List<int>();
+                List<int> sideQuantity = new List<int>();
                 //get side informaiton
                 List<SideModel> sides = new List<SideModel>();
-                List<List<ToppingModel>> toppings=new List<List<ToppingModel>>();
+                List<List<ToppingModel>> toppings = new List<List<ToppingModel>>();
                 var orderentities = databaseContext.OrderPizzas.Select(x => x).AsNoTracking().Where(x => x.OrderId == paged[i].Id).ToList();
-                for (int j=0;j<orderentities.Count();j++)
+                for (int j = 0; j < orderentities.Count(); j++)
                 {
-                    if(orderentities.ElementAt(j).PizzaId.HasValue)
+                    if (orderentities.ElementAt(j).PizzaId.HasValue)
                     {
                         var pizzaquery = EF.CompileAsyncQuery((DatabaseContext db, int id) => db.Pizzas.FirstOrDefault(x => x.Id == id));
                         var pizzaentity = await pizzaquery(databaseContext, orderentities.ElementAt(j).PizzaId.Value);
@@ -105,16 +105,16 @@ namespace Core.Order.Queries
                 var customereneity = await customerquery(databaseContext, paged[i].UserEmail);
                 orders.Add(new OrderModel
                 {
-                    User=customereneity.Map(),
-                    UserEmail=customereneity.Email,
-                    Pizzas=pizzas,
-                    Sides=sides,
-                    Status=paged.ElementAt(i).Status,
-                    DateCreated=paged.ElementAt(i).DateCreated,
-                    Id=paged.ElementAt(i).Id,
-                    SideQuantity=sideQuantity,
-                    PizzaQuantity=pizzaQuantity,
-                    Toppings=toppings,
+                    User = customereneity.Map(),
+                    UserEmail = customereneity.Email,
+                    Pizzas = pizzas,
+                    Sides = sides,
+                    Status = paged.ElementAt(i).Status,
+                    DateCreated = paged.ElementAt(i).DateCreated,
+                    Id = paged.ElementAt(i).Id,
+                    SideQuantity = sideQuantity,
+                    PizzaQuantity = pizzaQuantity,
+                    Toppings = toppings,
                 });
             }
             return ListResult<OrderModel>.Success(orders, count);

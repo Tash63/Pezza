@@ -14,7 +14,7 @@ namespace Common.Models.Order
 
         public string? UserEmail { get; set; }
 
-        public DateTime? DateCreated { get; set; }
+        public DateOnly? DateCreated { get; set; }
 
         public OrderStatus? Status { get; set; }
 

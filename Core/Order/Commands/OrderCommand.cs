@@ -70,7 +70,7 @@ public class OrderCommandHandler(IMediator mediator, DatabaseContext databaseCon
         {
             Status = Common.Enums.OrderStatus.Placed,
             UserEmail = request.CustomerEmail,
-            DateCreated = DateTime.UtcNow,
+            DateCreated = DateTime.UtcNow.AddDays(0),
         };
         databaseContext.Orders.Add(order);
         var result = await databaseContext.SaveChangesAsync(cancellationToken);

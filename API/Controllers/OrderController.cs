@@ -36,7 +36,7 @@ public class OrderController() : ApiController
     {
         var result = await this.Mediator.Send(new OrderCommand
         {
-           CustomerEmail=Email,
+            CustomerEmail = Email,
         });
 
         return ResponseHelper.ResponseOutcome(result, this);
@@ -61,7 +61,7 @@ public class OrderController() : ApiController
     [HttpPatch("Update/{id}")]
     [ProducesResponseType(200)]
     [ProducesResponseType(400)]
-    public async Task<ActionResult<UpdateOrderCommand>>Update([FromBody] UpdateOrderModel model,int id)
+    public async Task<ActionResult<UpdateOrderCommand>> Update([FromBody] UpdateOrderModel model, int id)
     {
         var result = await Mediator.Send(new UpdateOrderCommand
         {
@@ -78,12 +78,12 @@ public class OrderController() : ApiController
     {
         var result = await Mediator.Send(new SearchOrdersQuery
         {
-            data=model
+            data = model
         });
         return ResponseHelper.ResponseOutcome(result, this);
     }
 
-    [Authorize(Policy ="CustomerPolicy")]
+    [Authorize(Policy = "CustomerPolicy")]
     [HttpGet("NotCompleted/{customeremail}")]
     [ProducesResponseType(200)]
     [ProducesResponseType(400)]
@@ -91,7 +91,7 @@ public class OrderController() : ApiController
     {
         var result = await Mediator.Send(new GetNotCompletedOrders
         {
-            CustomerEmail=customeremail
+            CustomerEmail = customeremail
         });
         return ResponseHelper.ResponseOutcome(result, this);
     }
@@ -113,10 +113,11 @@ public class OrderController() : ApiController
     [HttpPost("AllOrders")]
     [ProducesResponseType(200)]
     [ProducesResponseType(400)]
-    public async Task<ActionResult<GetOrdersStaff>> AllOrders()
+    public async Task<ActionResult<GetOrdersStaff>> AllOrders([FromBody] StaffOrderModel data)
     {
         var result = await Mediator.Send(new GetOrdersStaff
         {
+            Data = data
         });
         return ResponseHelper.ResponseOutcome(result, this);
     }
