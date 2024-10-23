@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DataAcess.Mapping
 {
-   public  class OrderPizzaMap: IEntityTypeConfiguration<OrderPizza>
+    public class OrderPizzaMap : IEntityTypeConfiguration<OrderPizza>
     {
         public void Configure(EntityTypeBuilder<OrderPizza> builder)
         {
@@ -27,9 +27,19 @@ namespace DataAcess.Mapping
                 .HasColumnName("OrderId");
 
             builder.Property(x => x.PizzaId)
-                .IsRequired()
                 .HasColumnType("int")
+                .IsRequired(false)
                 .HasColumnName("PizzaId");
+
+            builder.Property(x => x.SideID)
+                .HasColumnType("int")
+                .IsRequired(false)
+                .HasColumnName("SideId");
+
+            builder.Property(X => X.Quantity)
+                .IsRequired()
+                .HasColumnName("Quantity")
+                .HasColumnType("int");
         }
     }
 }

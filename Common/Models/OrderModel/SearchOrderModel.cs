@@ -10,7 +10,7 @@ namespace Common.Models.Order
 
         public PagingArgs? PagingArgs { get; set; } = PagingArgs.NoPaging;
 
-        public int Id {  get; set; }
+        public int? Id {  get; set; }
 
         public string? UserEmail { get; set; }
 

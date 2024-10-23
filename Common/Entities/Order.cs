@@ -11,8 +11,5 @@ public class Order
     public virtual ApplicationUser User { get; set; }
     public DateTime? DateCreated { get; set; }
     public required OrderStatus Status { get; set; }
-    public List<int> SideIds { get; set; }
-    public ICollection<Side> Sides { get; set; }    
-
 
 }

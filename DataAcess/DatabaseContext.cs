@@ -69,6 +69,13 @@ public class DatabaseContext : IdentityDbContext<ApplicationUser>
             .HasForeignKey(e => e.PizzaId)
             .IsRequired();
 
+        // one to many relationship for side to order
+        modelBuilder.Entity<Side>()
+            .HasMany<OrderPizza>()
+            .WithOne()
+            .HasForeignKey(e => e.OrderId)
+            .IsRequired();  
+
         // one to many relationship for OrderPizza to OrderPizzaToppings
         modelBuilder.Entity<OrderPizza>()
             .HasMany<OrderPizzaTopping>()

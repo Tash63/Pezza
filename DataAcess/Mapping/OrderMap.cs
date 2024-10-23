@@ -25,10 +25,6 @@ public sealed class OrderMap : IEntityTypeConfiguration<Order>
             .WithOne()
             .HasForeignKey<Order>(o => o.UserEmail);
 
-        builder.HasMany(o => o.Sides)
-            .WithMany()
-            .UsingEntity(j => j.ToTable("OrderSides"));
-
         builder.Property(t => t.DateCreated)
             .IsRequired()
             .HasColumnName("DateCreated")

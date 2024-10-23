@@ -4,7 +4,7 @@
     {
         public string? Adress { get; set; }
         public string? PhoneNumber { get; set; }
-        public DateOnly? CreatedDate { get; set; }
+        public string? Password { get; set; }
         public string? Fullname { get; set; }
     }
 }

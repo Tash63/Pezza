@@ -15,7 +15,11 @@ public class OrderModel
 
     public List<PizzaModel> Pizzas { get; set; }
 
+    public List<int> PizzaQuantity { get; set; }
+
     public  List<SideModel> Sides { get; set; }
+
+    public List<int> SideQuantity { get; set; }
 
     public List<List<ToppingModel>> Toppings { get; set; }
 

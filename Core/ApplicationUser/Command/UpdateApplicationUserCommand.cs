@@ -32,14 +32,9 @@ public class UpdateApplicationUserCommandHandler(DatabaseContext databaseContext
         ApplicationUserResult.PhoneNumber = string.IsNullOrEmpty(request.Data.PhoneNumber) ? ApplicationUserResult.PhoneNumber : request.Data.PhoneNumber;
         ApplicationUserResult.Adress=string.IsNullOrEmpty(request.Data.Adress)?ApplicationUserResult.FullName: request.Data.Adress;
         ApplicationUserResult.FullName=string.IsNullOrEmpty(request.Data.Fullname)?ApplicationUserResult.FullName : request.Data.Fullname;
-        if(!ApplicationUserResult.DateCreated.HasValue && request.Data.CreatedDate.HasValue)
-        {
-            // add date created
-            ApplicationUserResult.DateCreated = request.Data.CreatedDate.Value;
-            //add claims
-            var claim = new Claim("Role", "customer");
-            await userManager.AddClaimAsync(ApplicationUserResult, claim);
-        }
+        //set user password
+        PasswordHasher<ApplicationUser> ph = new PasswordHasher<ApplicationUser>();
+        ApplicationUserResult.PasswordHash =string.IsNullOrEmpty(request.Data.Password)?ApplicationUserResult.PasswordHash: ph.HashPassword(ApplicationUserResult, request.Data.Password);
 
         // Update user entity in data base
         var outcome = databaseContext.Users.Update(ApplicationUserResult);
@@ -50,7 +45,6 @@ public class UpdateApplicationUserCommandHandler(DatabaseContext databaseContext
 
             // modify request data with contents in dB
             request.Data.Adress = ApplicationUserResult.Adress;
-            request.Data.CreatedDate = ApplicationUserResult.DateCreated;
             request.Data.Adress = ApplicationUserResult.Adress;
             request.Data.PhoneNumber = ApplicationUserResult.PhoneNumber;
         }

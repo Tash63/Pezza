@@ -8,51 +8,38 @@ using MediatR;
 namespace Core.Order.Commands
 {
 
-    public class UpdateOrderCommand : IRequest<Result<CreateOrderModel>>
+    public class UpdateOrderCommand : IRequest<Result<OrderStatusModel>>
     {
         public UpdateOrderModel? Data { get; set; }
 
         public int? Id { get; set; }
     }
 
-    public class UpdateOrderCommandHandler(DatabaseContext databaseContext): IRequestHandler<UpdateOrderCommand,Result<CreateOrderModel>>
+    public class UpdateOrderCommandHandler(DatabaseContext databaseContext) : IRequestHandler<UpdateOrderCommand, Result<OrderStatusModel>>
     {
-        public async Task<Result<CreateOrderModel>> Handle(UpdateOrderCommand request,CancellationToken cancellationToken)
+        public async Task<Result<OrderStatusModel>> Handle(UpdateOrderCommand request, CancellationToken cancellationToken)
         {
-            if(request.Data==null ||request.Id==null)
+            if (request.Data == null || request.Id == null)
             {
-                return Result<CreateOrderModel>.Failure("Not Found");
+                return Result<OrderStatusModel>.Failure("Not Found");
             }
-            var model=request.Data;
-            var query = EF.CompileAsyncQuery((DatabaseContext db, int id) =>db.Orders.FirstOrDefault(c=>c.Id==id));
+            var model = request.Data;
+            var query = EF.CompileAsyncQuery((DatabaseContext db, int id) => db.Orders.FirstOrDefault(c => c.Id == id));
             var entity = await query(databaseContext, request.Id.Value);
             if (entity == null)
             {
-                return Result<CreateOrderModel>.Failure("Not Found");
+                return Result<OrderStatusModel>.Failure("Not Found");
             }
 
             entity.Status = model.status;
-            var outcome=databaseContext.Orders.Update(entity);
-            var result=await databaseContext.SaveChangesAsync(cancellationToken);
-
-            // get the Pizza List 
-            List<int> PizzaIds = new List<int>();
-            var pizzas=databaseContext.OrderPizzas
-            .Select(x => x)
-            .AsNoTracking()
-            .Where(x=>x.OrderId==request.Id.Value).ToList();
-            for(int i=0;i<pizzas.Count();i++)
+            var outcome = databaseContext.Orders.Update(entity);
+            var result = await databaseContext.SaveChangesAsync(cancellationToken);
+            return result > 0 ? Result<OrderStatusModel>.Success(new OrderStatusModel
             {
-                PizzaIds.Add(pizzas.ElementAt(i).PizzaId);
-            }
-            CreateOrderModel resultModel=new CreateOrderModel()
-            {
-                PizzaIds = PizzaIds,
-                SideIds=entity.SideIds,
-                Status=entity.Status,
-                UserEmail=entity.UserEmail,
-            };
-            return result > 0 ? Result<CreateOrderModel>.Success(resultModel) : Result<CreateOrderModel>.Failure("Error");
+                Id = entity.Id,
+                Status = model.status,
+                CreatedDate = entity.DateCreated.Value,
+            }) : Result<OrderStatusModel>.Failure("Error");
         }
     }
 }

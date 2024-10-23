@@ -82,4 +82,42 @@ public class OrderController() : ApiController
         });
         return ResponseHelper.ResponseOutcome(result, this);
     }
+
+    [Authorize(Policy ="CustomerPolicy")]
+    [HttpGet("NotCompleted/{customeremail}")]
+    [ProducesResponseType(200)]
+    [ProducesResponseType(400)]
+    public async Task<ActionResult<GetNotCompletedOrders>> NotCompleted(string customeremail)
+    {
+        var result = await Mediator.Send(new GetNotCompletedOrders
+        {
+            CustomerEmail=customeremail
+        });
+        return ResponseHelper.ResponseOutcome(result, this);
+    }
+
+    [Authorize(Policy = "CustomerPolicy")]
+    [HttpGet("Completed/{customeremail}")]
+    [ProducesResponseType(200)]
+    [ProducesResponseType(400)]
+    public async Task<ActionResult<GetNotCompletedOrders>> Completed(string customeremail)
+    {
+        var result = await Mediator.Send(new GetCompletedOrders
+        {
+            CustomerEmail = customeremail
+        });
+        return ResponseHelper.ResponseOutcome(result, this);
+    }
+
+    [Authorize(Policy = "StaffPolicy")]
+    [HttpPost("AllOrders")]
+    [ProducesResponseType(200)]
+    [ProducesResponseType(400)]
+    public async Task<ActionResult<GetOrdersStaff>> AllOrders()
+    {
+        var result = await Mediator.Send(new GetOrdersStaff
+        {
+        });
+        return ResponseHelper.ResponseOutcome(result, this);
+    }
 }

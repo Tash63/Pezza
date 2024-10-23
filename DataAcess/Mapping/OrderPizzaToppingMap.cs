@@ -17,6 +17,7 @@
                 .IsRequired()
                 .HasColumnType("int")
                 .HasColumnName("OrderPizzaId");
+
             builder.Property(e => e.ToppingId)
                 .IsRequired()
                 .HasColumnName("ToppingId")

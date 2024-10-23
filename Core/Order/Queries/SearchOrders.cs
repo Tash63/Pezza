@@ -24,10 +24,11 @@ namespace Core.Order.Queries
             {
                 model.OrderBy = "DateCreated desc";
             }
-            var entities = databaseContext.Orders
+            var entities = databaseContext.Orders.Select(x=>x)
                 .FilterByCustomerEmail(model.UserEmail)
                 .FilterByDateCreated(model.DateCreated)
                 .FilterByStatus(model.Status)
+                .FilterByOrderID(model.Id)
                 .OrderBy(model.OrderBy);
 
             var count=entities.Count();
@@ -38,71 +39,68 @@ namespace Core.Order.Queries
             {
                 // get the list of pizzas
                 List<PizzaModel> pizzas=new List<PizzaModel>();
+                List<int> pizzaQuantity=new List<int>();
+                List<int> sideQuantity=new List<int>();
+                //get side informaiton
+                List<SideModel> sides = new List<SideModel>();
                 List<List<ToppingModel>> toppings=new List<List<ToppingModel>>();
                 var orderentities = databaseContext.OrderPizzas.Select(x => x).AsNoTracking().Where(x => x.OrderId == paged[i].Id).ToList();
                 for (int j=0;j<orderentities.Count();j++)
                 {
-                    var pizzaquery= EF.CompileAsyncQuery((DatabaseContext db,int id)=>db.Pizzas.FirstOrDefault(x=>x.Id==id));
-                    var pizzaentity = await pizzaquery(databaseContext, orderentities.ElementAt(j).PizzaId);
-                    if(pizzaentity!=null)
+                    if(orderentities.ElementAt(j).PizzaId.HasValue)
                     {
-                        pizzas.Add(new PizzaModel
+                        var pizzaquery = EF.CompileAsyncQuery((DatabaseContext db, int id) => db.Pizzas.FirstOrDefault(x => x.Id == id));
+                        var pizzaentity = await pizzaquery(databaseContext, orderentities.ElementAt(j).PizzaId.Value);
+                        pizzaQuantity.Add(orderentities.ElementAt(j).Quantity);
+                        if (pizzaentity != null)
                         {
-                            Category=pizzaentity.Category,
-                            Name=pizzaentity.Name,
-                            DateCreated=pizzaentity.DateCreated,
-                            Description=pizzaentity.Description,
-                            Id=pizzaentity.Id,
-                            InStock=pizzaentity.InStock,
-                            Price=pizzaentity.Price,
-                        });
-                        // get toppings for this pizza for the given order
-                        var pizzatopping = databaseContext.OrderPizzaToppings
-                            .Select(x => x)
-                            .Where(x => x.OrderPizzaId == orderentities.ElementAt(j).Id)
-                            .AsNoTracking().ToList();
-                        List<ToppingModel> pizzatoppings = new List<ToppingModel>();
-                        for(int k=0;k<pizzatopping.Count;k++)
-                        {
-                            // get the actual toppings from the db
-                            var toppingquery = EF.CompileAsyncQuery((DatabaseContext db,int id)=>db.Toppings.FirstOrDefault(x=>x.Id==id));
-                            var toppingresult = await toppingquery(databaseContext, pizzatopping[k].ToppingId);
-                            if(toppingresult!=null)
+                            pizzas.Add(pizzaentity.Map());
+                            // get toppings for this pizza for the given order
+                            var pizzatopping = databaseContext.OrderPizzaToppings
+                                .Select(x => x)
+                                .Where(x => x.OrderPizzaId == orderentities.ElementAt(j).Id)
+                                .AsNoTracking().ToList();
+                            List<ToppingModel> pizzatoppings = new List<ToppingModel>();
+                            for (int k = 0; k < pizzatopping.Count; k++)
                             {
-                                pizzatoppings.Add(new ToppingModel
+                                // get the actual toppings from the db
+                                var toppingquery = EF.CompileAsyncQuery((DatabaseContext db, int id) => db.Toppings.FirstOrDefault(x => x.Id == id));
+                                var toppingresult = await toppingquery(databaseContext, pizzatopping[k].ToppingId);
+                                if (toppingresult != null)
                                 {
-                                    Additional=toppingresult.Additional,
-                                    Id=toppingresult.Id,
-                                    InStock=toppingresult.InStock,
-                                    Price=toppingresult.Price,
-                                    Name=toppingresult.Name,
-                                    PizzaId=toppingresult.PizzaId,
-                                });
+                                    pizzatoppings.Add(new ToppingModel
+                                    {
+                                        Additional = toppingresult.Additional,
+                                        Id = toppingresult.Id,
+                                        InStock = toppingresult.InStock,
+                                        Price = toppingresult.Price,
+                                        Name = toppingresult.Name,
+                                        PizzaId = toppingresult.PizzaId,
+                                    });
+                                }
                             }
-                        }
-                        toppings.Add(pizzatoppings);
+                            toppings.Add(pizzatoppings);
 
+                        }
                     }
-                }
-                //get side informaiton
-                List<SideModel> sides=new List<SideModel>();
-                for(int j=0;j<paged.ElementAt(i).SideIds.Count;j++)
-                {
-                    var sidequery = EF.CompileAsyncQuery((DatabaseContext db, int id) => db.Sides.FirstOrDefault(x => x.ID == id));
-                    var sideentity = await sidequery(databaseContext, paged.ElementAt(i).SideIds.ElementAt(j));
-                    if(sideentity!=null)
+                    else
                     {
-                        sides.Add(new SideModel
+                        var sidequery = EF.CompileAsyncQuery((DatabaseContext db, int id) => db.Sides.FirstOrDefault(x => x.ID == id));
+                        var sideentity = await sidequery(databaseContext, orderentities.ElementAt(j).SideID.Value);
+                        sideQuantity.Add(orderentities.ElementAt(j).Quantity);
+                        if (sideentity != null)
                         {
-                            Description=sideentity.Description,
-                            Id=sideentity.ID,
-                            InStock=sideentity.InStock,
-                            Price=sideentity.Price,
-                            Name=sideentity.Name,
-                        });
+                            sides.Add(new SideModel
+                            {
+                                Description = sideentity.Description,
+                                Id = sideentity.ID,
+                                InStock = sideentity.InStock,
+                                Price = sideentity.Price,
+                                Name = sideentity.Name,
+                            });
+                        }
                     }
                 }
-                //get the customer associated with the order
                 var customerquery = EF.CompileAsyncQuery((DatabaseContext db, string email) => db.Users.FirstOrDefault(x => x.Email == email));
                 var customereneity = await customerquery(databaseContext, paged[i].UserEmail);
                 orders.Add(new OrderModel
@@ -114,10 +112,11 @@ namespace Core.Order.Queries
                     Status=paged.ElementAt(i).Status,
                     DateCreated=paged.ElementAt(i).DateCreated,
                     Id=paged.ElementAt(i).Id,
+                    SideQuantity=sideQuantity,
+                    PizzaQuantity=pizzaQuantity,
                     Toppings=toppings,
                 });
             }
-
             return ListResult<OrderModel>.Success(orders, count);
         }
 
