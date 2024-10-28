@@ -2,23 +2,24 @@
 
 using Common.Entities;
 using Common.Models.Order;
+using Common.Models.OrderModel;
 using Core.Order.Events;
 using DataAccess;
 using MediatR;
 
-public class OrderCommand : IRequest<Result>
+public class OrderCommand : IRequest<Result<OrderStatusModel>>
 {
     public string? CustomerEmail { get; set; }
 }
 
-public class OrderCommandHandler(IMediator mediator, DatabaseContext databaseContext) : IRequestHandler<OrderCommand, Result>
+public class OrderCommandHandler(IMediator mediator, DatabaseContext databaseContext) : IRequestHandler<OrderCommand, Result<OrderStatusModel>>
 {
 
-    public async Task<Result> Handle(OrderCommand request, CancellationToken cancellationToken)
+    public async Task<Result<OrderStatusModel>> Handle(OrderCommand request, CancellationToken cancellationToken)
     {
         if (string.IsNullOrEmpty(request.CustomerEmail))
         {
-            return Result.Failure("Error");
+            return Result<OrderStatusModel>.Failure("Error");
         }
 
         // the order infomation will be stored in the cart so i will build the request.data model together
@@ -36,7 +37,7 @@ public class OrderCommandHandler(IMediator mediator, DatabaseContext databaseCon
 
         if (cartitems.Count == 0)
         {
-            return Result.Failure("No Items in Cart");
+            return Result<OrderStatusModel>.Failure("No Items in Cart");
         }
 
         for (int i = 0; i < cartitems.Count(); i++)
@@ -132,7 +133,7 @@ public class OrderCommandHandler(IMediator mediator, DatabaseContext databaseCon
             databaseContext.OrderPizzas.Add(OrderPizzaEntity);
             await databaseContext.SaveChangesAsync(cancellationToken);
         }
-        return Result.Success();
+        return Result<OrderStatusModel>.Success(order.Mapstatus());
     }
 }
 

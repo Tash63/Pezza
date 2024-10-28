@@ -14,7 +14,7 @@ public static class PizzaFilter
             return query;
         }
 
-        return query.Where(x => x.Name.Contains(name));
+        return query.Where(x => x.Name.ToUpper().Contains(name.ToUpper()));
     }
 
     public static IEnumerable<PizzaModel> FilterByName(this IEnumerable<PizzaModel> query, string name)
@@ -24,7 +24,7 @@ public static class PizzaFilter
             return query;
         }
 
-        return query.Where(x => x.Name.Contains(name));
+        return query.Where(x => x.Name.ToUpper().Contains(name.ToUpper()));
     }
 
     public static IQueryable<Pizza> FilterByDescription(this IQueryable<Pizza> query, string description)

@@ -19,8 +19,6 @@ public class GetOrdersQueryHandler(DatabaseContext databaseContext) : IRequestHa
             .OrderBy("DateCreated desc");
         var count = entities.Count();
         var paged = await entities.ToListAsync(cancellationToken);
-
-       
         var customerquery = EF.CompileAsyncQuery((DatabaseContext db, string email) => db.Users.FirstOrDefault(c => c.Email == email));
         var customerentity = await customerquery(databaseContext, paged.ElementAt(0).UserEmail);
         List<OrderModel> orders=new List<OrderModel>();

@@ -4,6 +4,10 @@ public static class ResponseHelper
 {
     public static ActionResult ResponseOutcome<T>(Result<T> result, ApiController controller)
     {
+        if(result.Errors.Count>0)
+        {
+            return controller.BadRequest(result);
+        }
         if (result.Data == null)
         {
             return controller.NotFound(Result.Failure($"{typeof(T).Name.Replace("Model", string.Empty)} not found"));

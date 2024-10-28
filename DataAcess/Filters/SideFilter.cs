@@ -8,7 +8,7 @@
             {
                 return query;
             }
-            return query.Where(x => x.Name == name);
+            return query.Where(x => x.Name.ToUpper().Contains(name.ToUpper()));
         }
 
         public static IQueryable<Side> FilterByInStock(this IQueryable<Side> query,bool? instock)

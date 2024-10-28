@@ -30,7 +30,15 @@ namespace Core.Order.Commands
             {
                 return Result<OrderStatusModel>.Failure("Not Found");
             }
-
+            if (entity.Status == Common.Enums.OrderStatus.Cancelled || entity.Status == Common.Enums.OrderStatus.Rejected)
+            {
+                //the order cannot be progressed
+                return Result<OrderStatusModel>.Failure("Cannot Update Order Because the order is Already " + entity.Status);
+            }
+            if (entity.Status != Common.Enums.OrderStatus.Placed && model.status == Common.Enums.OrderStatus.Cancelled)
+            {
+                return Result<OrderStatusModel>.Failure("Cannot Cancel Order it has already been " + entity.Status);
+            }
             entity.Status = model.status;
             var outcome = databaseContext.Orders.Update(entity);
             var result = await databaseContext.SaveChangesAsync(cancellationToken);
